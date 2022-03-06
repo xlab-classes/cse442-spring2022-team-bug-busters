@@ -1,0 +1,3 @@
+<?php
+    $dbServername="oceanus"
+?>
