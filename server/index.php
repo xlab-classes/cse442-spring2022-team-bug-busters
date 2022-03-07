@@ -1,5 +1,10 @@
 <?php
 
+    include_once("config.php");
+    include_once("dbConnect.php");
+
+    $db = (new DbConnection($db_config))->getConnection();
+
     echo "</br></br><h1>Current Path</h1>";
 
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
