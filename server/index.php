@@ -29,6 +29,37 @@
     }else{
         echo "Error creating table: " . $conn->error;
     }
+
+    $request = explode('?', $_SERVER['REQUEST_URI'], 2);
+
+    switch ($request[0]) {
+        case '/' :
+            require __DIR__ . '/public/home.php';
+            break;
+        case '/login' :
+            require __DIR__ . '/public/login.php';
+            break;
+        case '/register' :
+            require __DIR__ . '/public/register.php';
+            break;
+        case '/createroom' :
+            require __DIR__ . '/public/createroom.php';
+            break;
+        case '/gameroom' :
+            require __DIR__ . '/public/gameroom.php';
+            break;
+        case '/joinroom' :
+            require __DIR__ . '/public/joinroom.php';
+            break;
+        case '/settings' :
+            require __DIR__ . '/public/settings.php';
+            break;
+        default:
+            http_response_code(404);
+            require __DIR__ . '/public/error404.php';
+            break;
+    }
+
 ?>
 
 <html lang="en">
