@@ -1,3 +1,3 @@
 <?php
-echo "This is the createroom path!";
+echo "Createroom!";
 ?>

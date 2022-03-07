@@ -1,3 +1,3 @@
 <?php
-echo "Oops, this path does not exist!";
+echo "Error 404: Page Not Found";
 ?>

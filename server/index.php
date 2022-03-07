@@ -1,5 +1,7 @@
 <?php
 
+    echo "</br></br><h1>Current Path</h1>";
+
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 
     switch ($request[0]) {
