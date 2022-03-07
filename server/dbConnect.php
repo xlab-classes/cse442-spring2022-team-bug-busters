@@ -1,15 +1,15 @@
 <?php
 class DBConnection{
 
-    private $mysqli;
+    private $conn;
 
     public function __construct($db_config) 
     {
-        $this->mysql = new mysqli(
+        $this->mysqli = new mysqli(
             $db_config["dbServername"],
             $db_config["dbUsername"],
-            $db_config["dbName"],
-            $db_config["dbPassword"]
+            $db_config["dbPassword"],
+            $db_config["dbName"]
         );
 
         if ($this->mysqli->connect_errno) {
