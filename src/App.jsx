@@ -35,10 +35,68 @@ class App extends React.Component{
   }
 }
 
+const Register = (props) => {
+  return(
+    <div>
+      <LoginForm login={props.login}/>
+    </div>
+  );
+}
+
 const Home = (props) => {
   return(
-      <LoginForm login={props.login} />
+    <div>
+      <p> This is where you login </p>
+    </div>
   );
+}
+
+const Settings = (props) => {
+  return(
+    <div>
+      <p>This is the Settings Page!</p>
+    </div>
+  )
+}
+
+const MakeRoom = (props) => {
+  return(
+    <div>
+      <p>This is the Make Room page!</p>
+    </div>
+  )
+}
+
+const JoinRoom = (props) => {
+  return(
+    <div>
+      <p> This is where you join a room!</p>
+    </div>
+  )
+  }
+
+const Account = (props) => {
+  return(
+    <div>
+      <p> This is where you register!</p>
+    </div>
+  )
+}
+
+const Game = (props) =>{
+  return(
+    <div>
+      <p> This is where you play the game!</p>
+    </div>
+  )
+}
+
+const ProfilePage = (props) =>{
+  return(
+    <div>
+      <p> This is where your profile is!</p>
+    </div>
+  )
 }
 
 
