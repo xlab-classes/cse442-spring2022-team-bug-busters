@@ -52,7 +52,7 @@ const Register = (props) => {
 const Home = (props) => {
   return(
     <div>
-      <p> This is where you login </p>
+      <Profile></Profile>
     </div>
   );
 }
