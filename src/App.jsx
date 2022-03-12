@@ -25,7 +25,6 @@ class App extends React.Component{
             <div className="game" id="gamePage">
               <Routes>
                 <Route path="/" element={<Home login={this.login} />} />
-                <Route path="/profile" element={<ProfilePage/>} />
               </Routes>
             </div>
           </header>
@@ -42,10 +41,6 @@ const Home = (props) => {
   );
 }
 
-const ProfilePage = (props) => {
-  return(
-      <Profile></Profile>
-  );
-}
+
 
 export default App;
