@@ -31,7 +31,7 @@ class DBConnection{
                         username VARCHAR(20) NOT NULL UNIQUE,
                         hashed_pw VARCHAR(60) NOT NULL,
                         PRIMARY KEY(userid)
-                    ); " ;
+                    )AUTO_INCREMENT=1; " ;
         
         if(mysqli_query($this->conn, $sql)){
             echo "Table users created sucessfully" . '<br>';
@@ -40,7 +40,7 @@ class DBConnection{
         }
 
         $sql = "CREATE TABLE IF NOT EXISTS scores(
-            userid INT AUTO_INCREMENT,
+            userid INT,
             username VARCHAR(20) NOT NULL UNIQUE,
             wins INT NOT NULL DEFAULT 0,
             loses INT NOT NULL DEFAULT 0,

@@ -24,6 +24,12 @@ class App extends React.Component{
             <div className="game" id="gamePage">
               <Routes>
                 <Route path="/" element={<Home login={this.login} />} />
+                <Route path="/settings" element={<Settings login={this.login} />} />
+                <Route path="/createroom" element={<MakeRoom login={this.login} />} />
+                <Route path="/join" element={<JoinRoom login={this.login} />} />
+                <Route path="/register" element={<Account login={this.login} />} />
+                <Route path="/room" element={<Game login={this.login} />} />
+                <Route path="/user" element={<Profile login={this.login} />} />
               </Routes>
             </div>
           </header>
@@ -36,8 +42,58 @@ class App extends React.Component{
 
 const Home = (props) => {
   return(
-      <LoginForm login={props.login} />
+    <div>
+      <p> This is where you login </p>
+    </div>
   );
+}
+
+const Settings = (props) => {
+  return(
+    <div>
+      <p>This is the Settings Page!</p>
+    </div>
+  )
+}
+
+const MakeRoom = (props) => {
+  return(
+    <div>
+      <p>This is the Make Room page!</p>
+    </div>
+  )
+}
+
+const JoinRoom = (props) => {
+  return(
+    <div>
+      <p> This is where you join a room!</p>
+    </div>
+  )
+  }
+
+const Account = (props) => {
+  return(
+    <div>
+      <p> This is where you register!</p>
+    </div>
+  )
+}
+
+const Game = (props) =>{
+  return(
+    <div>
+      <p> This is where you play the game!</p>
+    </div>
+  )
+}
+
+const Profile = (props) =>{
+  return(
+    <div>
+      <p> This is where your profile is!</p>
+    </div>
+  )
 }
 
 export default App;
