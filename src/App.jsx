@@ -29,7 +29,7 @@ class App extends React.Component{
                 <Route path="/join" element={<JoinRoom login={this.login} />} />
                 <Route path="/register" element={<Register login={this.login} />} />
                 <Route path="/room" element={<Game login={this.login} />} />
-                <Route path="/user" element={<Profile login={this.login} />} />
+                <Route path="/user" element={<ProfilePage element={<ProfilePage/>} />} />
               </Routes>
             </div>
           </header>
@@ -96,7 +96,7 @@ const Game = (props) =>{
   )
 }
 
-const Profile = (props) =>{
+const ProfilePage = (props) =>{
   return(
     <div>
       <p> This is where your profile is!</p>
