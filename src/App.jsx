@@ -27,7 +27,7 @@ class App extends React.Component{
                 <Route path="/settings" element={<Settings login={this.login} />} />
                 <Route path="/createroom" element={<MakeRoom login={this.login} />} />
                 <Route path="/join" element={<JoinRoom login={this.login} />} />
-                <Route path="/register" element={<Account login={this.login} />} />
+                <Route path="/register" element={<Register login={this.login} />} />
                 <Route path="/room" element={<Game login={this.login} />} />
                 <Route path="/user" element={<Profile login={this.login} />} />
               </Routes>
@@ -38,6 +38,14 @@ class App extends React.Component{
     );
 
   }
+}
+
+const Register = (props) => {
+  return(
+    <div>
+      <LoginForm login={props.login}/>
+    </div>
+  );
 }
 
 const Home = (props) => {
