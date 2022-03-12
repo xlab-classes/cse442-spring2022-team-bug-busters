@@ -1,37 +1,41 @@
 <?php
     include_once("config.php");
     include_once("dbConnect.php");
+    include_once("dbqueries.php");
 
-    $db = (new DbConnection($db_config))->getConnection();
+    $db = new DBConnection($db_config);
+    $db = $db -> getConnection();
+    $userDataBase = new usersHelper($db);
+    $userDataBase->getAllUsers();
     echo "</br></br><h1>Current Path</h1>";
 
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 
     switch ($request[0]) {
         case '/' :
-            require __DIR__ . '/public/home.php';
+            require __DIR__ . '/modals/home.php';
             break;
         case '/login' :
-            require __DIR__ . '/public/login.php';
+            require __DIR__ . '/modals/login.php';
             break;
         case '/register' :
-            require __DIR__ . '/public/register.php';
+            require __DIR__ . '/modals/register.php';
             break;
         case '/createroom' :
-            require __DIR__ . '/public/createroom.php';
+            require __DIR__ . '/modals/createroom.php';
             break;
         case '/gameroom' :
-            require __DIR__ . '/public/gameroom.php';
+            require __DIR__ . '/modals/gameroom.php';
             break;
         case '/joinroom' :
-            require __DIR__ . '/public/joinroom.php';
+            require __DIR__ . '/modals/joinroom.php';
             break;
         case '/settings' :
-            require __DIR__ . '/public/settings.php';
+            require __DIR__ . '/modals/settings.php';
             break;
         default:
             http_response_code(404);
-            require __DIR__ . '/public/error404.php';
+            require __DIR__ . '/modals/error404.php';
             break;
     }
 
