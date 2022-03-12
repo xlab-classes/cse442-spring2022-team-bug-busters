@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import "./Form.css";
 import LoginForm from "./Component/FormSignup.js";
+import Profile from "./Component/Profile";
 import {
   BrowserRouter as Router, Route, Routes
 }from 'react-router-dom';
