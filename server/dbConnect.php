@@ -13,10 +13,10 @@ class DBConnection{
         );
 
         if ($this->conn->connect_errno) {
-            echo "Connection to DB failed: ". mysqli_connect_error() . '\n';
+            echo "Connection to DB failed: ". mysqli_connect_error() . '<br>';
             exit();
         }
-        echo "Connection to DB success" . '\n';
+        echo "Connection to DB success" . '<br>';
 
         $this->setupTables();
     }
@@ -34,9 +34,9 @@ class DBConnection{
                     ); " ;
         
         if(mysqli_query($this->conn, $sql)){
-            echo "Table users created sucessfully" . '\n';
+            echo "Table users created sucessfully" . '<br>';
         }else{
-            echo "Error creating users table: " . mysqli_error($conn) . '\n';
+            echo "Error creating users table: " . mysqli_error($conn) . '<br>';
         }
 
         $sql = "CREATE TABLE IF NOT EXISTS scores(
@@ -49,9 +49,9 @@ class DBConnection{
         ); " ;
 
         if(mysqli_query($this->conn, $sql)){
-            echo "Table scores created sucessfully" . '\n';
+            echo "Table scores created sucessfully" . '<br>';
         }else{
-            echo "Error creating scores table: " . mysqli_error($conn) . '\n';
+            echo "Error creating scores table: " . mysqli_error($conn) . '<br>';
         }
     }
 }
