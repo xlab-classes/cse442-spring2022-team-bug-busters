@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import "./Form.css";
 import LoginForm from "./Component/FormSignup.js";
+import Profile from "./Component/Profile";
 import {
   BrowserRouter as Router, Route, Routes
 }from 'react-router-dom';
@@ -24,6 +25,7 @@ class App extends React.Component{
             <div className="game" id="gamePage">
               <Routes>
                 <Route path="/" element={<Home login={this.login} />} />
+                <Route path="/profile" element={<ProfilePage/>} />
               </Routes>
             </div>
           </header>
@@ -37,6 +39,12 @@ class App extends React.Component{
 const Home = (props) => {
   return(
       <LoginForm login={props.login} />
+  );
+}
+
+const ProfilePage = (props) => {
+  return(
+      <Profile></Profile>
   );
 }
 
