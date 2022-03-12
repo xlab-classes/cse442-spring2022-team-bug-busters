@@ -52,7 +52,7 @@ const Register = (props) => {
 const Home = (props) => {
   return(
     <div>
-      <Profile></Profile>
+      <p> This is where you login </p>
     </div>
   );
 }
@@ -100,7 +100,7 @@ const Game = (props) =>{
 const ProfilePage = (props) =>{
   return(
     <div>
-      <p> This is where your profile is!</p>
+      <Profile></Profile>
     </div>
   )
 }
