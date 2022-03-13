@@ -13,6 +13,36 @@ const FormSignup = ({ submitForm }) => {
     <form onSubmit={handleSubmit} className="form" noValidate>
       <h1>Let's play, Bug Busters!</h1>
       <h2>Create your account by filling out the information below.</h2>
+      
+      {/* First Name */}
+      <div className="form-inputs">
+        <label className="form-label">First Name</label>
+        <input
+          className="form-input"
+          type="text"
+          name="first_name"
+          placeholder="Enter your first name"
+          value={values.first_name}
+          onChange={handleChange}
+        />
+        {errors.first_name && <p>{errors.first_name}</p>}
+      </div>
+
+      {/* Last Name */}
+      <div className="form-inputs">
+        <label className="form-label">Last Name</label>
+        <input
+          className="form-input"
+          type="text"
+          name="last_name"
+          placeholder="Enter your last name"
+          value={values.last_name}
+          onChange={handleChange}
+        />
+        {errors.last_name && <p>{errors.last_name}</p>}
+      </div>
+
+      {/* Username */}
       <div className="form-inputs">
         <label className="form-label">Username</label>
         <input
@@ -25,7 +55,9 @@ const FormSignup = ({ submitForm }) => {
         />
         {errors.username && <p>{errors.username}</p>}
       </div>
-      <div className="form-inputs">
+
+      {/* Email */}
+      {/* <div className="form-inputs">
         <label className="form-label">Email</label>
         <input
           className="form-input"
@@ -36,7 +68,9 @@ const FormSignup = ({ submitForm }) => {
           onChange={handleChange}
         />
         {errors.email && <p>{errors.email}</p>}
-      </div>
+      </div> */}
+
+      {/* Passoword */}
       <div className="form-inputs">
         <label className="form-label">Password</label>
         <input
@@ -49,6 +83,8 @@ const FormSignup = ({ submitForm }) => {
         />
         {errors.password && <p>{errors.password}</p>}
       </div>
+
+      {/* Verify Password */}
       <div className="form-inputs">
         <label className="form-label">Confirm Password</label>
         <input
@@ -61,6 +97,7 @@ const FormSignup = ({ submitForm }) => {
         />
         {errors.password2 && <p>{errors.password2}</p>}
       </div>
+      
       <button className="form-input-btn" type="submit">
         Sign up
       </button>
