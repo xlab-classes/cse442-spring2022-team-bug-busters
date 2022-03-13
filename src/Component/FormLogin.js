@@ -13,6 +13,7 @@ const FormLogin = ({ submitForm }) => {
     <form onSubmit={handleSubmit} className="form" noValidate>
       <h1>Let's play, Bug Busters!</h1>
       
+      {/* Username */}
       <div className="form-inputs">
         <label className="form-label">Username</label>
         <input
@@ -26,6 +27,7 @@ const FormLogin = ({ submitForm }) => {
         {errors.username && <p>{errors.username}</p>}
       </div>
 
+      {/* Password */}
       <div className="form-inputs">
         <label className="form-label">Password</label>
         <input
