@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({
+    firstname: "",
+    lastname: "",
     username: "",
-    email: "",
     password: "",
     password2: "",
   });
@@ -21,8 +22,17 @@ const useForm = (callback, validate) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setErrors(validate(values));
-    setIsSubmitting(true);
+    const account = {values};
+
+    fetch('http://localhost:3001/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': "application/json"},
+        body: JSON.stringify(account)
+    }).then(() => {
+      setErrors(validate(values));
+      setIsSubmitting(true);
+    })
   };
 
   useEffect(() => {
