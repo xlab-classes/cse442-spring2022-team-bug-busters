@@ -1,7 +1,9 @@
 import React from "react";
 import "./App.css";
 import "./Form.css";
-import LoginForm from "./Component/FormSignup.js";
+import SignUp from "./Component/FormSignup.js";
+import LogInForm from "./Component/FormLogin.js";
+
 import {
   BrowserRouter as Router, Route, Routes
 }from 'react-router-dom';
@@ -28,6 +30,7 @@ class App extends React.Component{
                 <Route path="/createroom" element={<MakeRoom login={this.login} />} />
                 <Route path="/join" element={<JoinRoom login={this.login} />} />
                 <Route path="/register" element={<Register login={this.login} />} />
+                <Route path="/login" element={<SignIn login={this.login} />} />
                 <Route path="/room" element={<Game login={this.login} />} />
                 <Route path="/user" element={<ProfilePage element={<ProfilePage/>} />} />
               </Routes>
@@ -43,7 +46,7 @@ class App extends React.Component{
 const Register = (props) => {
   return(
     <div>
-      <LoginForm login={props.login}/>
+      <SignUp login={props.login}/>
     </div>
   );
 }
@@ -80,10 +83,10 @@ const JoinRoom = (props) => {
   )
   }
 
-const Account = (props) => {
+const SignIn = (props) => {
   return(
     <div>
-      <p> This is where you register!</p>
+      <LogInForm login={props.login}/>
     </div>
   )
 }
