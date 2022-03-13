@@ -1,14 +1,10 @@
 import React from "react";
 import "./App.css";
 import "./Form.css";
-<<<<<<< HEAD
-import LoginForm from "./Component/FormSignup.js";
 import Profile from "./Component/Profile";
-=======
 import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
 
->>>>>>> 39-loginPage
 import {
   BrowserRouter as Router, Route, Routes
 }from 'react-router-dom';
