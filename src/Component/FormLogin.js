@@ -14,7 +14,7 @@ export default function Login() {
       alert('You have been logged into your account!');
       event.preventDefault();
 
-      fetch('http://localhost:3000/login', {
+      fetch('./server/login.php', {
         method: 'POST',
         body: JSON.stringify(this.state)
       }).then(function(response) {
