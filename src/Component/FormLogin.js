@@ -2,15 +2,23 @@ import React from "react";
 import "../Form.css";
 import validate from "./validateInfo.js";
 import useForm from "./useForm.js";
+import { useNavigate } from "react-router-dom";
+import ProfilePage from "./Profile.js"
 
 const FormLogin = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
   );
+  
+  const navigate = useNavigate();
+
+  const submitHandler = () =>{
+    return <ProfilePage />
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="form" noValidate>
+    <form onSubmit={submitHandler} className="form" noValidate>
       <h1>Let's play, Bug Busters!</h1>
       
       {/* Username */}
@@ -41,7 +49,7 @@ const FormLogin = ({ submitForm }) => {
         {errors.password && <p>{errors.password}</p>}
       </div>
       
-      <button className="form-input-btn" type="login">
+      <button className="form-input-btn" type="button">
         Login
       </button>
     </form>
