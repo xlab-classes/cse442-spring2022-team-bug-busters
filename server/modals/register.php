@@ -1,10 +1,23 @@
 <?php
 
-    include("dbConnect.php");
+    include_once("dbConnect.php");
+    include_once("config.php");
+    include_once("index.php");
 
-    $username = "rsjeon";
-    $password = "password1";
+    // $this->conn = new mysqli(
+    //     $db_config["dbServername"],
+    //     $db_config["dbUsername"],
+    //     $db_config["dbPassword"],
+    //     $db_config["dbName"]
+    // );
+    // $username = "rsjeon";
+    // $password = "password1";
+    $db = new DBConnection($db_config);
+    // $this->conn;
+    $db = $db -> getConnection();
+    $userDataBase = new usersHelper($db);
 
+    $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error){
         die("Connection failed: " . $conn->connect_error);
     }
@@ -16,7 +29,7 @@
         if (mysql_num_rows($result) > 0) {
             echo 'User already exists!';
         } else {
-            dbConnect.addUser($username, $password);
+            $userDataBase->addUser($username, $password);
             echo 'Added a user';
         }
     } else {
