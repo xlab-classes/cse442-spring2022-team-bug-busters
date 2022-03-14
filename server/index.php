@@ -2,15 +2,15 @@
     include_once("config.php");
     include_once("dbConnect.php");
     include_once("dbqueries.php");
+    include_once("./modals/login.php");
 
     $db = new DBConnection($db_config);
     $db = $db -> getConnection();
     $userDataBase = new usersHelper($db);
-    //$userDataBase->addUser('racalasc', "123");
-    $userID = $userDataBase->getUserByID('racalasc');
-    $scoresDataBase = new scoresHelper($db);
-    echo "</br></br><h1>Current Path</h1>";
-
+    $userDataBase->getAllUsers();
+    echo "</br></br><h1>Current Path</h1><br>";
+    $token = generateAuth();
+    echo $token . "<br>";
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 
     switch ($request[0]) {

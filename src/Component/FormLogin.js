@@ -1,20 +1,20 @@
-import React from "react";
+
+// import Button from 'react-bootstrap/Button';
+// import Container from 'react-bootstrap/Container';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Form() {
+export default function Login() {
   
   const [state, setState] = React.useState({
-    firstName: "",
-    lastName: "",
     username: "",
     password: ""
   })
   
   function handleSubmit(event) {
-      alert('Your account has been submitted!');
+      alert('You have been logged into your account!');
       event.preventDefault();
 
-      fetch('http://localhost:3000/register', {
+      fetch('http://localhost:3000/login', {
         method: 'POST',
         body: JSON.stringify(this.state)
       }).then(function(response) {
@@ -36,37 +36,12 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Let's play, Bug Busters!</h1>
-      <h2>Create your account by filling out the information below.</h2>
-      <div className="register">
-      <label>
-        First Name
-        <input
-          type="text"
-          class="form-control"
-          name="firstname"
-          value={state.firstname}
-          placeholder="Enter your first name"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Last Name
-        <input
-          type="text"
-          class="form-control"
-          name="lastname"
-          value={state.lastname}
-          placeholder="Enter your last name"
-          onChange={handleChange}
-        />
-      </label>
-      </div>
-      <div className="register">
+      <h2>Sign in to your account to begin playing!</h2>
+      <div className="login">
       <label>
         Username
         <input
-          type="text"
+          type="username"
           class="form-control"
           name="username"
           value={state.username}
@@ -88,10 +63,10 @@ export default function Form() {
         />
       </label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Login</button>
       <br></br>
       <span className="login">
-        Already have an account? Login <a href="login">here</a>
+        Don't have an account? Register <a href="register">here</a>
       </span>
     </form>
   );
