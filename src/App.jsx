@@ -56,7 +56,7 @@ const Register = (props) => {
 const Home = (props) => {
   return(
     <div>
-      <p> This is where you login </p>
+      <p> This is where you choose to login,register, or play as guest </p>
     </div>
   );
 }
