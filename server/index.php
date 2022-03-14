@@ -20,6 +20,9 @@
         case '/login' :
             require __DIR__ . '/modals/login.php';
             break;
+        case '/leaderboard' :
+            require __DIR__ . '/modals/leaderboard.php';
+            break;
         case '/register' :
             require __DIR__ . '/modals/register.php';
             break;
