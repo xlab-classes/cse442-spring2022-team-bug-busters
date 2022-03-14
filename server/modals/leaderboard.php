@@ -2,6 +2,7 @@
 echo "Leaderboard!";
 $db = new DBConnection($db_config);
 $db = $db -> getConnection();
+$scoresDataBase = new scoresHelper($db);
 $userWins = $scoresDataBase->getAllWins();
 $userLoses = $scoresDataBase->getAllLoses();
 $userPoints = $scoresDataBase->getAllPoints();

@@ -33,7 +33,7 @@ class DBConnection{
         $sql = "CREATE TABLE IF NOT EXISTS users(
                         userid INT AUTO_INCREMENT,
                         username VARCHAR(20) NOT NULL UNIQUE,
-                        hashed_pw VARCHAR(60) NOT NULL,
+                        hashed_pw TEXT NOT NULL,
                         auth VARCHAR(120) DEFAULT NULL,
                         PRIMARY KEY(userid)
                     )AUTO_INCREMENT=1; " ;
