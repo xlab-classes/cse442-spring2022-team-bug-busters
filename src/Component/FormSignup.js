@@ -14,7 +14,7 @@ export default function Form() {
       alert('Your account has been submitted!');
       event.preventDefault();
 
-      fetch('http://localhost:3000/register', {
+      fetch('http://localhost:8080/server/modals/register.php', {
         method: 'POST',
         body: JSON.stringify(this.state)
       }).then(function(response) {
