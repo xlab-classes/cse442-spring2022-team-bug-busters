@@ -13,36 +13,7 @@
     echo $token . "<br>";
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 
-    switch ($request[0]) {
-        case '/' :
-            require __DIR__ . '/modals/home.php';
-            break;
-        case '/login' :
-            require __DIR__ . '/modals/login.php';
-            break;
-        case '/leaderboard' :
-            require __DIR__ . '/modals/leaderboard.php';
-            break;
-        case '/register' :
-            require __DIR__ . '/modals/register.php';
-            break;
-        case '/createroom' :
-            require __DIR__ . '/modals/createroom.php';
-            break;
-        case '/gameroom' :
-            require __DIR__ . '/modals/gameroom.php';
-            break;
-        case '/joinroom' :
-            require __DIR__ . '/modals/joinroom.php';
-            break;
-        case '/settings' :
-            require __DIR__ . '/modals/settings.php';
-            break;
-        default:
-            http_response_code(404);
-            require __DIR__ . '/modals/error404.php';
-            break;
-    }
+    include_once("./modals/leaderboard.php");
 
 ?>
 

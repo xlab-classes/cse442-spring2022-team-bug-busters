@@ -12,20 +12,20 @@ class usersHelper{
     }
 
 
-    //Given a username and a hashed password, adds a new user to the database.
+    //Given a username and an unhashed password, adds a new user to the database.
     public function addUser($username, $password){
-
+        $hashed_pw = hash('sha256', $password);
         $stmt = $this->conn->prepare("INSERT INTO users (username, hashed_pw) VALUES (?, ?)");
-        $stmt -> bind_param("ss", $username, $password);
+        $stmt -> bind_param("ss", $username, $hashed_pw);
         $stmt -> execute();
 
     }
 
-    //Given a username and password, removes a user from the database.
+    //Given a username and an unhashed password, removes a user from the database.
     public function removeUser($username, $password){
-
+        $hashed_pw = hash('sha256', $password);
         $stmt = $this->conn->prepare("DELETE FROM users WHERE username = ? AND hashed_pw = ?");
-        $stmt -> bind_param("ss", $username, $password);
+        $stmt -> bind_param("ss", $username, $hashed_pw);
         $stmt -> execute();
 
     }
@@ -73,7 +73,17 @@ class usersHelper{
 
     //Takes in a username and an unhashed password. Hashes the password and checks with the current password stored.
     public function checkPassword($username, $password){
-
+        $hashed_pw = hash('sha256', $password);
+        $stmt = $this->conn->prepare("SELECT hashed_pw FROM users WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> store_result();
+        $stmt -> bind_result($storedPassword);
+        $storedPassword = "NULL";
+        while($stmt->fetch()){
+            $storedPassword = $storedPassword;
+        }
+        return $storedPassword == $hashed_pw;
     }
 
 }
