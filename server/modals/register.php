@@ -4,25 +4,25 @@
     include_once("config.php");
     include_once("index.php");
 
-    // $this->conn = new mysqli(
-    //     $db_config["dbServername"],
-    //     $db_config["dbUsername"],
-    //     $db_config["dbPassword"],
-    //     $db_config["dbName"]
-    // );
-    // $username = "rsjeon";
-    // $password = "password1";
+    $this->conn = new mysqli(
+        $servername = $db_config["dbServername"],
+        $username = $db_config["dbUsername"],
+        $password = $db_config["dbPassword"],
+    );
+
     $db = new DBConnection($db_config);
     // $this->conn;
     $db = $db -> getConnection();
     $userDataBase = new usersHelper($db);
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error){
-        die("Connection failed: " . $conn->connect_error);
+    // Check connection
+    if (!$db) {
+        die("Connection failed: " . mysqli_connect_error());
     }
+    echo "Connected successfully";
 
-    $sql = "SELECT * FROM users(username, hashed_pw)";
+
+    $sql = "SELECT * FROM users($username, $hashed_pw)";
 
     $result = mysql_query($sql);
     if ($result) {
