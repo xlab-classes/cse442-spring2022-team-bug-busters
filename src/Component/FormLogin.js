@@ -1,51 +1,73 @@
 import React from "react";
-import "../Form.css";
-import validate from "./validateInfo.js";
-import useForm from "./useForm.js";
+// import Button from 'react-bootstrap/Button';
+// import Container from 'react-bootstrap/Container';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
-const FormLogin = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
-    submitForm,
-    validate
-  );
+export default function Form() {
+  
+  const [state, setState] = React.useState({
+    username: "",
+    password: ""
+  })
+  
+  function handleSubmit(event) {
+      alert('You have been logged into your account!');
+      event.preventDefault();
+
+      fetch('http://localhost:3000/login', {
+        method: 'POST',
+        body: JSON.stringify(this.state)
+      }).then(function(response) {
+        console.log(response)
+        return response.json();
+      });
+  }
+
+  //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
+  //get the 'value' from target and the 'name' of target  
+  function handleChange(event) {
+    const value = event.target.value;
+    setState({
+      //(updater, [callback])
+      ...state, [event.target.name]: value
+    })
+    
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="form" noValidate>
-      <h1>Let's play, Bug Busters!</h1>
-      
-      {/* Username */}
-      <div className="form-inputs">
-        <label className="form-label">Username</label>
+    <form onSubmit={handleSubmit}>
+      <h2>Sign in to your account to begin playing!</h2>
+      <div className="login">
+      <label>
+        Username
         <input
-          className="form-input"
-          type="text"
+          type="username"
+          class="form-control"
           name="username"
+          value={state.username}
           placeholder="Enter your username"
-          value={values.username}
           onChange={handleChange}
         />
-        {errors.username && <p>{errors.username}</p>}
+      </label>
       </div>
-
-      {/* Password */}
-      <div className="form-inputs">
-        <label className="form-label">Password</label>
+      <div className="register">
+      <label>
+        Password
         <input
-          className="form-input"
           type="password"
+          class="form-control"
           name="password"
+          value={state.password}
           placeholder="Enter your password"
-          value={values.password}
           onChange={handleChange}
         />
-        {errors.password && <p>{errors.password}</p>}
+      </label>
       </div>
-      
-      <button className="form-input-btn" type="login">
-        Login
-      </button>
+      <button type="submit" class="btn btn-primary">Login</button>
+      <br></br>
+      <span className="login">
+        Don't have an account? Register <a href="register">here</a>
+      </span>
     </form>
   );
-};
-
-export default FormLogin;
+}
