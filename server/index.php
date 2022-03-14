@@ -6,7 +6,9 @@
     $db = new DBConnection($db_config);
     $db = $db -> getConnection();
     $userDataBase = new usersHelper($db);
-    $userDataBase->getAllUsers();
+    //$userDataBase->addUser('racalasc', "123");
+    $userID = $userDataBase->getUserByID('racalasc');
+    $scoresDataBase = new scoresHelper($db);
     echo "</br></br><h1>Current Path</h1>";
 
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
@@ -17,6 +19,9 @@
             break;
         case '/login' :
             require __DIR__ . '/modals/login.php';
+            break;
+        case '/leaderboard' :
+            require __DIR__ . '/modals/leaderboard.php';
             break;
         case '/register' :
             require __DIR__ . '/modals/register.php';
