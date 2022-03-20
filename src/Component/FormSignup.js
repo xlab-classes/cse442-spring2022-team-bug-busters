@@ -1,74 +1,98 @@
 import React from "react";
-import "../Form.css";
-import validate from "./validateInfo.js";
-import useForm from "./useForm.js";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
-const FormSignup = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
-    submitForm,
-    validate
-  );
+export default function Form() {
+  
+  const [state, setState] = React.useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: ""
+  })
+  
+  function handleSubmit(event) {
+      alert('Your account has been submitted!');
+      event.preventDefault();
+
+      fetch('http://localhost:3000/register', {
+        method: 'POST',
+        body: JSON.stringify(this.state)
+      }).then(function(response) {
+        console.log(response)
+        return response.json();
+      });
+  }
+
+  //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
+  //get the 'value' from target and the 'name' of target  
+  function handleChange(event) {
+    const value = event.target.value;
+    setState({
+      //(updater, [callback])
+      ...state, [event.target.name]: value
+    })
+    
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="form" noValidate>
+    <form onSubmit={handleSubmit}>
       <h1>Let's play, Bug Busters!</h1>
       <h2>Create your account by filling out the information below.</h2>
-      <div className="form-inputs">
-        <label className="form-label">Username</label>
+      <div className="register">
+      <label>
+        First Name
         <input
-          className="form-input"
           type="text"
+          class="form-control"
+          name="firstname"
+          value={state.firstname}
+          placeholder="Enter your first name"
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Last Name
+        <input
+          type="text"
+          class="form-control"
+          name="lastname"
+          value={state.lastname}
+          placeholder="Enter your last name"
+          onChange={handleChange}
+        />
+      </label>
+      </div>
+      <div className="register">
+      <label>
+        Username
+        <input
+          type="text"
+          class="form-control"
           name="username"
+          value={state.username}
           placeholder="Enter your username"
-          value={values.username}
           onChange={handleChange}
         />
-        {errors.username && <p>{errors.username}</p>}
+      </label>
       </div>
-      <div className="form-inputs">
-        <label className="form-label">Email</label>
+      <div className="register">
+      <label>
+        Password
         <input
-          className="form-input"
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={values.email}
-          onChange={handleChange}
-        />
-        {errors.email && <p>{errors.email}</p>}
-      </div>
-      <div className="form-inputs">
-        <label className="form-label">Password</label>
-        <input
-          className="form-input"
           type="password"
+          class="form-control"
           name="password"
+          value={state.password}
           placeholder="Enter your password"
-          value={values.password}
           onChange={handleChange}
         />
-        {errors.password && <p>{errors.password}</p>}
+      </label>
       </div>
-      <div className="form-inputs">
-        <label className="form-label">Confirm Password</label>
-        <input
-          className="form-input"
-          type="password"
-          name="password2"
-          placeholder="Confirm your password"
-          value={values.password2}
-          onChange={handleChange}
-        />
-        {errors.password2 && <p>{errors.password2}</p>}
-      </div>
-      <button className="form-input-btn" type="submit">
-        Sign up
-      </button>
-      <span className="form-input-login">
-        Already have an account? Login <a href="#">here</a>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <br></br>
+      <span className="login">
+        Already have an account? Login <a href="login">here</a>
       </span>
     </form>
   );
-};
-
-export default FormSignup;
+}

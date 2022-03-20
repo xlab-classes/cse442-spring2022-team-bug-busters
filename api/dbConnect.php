@@ -25,11 +25,15 @@ class DBConnection{
         return $this->conn;
     }
 
+    public function closeConnection(){
+        $this->conn->close();
+    }
+
     public function setupTables(){
         $sql = "CREATE TABLE IF NOT EXISTS users(
                         userid INT AUTO_INCREMENT,
                         username VARCHAR(20) NOT NULL UNIQUE,
-                        hashed_pw VARCHAR(60) NOT NULL,
+                        hashed_pw TEXT NOT NULL,
                         auth VARCHAR(120) DEFAULT NULL,
                         PRIMARY KEY(userid)
                     )AUTO_INCREMENT=1; " ;
@@ -41,13 +45,12 @@ class DBConnection{
         }
 
         $sql = "CREATE TABLE IF NOT EXISTS scores(
-            userid INT,
             username VARCHAR(20) NOT NULL UNIQUE,
             wins INT NOT NULL DEFAULT 0,
             loses INT NOT NULL DEFAULT 0,
             points INT NOT NULL DEFAULT 0, 
             PRIMARY KEY(userid)
-        ); " ;
+        )" ;
 
         if(mysqli_query($this->conn, $sql)){
             echo "Table scores created sucessfully" . '<br>';
