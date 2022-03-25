@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import "./Form.css";
-import Profile from "./Component/Profile.s";
+import Profile from "./Component/Profile.js";
 import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
 

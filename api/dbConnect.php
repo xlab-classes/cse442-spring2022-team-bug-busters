@@ -9,14 +9,13 @@ class DBConnection{
             $db_config["dbServername"],
             $db_config["dbUsername"],
             $db_config["dbPassword"],
-            $db_config["dbName"]
+            $db_config["dbName"],
+            $db_config["port"]
         );
 
         if ($this->conn->connect_errno) {
-            echo "Connection to DB failed: ". mysqli_connect_error() . '<br>';
-            exit();
+            die("Connection failed: " . mysqli_connect_error());
         }
-        echo "Connection to DB success" . '<br>';
 
         $this->setupTables();
     }
