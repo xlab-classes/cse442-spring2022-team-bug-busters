@@ -4,6 +4,7 @@ import "./Form.css";
 import Profile from "./Component/Profile.js";
 import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
+import GameRoom from "./Component/GameRoom.jsx";
 
 import {
   BrowserRouter as Router, Route, Routes
@@ -96,7 +97,7 @@ const SignIn = (props) => {
 const Game = (props) =>{
   return(
     <div>
-      <p> This is where you play the game!</p>
+      <GameRoom login={props.login}/>
     </div>
   )
 }
