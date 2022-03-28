@@ -8,7 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router basename='/CSE442-542/2022-Spring/cse-442h'></Router>
+    <Router></Router>
     <App />
   </React.StrictMode>,
   document.getElementById("root")

@@ -23,7 +23,7 @@ class App extends React.Component{
 
   render(){
     return(
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <div className="App">
           <header className="App-header">
             <div className="game" id="gamePage">
