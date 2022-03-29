@@ -8,7 +8,7 @@ import GameRoom from "./Component/GameRoom.jsx";
 import {
   BrowserRouter as Router, Routes, Route
 }from 'react-router-dom';
-const PUBLIC_URL = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h";
+const PUBLIC_URL = "/CSE442-542/2022-Spring/cse-442h";
 class App extends React.Component{
 
   constructor(props){
@@ -20,27 +20,33 @@ class App extends React.Component{
     this.mainContent = React.createRef();
   }
 
+  componentDidMount(){
+    window.addEventListener('click', e => {console.log("TESTING EVENT LISTENER")});
+  }
 
   render(){
     return(
-      <Router basename={process.env.PUBLIC_URL}>
-        <div className="App">
-          <header className="App-header">
-            <div className="maincontent" id="mainContent">
-              <Routes>
-                <Route path="/settings" element={<Settings login={this.login} />} />
-                <Route path="/createroom" element={<MakeRoom login={this.login} />} />
-                <Route path="/join" element={<JoinRoom login={this.login} />} />
-                <Route path="/register" element={<Register login={this.login} />} />
-                <Route path="/login" element={<SignIn login={this.login} />} />
-                <Route path="/room" element={<Game login={this.login} />} />
-                <Route path="/user" element={<ProfilePage element={<ProfilePage/>} />} />
-                <Route path="/" element={<Home login={this.login} />} />
-              </Routes>
-            </div>
-          </header>
-        </div>
-      </Router>
+      <div basename={PUBLIC_URL}>
+        <Router>
+          <div className="App">
+            <header className="App-header">
+              <div className="maincontent" id="mainContent">
+                <Routes>
+                  <Route path={PUBLIC_URL + "/settings"} element={<Settings login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/createroom"} element={<MakeRoom login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/join"} element={<JoinRoom login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/register"} element={<Register login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/login" }element={<SignIn login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/room"} element={<Game login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/user"} element={<ProfilePage element={<ProfilePage/>} />} />
+                  <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
+                </Routes>
+              </div>
+            </header>
+          </div>
+        </Router>
+      </div>
+
     );
 
   }
