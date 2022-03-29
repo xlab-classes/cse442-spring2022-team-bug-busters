@@ -5,12 +5,10 @@ import Profile from "./Component/Profile.js";
 import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
 import GameRoom from "./Component/GameRoom.jsx";
-
 import {
-  BrowserRouter as Router, Route, Routes
+  BrowserRouter as Router, Routes, Route
 }from 'react-router-dom';
-
-
+const PUBLIC_URL = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h";
 class App extends React.Component{
 
   constructor(props){
@@ -19,16 +17,17 @@ class App extends React.Component{
       logout: false,
       login: false
     }
+    this.mainContent = React.createRef();
   }
+
 
   render(){
     return(
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <div className="App">
           <header className="App-header">
-            <div className="game" id="gamePage">
+            <div className="maincontent" id="mainContent">
               <Routes>
-                <Route path="/" element={<Home login={this.login} />} />
                 <Route path="/settings" element={<Settings login={this.login} />} />
                 <Route path="/createroom" element={<MakeRoom login={this.login} />} />
                 <Route path="/join" element={<JoinRoom login={this.login} />} />
@@ -36,6 +35,7 @@ class App extends React.Component{
                 <Route path="/login" element={<SignIn login={this.login} />} />
                 <Route path="/room" element={<Game login={this.login} />} />
                 <Route path="/user" element={<ProfilePage element={<ProfilePage/>} />} />
+                <Route path="/" element={<Home login={this.login} />} />
               </Routes>
             </div>
           </header>

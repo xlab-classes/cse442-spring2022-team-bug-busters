@@ -6,8 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Navbar, Nav } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup'
-import * as Icon from 'react-bootstrap-icons';
-// import Container from 'react-bootstrap/Container';
+// import * as Icon from 'react-bootstrap-icons';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 export default class GameRoom extends React.Component {
   

@@ -14,7 +14,6 @@
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 
     include_once("leaderboard.php");
-
 ?>
 
 <!doctype html>
