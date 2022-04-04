@@ -1,7 +1,7 @@
 import React from "react";
-const API = "http://localhost/react/api/index.php"
 // import Container from 'react-bootstrap/Container';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+const API_URL = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/api"
 export default class LoginForm extends React.Component {
   
   constructor(props){
@@ -20,13 +20,19 @@ export default class LoginForm extends React.Component {
     });
   };
 
+  usernameChangeHandler = event => {
+    this.setState({
+      username: event.target.value
+    });
+  };
+
   handleSubmit = event => {
       // alert('You have been logged into your account!');
       event.preventDefault();
       console.log(this.state);
 
       
-      fetch(`${API}`, {
+      fetch(API_URL + "/modals/login.php", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

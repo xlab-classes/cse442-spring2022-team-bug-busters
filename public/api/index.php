@@ -11,9 +11,6 @@
     
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 
-<<<<<<< Updated upstream
-    include_once("leaderboard.php");
-=======
     switch ($request[0]) {
         case '/' :
             require __DIR__ . '/modals/home.php';
@@ -41,7 +38,6 @@
             require __DIR__ . '/modals/error404.php';
             break;
     }
->>>>>>> Stashed changes
 
 ?>
 
