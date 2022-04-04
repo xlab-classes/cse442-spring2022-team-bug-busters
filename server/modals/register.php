@@ -4,33 +4,42 @@
     include_once("config.php");
     include_once("index.php");
 
-    $this->conn = new mysqli(
-        $servername = $db_config["dbServername"],
-        $username = $db_config["dbUsername"],
-        $password = $db_config["dbPassword"],
-    );
+    // ALTERNATIVE
+    // $this->conn = new mysqli(
+    //     $servername = $db_config["dbServername"],
+    //     $username = $db_config["dbUsername"],
+    //     $password = $db_config["dbPassword"],
+    // );
 
-    $db = new DBConnection($db_config);
-    // $this->conn;
-    $db = $db -> getConnection();
+    // Lines 15 - 24: [ALTERNATIVE] Creates new connection and access 
+    // $this->conn = mysqli_connect(
+    //     $servername,
+    //     $username,
+    //     $password,
+    // );
+
+    // // Will automatically render __construct (ie. pass or fail)
+    // $db = new DBConnection($db_config);
+    // // Verifies and returns valid connection
+    // $db = $db -> getConnection();
+
+    //... Assuming usersHelper creates connection created from other php files
     $userDataBase = new usersHelper($db);
 
-    // Check connection
-    if (!$db) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    echo "Connected successfully";
-
-
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    //TODO: dbqueries.php - Must include 'First name', 'Last name' to addUser() method
     $sql = "SELECT * FROM users($username, $hashed_pw)";
-
+    
     $result = mysql_query($sql);
     if ($result) {
         if (mysql_num_rows($result) > 0) {
             echo 'User already exists!';
         } else {
-            $userDataBase->addUser($username, $password);
-            echo 'Added a user';
+            $userDataBase->addUser('$firstname', '$lastname', '$username', '$password');
+            echo 'Added a user!';
         }
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
