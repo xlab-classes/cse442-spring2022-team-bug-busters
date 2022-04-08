@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
 import "./Form.css";
-import Profile from "./Component/Profile.js";
+import Profile from "./Component/Profile.jsx";
 import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
 import GameRoom from "./Component/GameRoom.jsx";
+import WaitingRoom from "./Component/WaitingRoom";
 import {
   BrowserRouter as Router, Routes, Route
 }from 'react-router-dom';
@@ -87,7 +88,7 @@ const MakeRoom = (props) => {
 const JoinRoom = (props) => {
   return(
     <div>
-      <p> This is where you join a room!</p>
+      <WaitingRoom></WaitingRoom>
     </div>
   )
   }

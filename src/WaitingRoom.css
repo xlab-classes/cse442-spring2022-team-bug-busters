@@ -1,0 +1,16 @@
+/* .WaitingRoom{
+  display: flex;
+  flex-direction: column;
+} */
+
+.waitingRoomContents{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.players{
+  display: flex;
+  flex-direction: row;
+}

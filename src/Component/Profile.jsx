@@ -1,15 +1,21 @@
 import React from 'react';
+import "../Profile.css"
+import NavBar from "./NavBar"
 export default function Profile() {
   return (
     <div>
-      <div id='navbar'>
+      {/* <div id='navbar'>
         <div id="navbarLeftside">
           Home
         </div>
         <div id="navbarRightside">
           Username
         </div>
-      </div>
+      </div> */}
+
+      <NavBar>
+        
+      </NavBar>
 
       <div id='profile'>
         <img src={'/image/flower.png'} alt="profile" id='profilepicture'/>
