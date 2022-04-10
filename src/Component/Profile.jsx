@@ -2,6 +2,7 @@ import React from 'react';
 import "../Profile.css";
 import NavBar from "./NavBar";
 import profilePic from '../assets/flower.png';
+
 export default function Profile() {
   return (
     <div>

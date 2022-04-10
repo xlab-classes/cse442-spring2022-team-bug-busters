@@ -4,7 +4,6 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Navbar, Nav } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup'
 import NavBar from "./NavBar";
 // import * as Icon from 'react-bootstrap-icons';
@@ -17,15 +16,22 @@ export default class GameRoom extends React.Component {
       username: "",
       players: [],
       userid: "",
+      deck: []
     };
   }
   
+  shuffleDeck(){
+    let currDeck = [1, 1, 4, 5, 6, 7, 8]; //this.state.deck;
+    currDeck = currDeck.sort(() => Math.random() - 0.5)
+    console.log(currDeck);
+  }
 
   render(){
     return(
         <div className="gameRoom">
             <NavBar>
             </NavBar>
+            {this.shuffleDeck()}
             <Container className="mainContent">
                 <Row>
                     <Col className="participants">
