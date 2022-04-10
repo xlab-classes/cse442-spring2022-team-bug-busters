@@ -5,14 +5,18 @@ import profilePic from '../assets/flower.png';
 export default function Profile() {
   return (
     <div>
-      <div id='navbar'>
+      {/* <div id='navbar'>
         <div id="navbarLeftside">
           Home
         </div>
         <div id="navbarRightside">
           Username
         </div>
-      </div>
+      </div> */}
+
+      <NavBar>
+        
+      </NavBar>
 
       <div id='profile'>
         <img src={profilePic} alt="profile" id='profilepicture'/>
