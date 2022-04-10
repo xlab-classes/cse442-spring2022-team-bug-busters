@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Navbar, Nav } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup'
+import NavBar from "./NavBar";
 // import * as Icon from 'react-bootstrap-icons';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 export default class GameRoom extends React.Component {
@@ -23,22 +24,8 @@ export default class GameRoom extends React.Component {
   render(){
     return(
         <div className="gameRoom">
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Container>
-                <Navbar.Brand href="#home">Bug Busters</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
-                    </Nav>
-                    <Nav>
-                    <Nav.Link href="#deets">Username</Nav.Link>
-                    <Nav.Link eventKey={2} href="#memes">
-                        Settings
-                    </Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <NavBar>
+            </NavBar>
             <Container className="mainContent">
                 <Row>
                     <Col className="participants">

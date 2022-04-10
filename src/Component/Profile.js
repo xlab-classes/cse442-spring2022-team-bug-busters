@@ -1,4 +1,7 @@
 import React from 'react';
+import "../Profile.css";
+import NavBar from "./NavBar";
+import profilePic from '../assets/flower.png';
 export default function Profile() {
   return (
     <div>
@@ -12,7 +15,7 @@ export default function Profile() {
       </div>
 
       <div id='profile'>
-        <img src={'/image/flower.png'} alt="profile" id='profilepicture'/>
+        <img src={profilePic} alt="profile" id='profilepicture'/>
         <div id = 'profileInformation'>
           <p>Player Name</p>
           <p>Rank #4104</p>
