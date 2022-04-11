@@ -1,20 +1,21 @@
 import React from 'react';
 import "../Profile.css"
 import NavBar from "./NavBar"
+import axios from "axios";
 export default function Profile() {
 
-  const [state, setState] = React.useState({
-    wins: 0,
-    lossess: 0,
-  })
+  const [state, setState] = React.useState([]);
 
-  function handleChange(event) {
-    const value = event.target.value;
-    setState({
-      //(updater, [callback])
-      ...state, [event.target.name]: value
-    })
-    
+  // Only runs when the component gets moounted
+  useEffect(() => {
+    getPoints();
+  }, []);
+
+  function getPoints(){
+    axios.get('http://localhost:8080/backend/modals/dbqueries.php').then(function(response) {
+      console.log(response.data);
+      setState(response.data);
+    });
   }
 
   return (
@@ -38,8 +39,8 @@ export default function Profile() {
         <div id = 'profileInformation'>
           <p>Player Name</p>
           <p>Rank #4104</p>
-          <p name='wins' values={state.wins} onChange={handleChange}> Wins: {state.wins} | </p>
-          <p name='losses' values={state.losses} onChange={handleChange}> Losses: {state.losses}</p>
+          <p name='wins' value={state.wins} onChange={handleChange}> Wins: {state.wins} | </p>
+          <p name='losses' value={state.losses} onChange={handleChange}> Losses: {state.losses}</p>
         </div>
 
       </div>
