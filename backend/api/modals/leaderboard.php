@@ -8,6 +8,15 @@ $userLoses = $scoresDataBase->getAllLoses();
 $userPoints = $scoresDataBase->getAllPoints();
 $counter = 1;
 
+//TODO: when a game event ends...
+if ($click_finished){
+  // get user, points from frontend
+  $firstname = $_POST['firstname'];
+  $numberofPoints = $_GET['points'];
+  $scoresDataBase->updatePoints($firstname, $numberofPoints);
+  $scoresDataBase->close();
+}
+
 echo "<html>
 <style>
 table, th, td {
