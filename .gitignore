@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# config file for database 
+./backend/api/config.php
+
 # testing
 /coverage
 

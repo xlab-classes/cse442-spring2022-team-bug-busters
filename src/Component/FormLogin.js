@@ -1,5 +1,5 @@
 import React from "react";
-const API = "http://localhost/react/api/index.php"
+const API = "http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 // import Container from 'react-bootstrap/Container';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 export default class LoginForm extends React.Component {
@@ -20,13 +20,19 @@ export default class LoginForm extends React.Component {
     });
   };
 
+  usernameChangeHandler = event => {
+    this.setState({
+      username: event.target.value
+    });
+  };
+
   handleSubmit = event => {
       // alert('You have been logged into your account!');
       event.preventDefault();
       console.log(this.state);
 
       
-      fetch(`${API}`, {
+      fetch(API + "login.php", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,16 +43,17 @@ export default class LoginForm extends React.Component {
           password: this.state.password
         }),
       })
-        .then((res) => {
-          res.text()
-        })
+        .then((res) => {res.text()}) // check response and convert response to json
         .then((result) =>{
             console.log(result);
             // console.log("Testing");
             // console.log(result.token);
             // console.log(result.connection);
-          }
-        )
+          })
+        .catch((error)=>{
+          alert("Error occured!");
+        })
+
   }
 
 
