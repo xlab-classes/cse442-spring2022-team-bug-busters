@@ -1,11 +1,10 @@
-import React from 'react';
-import "../Profile.css"
-import NavBar from "./NavBar"
-import axios from "axios";
-const API = "http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+import React from "react";
+import "../Profile.css";
+import NavBar from "./NavBar";
+const API =
+  "http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/";
 
 export default class Profile extends React.Component {
-
   // 1. The component will start to get inserted into the DOM
   // 2. The initial render happens (with an empty array for 'points')
   // 3. Then componentDidMount() is called
@@ -14,29 +13,29 @@ export default class Profile extends React.Component {
   state = {
     error: null,
     isLoaded: false,
-    points: []
-  }
+    points: [],
+  };
 
   // Requests data from the server
   componentDidMount() {
     fetch(API + "points.php")
-    .then(res => res.json())
-    .then(
-      (result) => {
-        // setState() - triggers a new render and each point 
-        this.setState({
-          isLoaded: true,
-          points: result.points
-        });
-        console.log(this.state.points)
-      },
-      (error) => {
-        this.setState({
-          isLoaded: true,
-          error
-        })
-      }
-    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          // setState() - triggers a new render and each point
+          this.setState({
+            isLoaded: true,
+            points: result.points,
+          });
+          console.log(this.state.points);
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      );
   }
 
   // Only runs when the component gets moounted
@@ -52,12 +51,11 @@ export default class Profile extends React.Component {
   // }
 
   render() {
-
     const { error, isLoaded, points } = this.state;
     if (error) {
-      return <div>Error: {error.message} </div>
-    } else if (!isLoaded){
-      return <div>Loading...</div>
+      return <div>Error: {error.message} </div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
     } else {
       return (
         <div>
@@ -70,28 +68,22 @@ export default class Profile extends React.Component {
             </div>
           </div> */}
 
-          <NavBar>
-            
-          </NavBar>
+          <NavBar></NavBar>
 
-          <div className='profile'>
-            <img src={'/image/flower.png'} alt="profile" id='profilepicture'/>
-              {this.state.points.map(profileInformation => (
-                <div id = 'profileInformation' key={profileInformation.username}>
-                  <p>Player Name</p>
-                  <p>Rank #4104</p>
-                  {/* <UserInfo /> component is a fundamental component to display the user's avatar and name */}
-                  <p className='Wins'>Wins: {profileInformation.wins} | </p>
-                  <p className='Losses'>Losses: {profileInformation.losses}</p>
-                </div>
-              ))}
+          <div className="profile">
+            <img src={"/image/flower.png"} alt="profile" id="profilepicture" />
+            {this.state.points.map((profileInformation) => (
+              <div id="profileInformation" key={profileInformation.username}>
+                <p>Player Name</p>
+                <p>Rank #4104</p>
+                {/* <UserInfo /> component is a fundamental component to display the user's avatar and name */}
+                <p className="Wins">Wins: {profileInformation.wins} | </p>
+                <p className="Losses">Losses: {profileInformation.losses}</p>
+              </div>
+            ))}
           </div>
-          
         </div>
-            
-      )
+      );
     }
   }
 }
-
-
