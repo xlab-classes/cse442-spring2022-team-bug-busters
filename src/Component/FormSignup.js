@@ -15,14 +15,13 @@ export default function Form() {
     alert('Your account has been submitted!');
     event.preventDefault();
 
-    const data = {firstname, lastname, username, password};
-
-    fetch('http://localhost:3000/register', {
+    const API = "http://www-student.cse/buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals"
+    fetch(API + 'register.php', {
       method: 'POST',
-      headers: {
-        'Content-Type': "applications/json"
+      header: {
+        'Content-Type': "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(state)
     }).then(response => response.json())
     .then(res => console.log(res));
   }
@@ -38,6 +37,7 @@ export default function Form() {
     
   }
 
+  // Note - Functional Components don't use render()!
   return (
     <form onSubmit={handleSubmit}>
       <h1>Let's play, Bug Busters!</h1>
