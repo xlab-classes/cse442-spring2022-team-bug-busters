@@ -3,24 +3,28 @@ import React from "react";
 
 export default function Form() {
   
+  // functional component - useState(), useEffect(): collect user data by using the Axios API
   const [state, setState] = React.useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     username: "",
     password: ""
   })
   
-  function handleSubmit(event) {
-      alert('Your account has been submitted!');
-      event.preventDefault();
+  const handleSubmit = event => {
+    alert('Your account has been submitted!');
+    event.preventDefault();
 
-      fetch('http://localhost:3000/register', {
-        method: 'POST',
-        body: JSON.stringify(this.state)
-      }).then(function(response) {
-        console.log(response)
-        return response.json();
-      });
+    const data = {firstname, lastname, username, password};
+
+    fetch('http://localhost:3000/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': "applications/json"
+      },
+      body: JSON.stringify(data)
+    }).then(response => response.json())
+    .then(res => console.log(res));
   }
 
   //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
@@ -88,7 +92,7 @@ export default function Form() {
         />
       </label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
       <br></br>
       <span className="login">
         Already have an account? Login <a href="login">here</a>
