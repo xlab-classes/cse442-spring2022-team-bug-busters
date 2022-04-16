@@ -36,5 +36,5 @@
     }
     
     // $db->close();
-    $userDataBase->close();
+    $scoresDataBase->close();
 ?>
