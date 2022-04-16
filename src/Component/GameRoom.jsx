@@ -69,9 +69,12 @@ export default class GameRoom extends React.Component {
             </div>
 
             <div id="gameRoomEndGame">
-              <Link to={"/CSE442-542/2022-Spring/cse-442h/join"}>
-                <button id="finishGame">Finish Game</button>
-              </Link>
+              <div>
+                <Link to={"/CSE442-542/2022-Spring/cse-442h/join"}>
+                  <button id="finishGame">Finish Game</button>
+                </Link>
+              </div>
+
             </div>
 
           </div>
