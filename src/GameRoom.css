@@ -8,13 +8,14 @@
 #gameRoomPlayers{
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 20vw;
   margin-top: 80px;
 }
 .eachPlayerRow{
   padding: 20px;
   border: solid black;
   margin: 20px;
+  width: 250px;
   text-align: center;
 }
 
@@ -23,7 +24,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 900px;
+  width: 60vw;
 }
 
 #gameRoomDeck{
@@ -58,7 +59,7 @@
 #gameRoomEndGame{
   display: flex;
   justify-content: center;
-  width: 400px
+  width: 20vw
 }
 
 #finishGame{
