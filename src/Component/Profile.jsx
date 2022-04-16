@@ -1,8 +1,7 @@
 import React from "react";
 import "../Profile.css";
 import NavBar from "./NavBar";
-const API =
-  "http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/";
+const API = "http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/";
 
 export default class Profile extends React.Component {
   // 1. The component will start to get inserted into the DOM
@@ -73,7 +72,7 @@ export default class Profile extends React.Component {
           <div className="profile">
             <img src={"/image/flower.png"} alt="profile" id="profilepicture" />
             {this.state.points.map((profileInformation) => (
-              <div id="profileInformation" key={profileInformation.username}>
+              <div id="profileInformation" key={profileInformation.id}>
                 <p>Player Name</p>
                 <p>Rank #4104</p>
                 {/* <UserInfo /> component is a fundamental component to display the user's avatar and name */}
