@@ -1,6 +1,10 @@
 import React from 'react'
 import NavBar from './NavBar'
 import "../WaitingRoom.css"
+import {
+  Link
+} from 'react-router-dom';
+
 
 export default class WaitingRoom extends React.Component {
   constructor(props){
@@ -40,7 +44,9 @@ export default class WaitingRoom extends React.Component {
             </div>
           </div>
           <div className='start'>
-            Start Game
+            <Link to={"/CSE442-542/2022-Spring/cse-442h/room"}>
+              <button className='startButton'>Start Game</button>
+            </Link>
           </div>
 
           <div className='roomCode'>

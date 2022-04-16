@@ -40,11 +40,17 @@
 .start{
   text-align: right;
   width: 500px;
-  padding: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .roomCode{
   display: flex;
   flex-direction: column;
+}
+
+.startButton{
+  padding: 5px;
 }
 
