@@ -16,6 +16,7 @@ export default function Form() {
     event.preventDefault();
 
     const API = "http://www-student.cse/buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals"
+    console.log("API is", API);
     fetch(API + 'register.php', {
       method: 'POST',
       header: {
@@ -23,7 +24,7 @@ export default function Form() {
       },
       body: JSON.stringify(state)
     }).then(response => response.json())
-    .then(res => console.log(res));
+    .then(res => res => this.setState({...this.state, data: res.data}));
   }
 
   //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
@@ -47,7 +48,7 @@ export default function Form() {
         First Name
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           name="firstname"
           value={state.firstname}
           placeholder="Enter your first name"
@@ -58,7 +59,7 @@ export default function Form() {
         Last Name
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           name="lastname"
           value={state.lastname}
           placeholder="Enter your last name"
@@ -71,7 +72,7 @@ export default function Form() {
         Username
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           name="username"
           value={state.username}
           placeholder="Enter your username"
@@ -84,7 +85,7 @@ export default function Form() {
         Password
         <input
           type="password"
-          class="form-control"
+          className="form-control"
           name="password"
           value={state.password}
           placeholder="Enter your password"
@@ -92,7 +93,7 @@ export default function Form() {
         />
       </label>
       </div>
-      <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
+      <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
       <br></br>
       <span className="login">
         Already have an account? Login <a href="login">here</a>
