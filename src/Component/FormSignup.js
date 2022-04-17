@@ -6,8 +6,8 @@ import React from "react";
 export default function Form() {
   
   const [state, setState] = React.useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     username: "",
     password: ""
   })
@@ -18,6 +18,7 @@ export default function Form() {
     event.preventDefault();
 
     const {firstname, lastname, username, password} = state;
+    console.log("this is the info", {firstname, lastname, username, password});
     const user = {firstname, lastname, username, password};
     const API = 'http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php'
     console.log(user);
