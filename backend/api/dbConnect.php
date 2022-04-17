@@ -71,6 +71,20 @@ class DBConnection{
         }else{
             echo "Error creating friends table: " . mysqli_error($conn) . '<br>';
         }
+
+        $sql = "CREATE TABLE IF NOT EXISTS passwordReset(
+            username VARCHAR(20) NOT NULL UNIQUE,
+            email VARCHAR(320) NOT NULL UNIQUE,
+            token TEXT NOT NULL,
+            timeCreated TEXT NOT NULL,
+            PRIMARY KEY(username)
+        )";
+
+        if(mysqli_query($this->conn, $sql)){
+        echo "Table passwordReset created sucessfully" . '<br>';
+        }else{
+        echo "Error creating users table: " . mysqli_error($conn) . '<br>';
+        }
         
     }
 }

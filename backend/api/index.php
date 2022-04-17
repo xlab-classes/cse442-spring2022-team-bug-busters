@@ -13,8 +13,6 @@
 
     include_once("./modals/leaderboard.php");
 
-    echo "</br></br><h1>Testing Friends</h1><br>";
-    include_once("./modals/testFriends.php");
 ?>
 
 <!doctype html>

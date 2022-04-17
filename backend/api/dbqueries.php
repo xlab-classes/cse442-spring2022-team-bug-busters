@@ -14,10 +14,35 @@ class usersHelper{
 
     //Given a username and an unhashed password, adds a new user to the database.
     public function addUser($username, $email, $password){
+        //Check to see if user already exists!
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> bind_result($result);
+        $numberOfUsers;
+        while($stmt->fetch()){
+            $numberOfUsers = $result;
+        }
+        if($numberOfUsers >= 1){
+            return "This user already exists!";
+        }
         $hashed_pw = hash('sha256', $password);
         $stmt = $this->conn->prepare("INSERT INTO users (username, email, hashed_pw) VALUES (?, ?, ?)");
-        $stmt -> bind_param("ss", $username, $email, $hashed_pw);
+        $stmt -> bind_param("sss", $username, $email, $hashed_pw);
         $stmt -> execute();
+        $stmt = $this->conn->prepare("INSERT INTO scores (username) VALUES (?)");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $defaultArray = serialize(array());
+        $stmt = $this->conn->prepare("INSERT INTO friends (username, currentFriends, pendingRequests, receivedRequests) VALUES (?, ?, ?, ?)");
+        $stmt -> bind_param("ssss", $username, $defaultArray, $defaultArray, $defaultArray);
+        $stmt -> execute();
+        $token = bin2hex(random_bytes(50));
+        $currentTime = date("m-d-y h:i");
+        $stmt = $this->conn->prepare("INSERT INTO passwordReset (username, email, token, timeCreated) VALUES (?, ?, ?, ?)");
+        $stmt -> bind_param("ssss", $username, $email, $token, $currentTime);
+        $stmt -> execute();
+        return "Added the new user to all tables successfuly";
     }
 
     //Given a username and an unhashed password, removes a user from the database.
@@ -416,5 +441,51 @@ class friendsHelper{
         }
         return $results;
     }
+}
+
+
+class passwordResetHelper{
+
+    private $conn;
+    
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    //Takes in a username and email, generates a passwordReset token.
+    public function generateResetToken($username, $email){
+        $token = bin2hex(random_bytes(50));
+        $currentTime = date("m-d-y H:i:s");
+        $stmt = $this->conn->prepare("UPDATE passwordReset SET token = ?, timeCreated = ? WHERE username = ? AND email = ?");
+        $stmt -> bind_param("ssss", $token, $currentTime, $username, $email);
+        $stmt -> execute();
+        return $token;
+    }
+
+    public function changePassword($username, $token, $password, $confirmPassword){
+        //First check the time the token was created to make sure it didn't expire! (Token Expires after ~1 hour)
+        if($password != $confirmPassword){
+        return "The passwords given did not match.";
+        }
+        $stmt = $this->conn->prepare("SELECT token, timeCreated FROM passwordReset WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> store_result();
+        $stmt -> bind_result($storedToken, $timeCreated);
+        while($stmt->fetch()){
+            $storedToken = $storedToken;
+            $timeCreated = $timeCreated;
+        }
+        //If tokens do not match, throw an error!
+        if($storedToken != $token){
+            return "Error, the token provided was incorrect.";
+        }
+        $hashed_pw = hash('sha256', $password);
+        $stmt = $this->conn->prepare("UPDATE users SET hashed_pw = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $hashed_pw, $username);
+        $stmt -> execute();
+        return "Password has been successfully changed!";
+    }
+
 }
 ?>
