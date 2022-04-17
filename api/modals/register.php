@@ -4,9 +4,10 @@
     include_once("./dbqueries.php");
     include_once("./dbConnect.php");
     header('Access-Control-Allow-Origin: *');
-    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, PATCH, DELETE");
     header("Allow: GET, POST, OPTIONS, PUT, DELETE");
     header("Access-Control-Allow-Headers: *");
+    header("Access-Control-Allow-Headers: 'X-Requested-With,content-type'");
     $_POST = json_decode(file_get_contents("php://input"), true);
     $method = $_SERVER['REQUEST_METHOD'];
     
