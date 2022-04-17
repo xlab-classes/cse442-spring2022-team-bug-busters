@@ -8,8 +8,13 @@
     header("Allow: GET, POST, OPTIONS, PUT, DELETE");
     header("Access-Control-Allow-Headers: *");
     header("Access-Control-Allow-Headers: 'X-Requested-With,content-type'");
-    $_POST = json_decode(file_get_contents("php://input"), true);
+    header('Access-Control-Max-Age: 1728000');
+    header("Content-Length: 0");
+    header("Content-Type: text/plain"); 
+    $_POST = json_decode(file_get_contents("php://input"));
     $method = $_SERVER['REQUEST_METHOD'];
+    echo "received data";
+    print_r($_POST);
     
     if ($method == 'POST'){
         if (empty($_POST['username']) || empty($_POST['password'])){
