@@ -1,44 +1,53 @@
+import axios from "axios";
 import React from "react";
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Form() {
   
-  // functional component - useState(), useEffect(): collect user data by using the Axios API
   const [state, setState] = React.useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     username: "",
     password: ""
   })
   
-  const handleSubmit = event => {
+  // https://stackoverflow.com/questions/65456583/how-to-post-request-using-axios-with-react-hooks
+  function handleSubmit(event) {
     alert('Your account has been submitted!');
     event.preventDefault();
 
-    const API = "http://www-student.cse/buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals"
-    console.log("API is", API);
-    fetch(API + 'register.php', {
-      method: 'POST',
-      header: {
-        'Content-Type': "application/json"
-      },
-      body: JSON.stringify(state)
-    }).then(response => response.json())
-    .then(res => this.setState({...this.state, data: res.data}));
+    const {firstname, lastname, username, password} = state;
+    const user = {firstname, lastname, username, password};
+    const API = 'http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php'
+    console.log(user);
+
+    axios.post(API, user)
+    .then((res) => {console.log(res)})
+    .catch((err) => {console.log(err)})
+    // fetch('http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php', {
+    //   method: 'POST',
+    //   headers: {
+    //     "Accept": "application/json",
+    //     "Content-Type": "application/json;charset=UTF-8",
+    //     "Access-Control-Allow-Origin":"*"
+    //   },
+    //   body: JSON.stringify(state)
+    // }).then((response) => response.json())
+    // .then((data) => {console.log(data)});
   }
 
   //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
   //get the 'value' from target and the 'name' of target  
-  function handleChange(event) {
-    const value = event.target.value;
+  const handleChange = name => e => {
+    // console.log("You're in handleChange!");
+    // const value = event.target.value;
     setState({
       //(updater, [callback])
-      ...state, [event.target.name]: value
-    })
-    
-  }
+      ...state, [name]: e.target.value
+    });
+  };
 
-  // Note - Functional Components don't use render()!
   return (
     <form onSubmit={handleSubmit}>
       <h1>Let's play, Bug Busters!</h1>
@@ -52,7 +61,7 @@ export default function Form() {
           name="firstname"
           value={state.firstname}
           placeholder="Enter your first name"
-          onChange={handleChange}
+          onChange={handleChange('firstname')}
         />
       </label>
       <label>
@@ -63,7 +72,7 @@ export default function Form() {
           name="lastname"
           value={state.lastname}
           placeholder="Enter your last name"
-          onChange={handleChange}
+          onChange={handleChange('lastname')}
         />
       </label>
       </div>
@@ -76,7 +85,7 @@ export default function Form() {
           name="username"
           value={state.username}
           placeholder="Enter your username"
-          onChange={handleChange}
+          onChange={handleChange('username')}
         />
       </label>
       </div>
@@ -89,11 +98,11 @@ export default function Form() {
           name="password"
           value={state.password}
           placeholder="Enter your password"
-          onChange={handleChange}
+          onChange={handleChange('password')}
         />
       </label>
       </div>
-      <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+      <button type="submit" className="btn btn-primary">Submit</button>
       <br></br>
       <span className="login">
         Already have an account? Login <a href="login">here</a>
