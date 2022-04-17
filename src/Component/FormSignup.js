@@ -24,7 +24,7 @@ export default function Form() {
       },
       body: JSON.stringify(state)
     }).then(response => response.json())
-    .then(res => res => this.setState({...this.state, data: res.data}));
+    .then(res => this.setState({...this.state, data: res.data}));
   }
 
   //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
