@@ -7,10 +7,12 @@
     $db = $db -> getConnection();
     $userDataBase = new usersHelper($db);
     $userDataBase->getAllUsers();
+    $friendsDataBase = new friendsHelper($db);
     echo "</br></br><h1>Current Path</h1><br>";
     $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 
     include_once("./modals/leaderboard.php");
+
 ?>
 
 <!doctype html>

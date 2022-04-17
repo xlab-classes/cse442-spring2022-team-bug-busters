@@ -32,6 +32,7 @@ class DBConnection{
         $sql = "CREATE TABLE IF NOT EXISTS users(
                         userid INT AUTO_INCREMENT,
                         username VARCHAR(20) NOT NULL UNIQUE,
+                        email VARCHAR(320) NOT NULL UNIQUE,
                         hashed_pw TEXT NOT NULL,
                         auth VARCHAR(120) DEFAULT NULL,
                         PRIMARY KEY(userid)
@@ -48,7 +49,7 @@ class DBConnection{
             wins INT NOT NULL DEFAULT 0,
             loses INT NOT NULL DEFAULT 0,
             points INT NOT NULL DEFAULT 0, 
-            PRIMARY KEY(userid)
+            PRIMARY KEY(username)
         )" ;
 
         if(mysqli_query($this->conn, $sql)){
@@ -56,6 +57,35 @@ class DBConnection{
         }else{
             echo "Error creating scores table: " . mysqli_error($conn) . '<br>';
         }
+
+        $sql = "CREATE TABLE IF NOT EXISTS friends(
+            username VARCHAR(20) NOT NULL UNIQUE,
+            currentFriends LONGTEXT NOT NULL,
+            pendingRequests LONGTEXT NOT NULL,
+            receivedRequests LONGTEXT NOT NULL, 
+            PRIMARY KEY(username)
+        )";
+
+        if(mysqli_query($this->conn, $sql)){
+            echo "Table friends created sucessfully" . '<br>';
+        }else{
+            echo "Error creating friends table: " . mysqli_error($conn) . '<br>';
+        }
+
+        $sql = "CREATE TABLE IF NOT EXISTS passwordReset(
+            username VARCHAR(20) NOT NULL UNIQUE,
+            email VARCHAR(320) NOT NULL UNIQUE,
+            token TEXT NOT NULL,
+            timeCreated TEXT NOT NULL,
+            PRIMARY KEY(username)
+        )";
+
+        if(mysqli_query($this->conn, $sql)){
+        echo "Table passwordReset created sucessfully" . '<br>';
+        }else{
+        echo "Error creating users table: " . mysqli_error($conn) . '<br>';
+        }
+        
     }
 }
 ?>

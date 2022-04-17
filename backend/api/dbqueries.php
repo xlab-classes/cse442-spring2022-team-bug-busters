@@ -13,12 +13,36 @@ class usersHelper{
 
 
     //Given a username and an unhashed password, adds a new user to the database.
-    public function addUser($username, $password){
-        $hashed_pw = hash('sha256', $password);
-        $stmt = $this->conn->prepare("INSERT INTO users (username, hashed_pw) VALUES (?, ?)");
-        $stmt -> bind_param("ss", $username, $hashed_pw);
+    public function addUser($username, $email, $password){
+        //Check to see if user already exists!
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
+        $stmt -> bind_param("s", $username);
         $stmt -> execute();
-
+        $stmt -> bind_result($result);
+        $numberOfUsers;
+        while($stmt->fetch()){
+            $numberOfUsers = $result;
+        }
+        if($numberOfUsers >= 1){
+            return "This user already exists!";
+        }
+        $hashed_pw = hash('sha256', $password);
+        $stmt = $this->conn->prepare("INSERT INTO users (username, email, hashed_pw) VALUES (?, ?, ?)");
+        $stmt -> bind_param("sss", $username, $email, $hashed_pw);
+        $stmt -> execute();
+        $stmt = $this->conn->prepare("INSERT INTO scores (username) VALUES (?)");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $defaultArray = serialize(array());
+        $stmt = $this->conn->prepare("INSERT INTO friends (username, currentFriends, pendingRequests, receivedRequests) VALUES (?, ?, ?, ?)");
+        $stmt -> bind_param("ssss", $username, $defaultArray, $defaultArray, $defaultArray);
+        $stmt -> execute();
+        $token = bin2hex(random_bytes(50));
+        $currentTime = date("m-d-y h:i");
+        $stmt = $this->conn->prepare("INSERT INTO passwordReset (username, email, token, timeCreated) VALUES (?, ?, ?, ?)");
+        $stmt -> bind_param("ssss", $username, $email, $token, $currentTime);
+        $stmt -> execute();
+        return "Added the new user to all tables successfuly";
     }
 
     //Given a username and an unhashed password, removes a user from the database.
@@ -27,7 +51,6 @@ class usersHelper{
         $stmt = $this->conn->prepare("DELETE FROM users WHERE username = ? AND hashed_pw = ?");
         $stmt -> bind_param("ss", $username, $hashed_pw);
         $stmt -> execute();
-
     }
 
     //Gets a username by id of a user in the database. Returned as a string.
@@ -197,6 +220,271 @@ class scoresHelper{
         $columns = array_column($results, 'points');
         array_multisort($columns, SORT_DESC, $results);
         return $results;
+    }
+}
+
+class friendsHelper{
+
+    private $conn;
+    
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    //Takes in a username and adds to the friends table.
+    public function addUser($username){
+        $defaultArray = serialize(array());
+        $stmt = $this->conn->prepare("INSERT INTO friends (username, currentFriends, pendingRequests, receivedRequests) VALUES (?, ?, ?, ?)");
+        $stmt -> bind_param("ssss", $username, $defaultArray, $defaultArray, $defaultArray);
+        $stmt -> execute();
+    }
+
+    /*Takes in a username and removes them form the friends table.
+    This should effectively remove all pending and current friends as well.*/
+    public function removeUser($username){
+        $stmt = $this->conn->prepare("DELETE FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+    }
+
+    /*Takes in a username and friendID and adds them as a friend.
+    This request will go both ways, showing the friends on both the $username and the $friendIDs list.
+    $username == The user who has received a request.
+    $friendUsername == The user who has a pending sent friend request.
+    */
+    public function acceptFriend($username, $friendUsername){
+        //Update the received requests of $username
+        $stmt = $this->conn->prepare("SELECT receivedRequests FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        $currentFriends = array_diff($currentFriends, array($friendUsername));
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET receivedRequests = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $username);
+        $stmt -> execute();
+        //Update the pendingRequests of $friendUsername.
+        $stmt = $this->conn->prepare("SELECT pendingRequests FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $friendUsername);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        $currentFriends = array_diff($currentFriends, array($username));
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET pendingRequests = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $friendUsername);
+        $stmt -> execute();
+        //Update the current friends of $username
+        $stmt = $this->conn->prepare("SELECT currentFriends FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        array_push($currentFriends, $friendUsername);
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET currentFriends = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $username);
+        $stmt -> execute();
+        //Update the current friends of $friendUsername
+        $stmt = $this->conn->prepare("SELECT currentFriends FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $friendUsername);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        array_push($currentFriends, $username);
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET currentFriends = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $friendUsername);
+        $stmt -> execute();
+        return "Friend successfully added!";
+    }
+
+    public function sendRequest($username, $friendUsername){
+        //Check to make sure the user trying to friend exists!
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $friendUsername);
+        $stmt -> execute();
+        $stmt -> bind_result($result);
+        $numberOfUsers;
+        while($stmt->fetch()){
+            $numberOfUsers = $result;
+        }
+        if($numberOfUsers < 1){
+            return "Error, the user you are trying to friend does not exist!";
+        }
+        //Check to make sure the users are currently not friends!
+        if(in_array($friendUsername, $this->currentFriends($username))){
+            return "Error, you are already friends with this user.";
+        }
+
+        //First update the user who sent the friend request to show that the request is pending.
+        $stmt = $this->conn->prepare("SELECT pendingRequests FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        //If the user has already sent a friend request return an error.
+        if(in_array($friendUsername, $currentFriends)){
+            return "Error, you have already sent this user a friend request!";
+        }
+        array_push($currentFriends, $friendUsername);
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET pendingRequests = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $username);
+        $stmt -> execute();
+
+        //Second update the user who received the friend request to show that they have a pending request.
+        $stmt = $this->conn->prepare("SELECT receivedRequests FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $friendUsername);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        array_push($currentFriends, $username);
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET receivedRequests = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $friendUsername);
+        $stmt -> execute();
+        return "Friend request sent sucessfully!";
+    }
+
+    /*Takes in a username and friendID and removes them as a friend.
+    This will remove the friend from both users.*/
+    public function removeFriend($username, $friendUsername){
+        //First update the first user to remove their friend.
+        $stmt = $this->conn->prepare("SELECT currentFriends FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        $currentFriends = array_diff($currentFriends, array($friendUsername));
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET currentFriends = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $username);
+        $stmt -> execute();
+        //Second update the second user to remove their friend.
+        $stmt = $this->conn->prepare("SELECT currentFriends FROM friends WHERE username = ?");
+        $stmt -> bind_param("s", $friendUsername);
+        $stmt -> execute();
+        $stmt -> bind_result($friends);
+        $currentFriends;
+        while($stmt->fetch()){
+            $currentFriends = unserialize($friends);
+        }
+        $currentFriends = array_diff($currentFriends, array($username));
+        $updatedFriends = serialize($currentFriends);
+        $stmt = $this->conn->prepare("UPDATE friends SET currentFriends = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $updatedFriends, $friendUsername);
+        $stmt -> execute();
+        return "Friend removed successfully!";
+    }
+
+    //Takes in a username and returns a list of the friends of this user.
+    public function currentFriends($username){
+        $stmt = $this->conn->prepare("SELECT currentFriends FROM friends WHERE username = (?)");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> store_result();
+        $stmt -> bind_result($friends);
+        $results;
+        while($stmt->fetch()){
+            $results = unserialize($friends);
+        }
+        return $results;
+    }
+
+    //Takes in a username and returns a list of the current pending friends of a user.
+    public function pendingRequests($username){
+        $stmt = $this->conn->prepare("SELECT pendingRequests FROM friends WHERE username = (?)");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> store_result();
+        $stmt -> bind_result($friends);
+        $results;
+        while($stmt->fetch()){
+            $results = unserialize($friends);
+        }
+        return $results;
+    }
+
+    //Takes in a username and returns a list of the current requests sent by a user.
+    public function receivedRequests($username){
+        $stmt = $this->conn->prepare("SELECT receivedRequests FROM friends WHERE username = (?)");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> store_result();
+        $stmt -> bind_result($friends);
+        $results;
+        while($stmt->fetch()){
+            $results = unserialize($friends);
+        }
+        return $results;
+    }
+}
+
+
+class passwordResetHelper{
+
+    private $conn;
+    
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    //Takes in a username and email, generates a passwordReset token.
+    public function generateResetToken($username, $email){
+        $token = bin2hex(random_bytes(50));
+        $currentTime = date("m-d-y H:i:s");
+        $stmt = $this->conn->prepare("UPDATE passwordReset SET token = ?, timeCreated = ? WHERE username = ? AND email = ?");
+        $stmt -> bind_param("ssss", $token, $currentTime, $username, $email);
+        $stmt -> execute();
+        return $token;
+    }
+
+    public function changePassword($username, $token, $password, $confirmPassword){
+        //First check the time the token was created to make sure it didn't expire! (Token Expires after ~1 hour)
+        if($password != $confirmPassword){
+        return "The passwords given did not match.";
+        }
+        $stmt = $this->conn->prepare("SELECT token, timeCreated FROM passwordReset WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> store_result();
+        $stmt -> bind_result($storedToken, $timeCreated);
+        while($stmt->fetch()){
+            $storedToken = $storedToken;
+            $timeCreated = $timeCreated;
+        }
+        //If tokens do not match, throw an error!
+        if($storedToken != $token){
+            return "Error, the token provided was incorrect.";
+        }
+        $hashed_pw = hash('sha256', $password);
+        $stmt = $this->conn->prepare("UPDATE users SET hashed_pw = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $hashed_pw, $username);
+        $stmt -> execute();
+        return "Password has been successfully changed!";
     }
 
 }
