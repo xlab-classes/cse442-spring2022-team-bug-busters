@@ -1,14 +1,32 @@
 <?php
-    include_once("registerController.php");
+    require("../helper.php");
+    require("../config.php");
+    require("../dbConnect.php");
+    require("../dbqueries.php");
 
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
-    header("Access-Control-Max-Age: 3600");
+    http_response_code(200);
+    header("Content-Type: application/json");
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    $method = $_SERVER['REQUEST_METHOD'];
+    $_POST = json_decode(file_get_contents("php://input"), TRUE);
 
-    $requestMethod = $_SERVER["REQUEST_METHOD"];
-  
-    $controller = new registerController($dbConnection, $requestMethod, $username);
-    $controller->processRequest();
+    if($method == 'POST'){
+        $db = new DBConnection($db_config);
+        $db = $db -> getConnection();
+        $userdb = new usersHelper($db);
+        $username = $_POST['username'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $password = $_POST['password'];
+
+        $userdb->addUser($username, $password);
+        $userdb->
+        $token = generateAuth();
+        $data = array();
+        $data['token'] = $token;
+        echo json_encode($data);
+        $db->close();
+    }
 ?>
