@@ -1,7 +1,6 @@
 <?php
     include_once("dbConnect.php");
     include_once("config.php");
-    include_once("index.php");
 
 class usersHelper{
 

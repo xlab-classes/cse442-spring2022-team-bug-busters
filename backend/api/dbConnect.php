@@ -39,9 +39,11 @@ class DBConnection{
                     )AUTO_INCREMENT=1; " ;
         
         if(mysqli_query($this->conn, $sql)){
-            echo "Table users created sucessfully" . '<br>';
+            //echo "Table users created sucessfully" . '<br>';
+            $testing = "Hi";
         }else{
-            echo "Error creating users table: " . mysqli_error($conn) . '<br>';
+            //echo "Error creating users table: " . mysqli_error($conn) . '<br>';
+            $testing = "Hi";
         }
 
         $sql = "CREATE TABLE IF NOT EXISTS scores(
@@ -53,9 +55,11 @@ class DBConnection{
         )" ;
 
         if(mysqli_query($this->conn, $sql)){
-            echo "Table scores created sucessfully" . '<br>';
+            //echo "Table scores created sucessfully" . '<br>';
+            $testing = "Hi";
         }else{
-            echo "Error creating scores table: " . mysqli_error($conn) . '<br>';
+            //echo "Error creating scores table: " . mysqli_error($conn) . '<br>';
+            $testing = "Hi";
         }
 
         $sql = "CREATE TABLE IF NOT EXISTS friends(
@@ -67,9 +71,11 @@ class DBConnection{
         )";
 
         if(mysqli_query($this->conn, $sql)){
-            echo "Table friends created sucessfully" . '<br>';
+            //echo "Table friends created sucessfully" . '<br>';
+            $testing = "Hi";
         }else{
-            echo "Error creating friends table: " . mysqli_error($conn) . '<br>';
+            //echo "Error creating friends table: " . mysqli_error($conn) . '<br>';
+            $testing = "Hi";
         }
 
         $sql = "CREATE TABLE IF NOT EXISTS passwordReset(
@@ -81,9 +87,11 @@ class DBConnection{
         )";
 
         if(mysqli_query($this->conn, $sql)){
-        echo "Table passwordReset created sucessfully" . '<br>';
+        //echo "Table passwordReset created sucessfully" . '<br>';
+        $testing = "Hi";
         }else{
-        echo "Error creating users table: " . mysqli_error($conn) . '<br>';
+        //echo "Error creating users table: " . mysqli_error($conn) . '<br>';
+        $testing = "Hi";
         }
         
     }

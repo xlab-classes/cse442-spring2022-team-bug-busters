@@ -1,5 +1,12 @@
 import React from "react";
-const API = "http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+
+// Use the following line for deployment!
+//const API = "http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+
+//Use the following line for local testing!
+const API = "http://localhost:8080/modals/"
+
+
 // import Container from 'react-bootstrap/Container';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 export default class LoginForm extends React.Component {
@@ -9,7 +16,7 @@ export default class LoginForm extends React.Component {
     this.state = {
       username: "",
       password: "",
-      sessiontoken: "",
+      sessionToken: "",
     };
   }
   
@@ -29,36 +36,34 @@ export default class LoginForm extends React.Component {
   handleSubmit = event => {
       // alert('You have been logged into your account!');
       event.preventDefault();
-      console.log(this.state);
-
-      
       fetch(API + "login.php", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
         },
         body: JSON.stringify({
-          email: this.state.email,
+          username: this.state.username,
           password: this.state.password
-        }),
-      })
-        .then((res) => {res.text()}) // check response and convert response to json
-        .then((result) =>{
-            console.log(result);
-            // console.log("Testing");
-            // console.log(result.token);
-            // console.log(result.connection);
-          })
-        .catch((error)=>{
-          alert("Error occured!");
         })
-
-  }
-
+      })
+      .then(res => res.json())
+      .then(
+        result => {
+            this.setState({
+              sessionToken: result.token,
+            });
+            document.location = "/CSE442-542/2022-Spring/cse-442h/room"
+        },
+      error =>{
+        alert("Incorrect username, or password!");
+      }
+  );
+}
 
   render(){
     return(
+      <html>
+      <h3>{this.state.sessionToken}</h3>
       <form onSubmit={this.handleSubmit}>
         <h2>Sign in to your account to begin playing!</h2>
         <div className="login">
@@ -93,6 +98,7 @@ export default class LoginForm extends React.Component {
           Don't have an account? Register <a href="/register">here</a>
         </span>
       </form>
+      </html>
     )
   }
 }
