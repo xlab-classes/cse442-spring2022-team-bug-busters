@@ -20,22 +20,23 @@ export default function Form() {
     const {firstname, lastname, username, password} = state;
     console.log("this is the info", {firstname, lastname, username, password});
     const user = {firstname, lastname, username, password};
-    const API = 'http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php'
+    const API = "http://localhost:8080/register";
+    // const API = 'http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php'
     console.log(user);
 
-    axios.post(API, user)
-    .then((res) => {console.log(res)})
-    .catch((err) => {console.log(err)})
-    // fetch('http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php', {
-    //   method: 'POST',
-    //   headers: {
-    //     "Accept": "application/json",
-    //     "Content-Type": "application/json;charset=UTF-8",
-    //     "Access-Control-Allow-Origin":"*"
-    //   },
-    //   body: JSON.stringify(state)
-    // }).then((response) => response.json())
-    // .then((data) => {console.log(data)});
+    // axios.post(API, user)
+    // .then((res) => {console.log(res)})
+    // .catch((err) => {console.log(err)})
+    fetch(API, {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin":"*"
+      },
+      body: JSON.stringify(state)
+    }).then((response) => response.json())
+    .then((data) => {console.log(data)});
   }
 
   //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
