@@ -1,54 +1,54 @@
-import axios from "axios";
 import React from "react";
-
+import { AppIndicator } from "react-bootstrap-icons";
 // import 'bootstrap/dist/css/bootstrap.min.css';
+
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php"
 
 export default function Form() {
   
   const [state, setState] = React.useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     username: "",
     password: ""
   })
   
-  // https://stackoverflow.com/questions/65456583/how-to-post-request-using-axios-with-react-hooks
   function handleSubmit(event) {
-    alert('Your account has been submitted!');
-    event.preventDefault();
+      alert('Your account has been submitted!');
+      event.preventDefault();
 
-    const {firstname, lastname, username, password} = state;
-    console.log("this is the info", {firstname, lastname, username, password});
-    const user = {firstname, lastname, username, password};
-    const API = "http://localhost:8080/register";
-    // const API = 'http://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php'
-    console.log(user);
+      fetch(API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+      .then(response => response.json())
+      .then(
+        result => {
+            setState({
+              sessionToken: result.token,
+            });
+            document.location = "/CSE442-542/2022-Spring/cse-442h/room"
+        },
+      error =>{
+        alert("Incorrect username, or password!");
+      }
+    )
+  };
 
-    // axios.post(API, user)
-    // .then((res) => {console.log(res)})
-    // .catch((err) => {console.log(err)})
-    fetch(API, {
-      method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin":"*"
-      },
-      body: JSON.stringify(state)
-    }).then((response) => response.json())
-    .then((data) => {console.log(data)});
-  }
 
   //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
   //get the 'value' from target and the 'name' of target  
-  const handleChange = name => e => {
-    // console.log("You're in handleChange!");
-    // const value = event.target.value;
+  function handleChange(event) {
+    const value = event.target.value;
     setState({
       //(updater, [callback])
-      ...state, [name]: e.target.value
-    });
-  };
+      ...state, [event.target.name]: value
+    })
+    
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -59,22 +59,22 @@ export default function Form() {
         First Name
         <input
           type="text"
-          className="form-control"
+          class="form-control"
           name="firstname"
           value={state.firstname}
           placeholder="Enter your first name"
-          onChange={handleChange('firstname')}
+          onChange={handleChange}
         />
       </label>
       <label>
         Last Name
         <input
           type="text"
-          className="form-control"
+          class="form-control"
           name="lastname"
           value={state.lastname}
           placeholder="Enter your last name"
-          onChange={handleChange('lastname')}
+          onChange={handleChange}
         />
       </label>
       </div>
@@ -83,11 +83,11 @@ export default function Form() {
         Username
         <input
           type="text"
-          className="form-control"
+          class="form-control"
           name="username"
           value={state.username}
           placeholder="Enter your username"
-          onChange={handleChange('username')}
+          onChange={handleChange}
         />
       </label>
       </div>
@@ -96,15 +96,15 @@ export default function Form() {
         Password
         <input
           type="password"
-          className="form-control"
+          class="form-control"
           name="password"
           value={state.password}
           placeholder="Enter your password"
-          onChange={handleChange('password')}
+          onChange={handleChange}
         />
       </label>
       </div>
-      <button type="submit" className="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
       <br></br>
       <span className="login">
         Already have an account? Login <a href="login">here</a>
