@@ -1,0 +1,69 @@
+#gameRoomContent{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+
+#gameRoomPlayers{
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  margin-top: 80px;
+}
+.eachPlayerRow{
+  padding: 20px;
+  border: solid black;
+  margin: 20px;
+  width: 250px;
+  text-align: center;
+}
+
+#gameRoomCards{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+}
+
+#gameRoomDeck{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+  width: 150px;
+  height: 200px;
+  border: solid black;
+}
+
+#gameRoomHand{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+
+}
+
+.eachCardInHand{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1px;
+  width: 150px;
+  height: 200px;
+  border: solid black;
+}
+
+#gameRoomEndGame{
+  display: flex;
+  justify-content: center;
+  width: 20vw
+}
+
+#finishGame{
+  padding: 20px;
+  margin: 20px
+}
+

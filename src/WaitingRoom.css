@@ -1,0 +1,56 @@
+/* .WaitingRoom{
+  display: flex;
+  flex-direction: column;
+} */
+
+.waitingRoomContents{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+}
+.gameName{
+  font-size: 40px;
+  width: 500px;
+  text-align: center;
+}
+
+.player{
+  font-size: 20px;
+  width: 500px;
+  text-align: left;
+}
+
+.user{
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  width: 500px;
+  border: solid black;
+  flex-wrap: wrap;
+}
+
+.userrow{
+  text-align: left;
+  padding: 20px;
+  height: 75px;
+}
+
+.start{
+  text-align: right;
+  width: 500px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.roomCode{
+  display: flex;
+  flex-direction: column;
+}
+
+.startButton{
+  padding: 5px;
+}
+
