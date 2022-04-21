@@ -1,5 +1,8 @@
 import React from "react";
+import { AppIndicator } from "react-bootstrap-icons";
 // import 'bootstrap/dist/css/bootstrap.min.css';
+
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php"
 
 export default function Form() {
   
@@ -14,14 +17,27 @@ export default function Form() {
       alert('Your account has been submitted!');
       event.preventDefault();
 
-      fetch('http://localhost:3000/register', {
+      fetch(API, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(this.state)
-      }).then(function(response) {
-        console.log(response)
-        return response.json();
-      });
-  }
+      })
+      .then(response => response.json())
+      .then(
+        result => {
+            setState({
+              sessionToken: result.token,
+            });
+            document.location = "/CSE442-542/2022-Spring/cse-442h/room"
+        },
+      error =>{
+        alert("Incorrect username, or password!");
+      }
+    )
+  };
+
 
   //NOTE IMPORTANT: In handling multiple inputs fields with one handler,
   //get the 'value' from target and the 'name' of target  
