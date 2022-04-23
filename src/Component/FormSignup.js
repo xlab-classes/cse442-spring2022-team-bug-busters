@@ -2,38 +2,35 @@ import React from "react";
 import { AppIndicator } from "react-bootstrap-icons";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php"
+// const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php"
+const API = "http://localhost:8080/modals/";
 
 export default function Form() {
   
   const [state, setState] = React.useState({
-    firstName: "",
-    lastName: "",
     username: "",
-    password: ""
+    password: "",
+    email: ""
   })
   
   function handleSubmit(event) {
-      alert('Your account has been submitted!');
       event.preventDefault();
-
-      fetch(API, {
+      
+      fetch(API + "register.php", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.state)
+        body: JSON.stringify(state)
       })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(
         result => {
-            setState({
-              sessionToken: result.token,
-            });
-            document.location = "/CSE442-542/2022-Spring/cse-442h/room"
+          document.location = "/CSE442-542/2022-Spring/cse-442h/login"
+          alert('Your account has been submitted!');
         },
       error =>{
-        alert("Incorrect username, or password!");
+        alert("Fill in all the account info!");
       }
     )
   };
@@ -56,30 +53,6 @@ export default function Form() {
       <h2>Create your account by filling out the information below.</h2>
       <div className="register">
       <label>
-        First Name
-        <input
-          type="text"
-          class="form-control"
-          name="firstname"
-          value={state.firstname}
-          placeholder="Enter your first name"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Last Name
-        <input
-          type="text"
-          class="form-control"
-          name="lastname"
-          value={state.lastname}
-          placeholder="Enter your last name"
-          onChange={handleChange}
-        />
-      </label>
-      </div>
-      <div className="register">
-      <label>
         Username
         <input
           type="text"
@@ -87,6 +60,19 @@ export default function Form() {
           name="username"
           value={state.username}
           placeholder="Enter your username"
+          onChange={handleChange}
+        />
+      </label>
+      </div>
+      <div className="register">
+      <label>
+        Email
+        <input
+          type="text"
+          class="form-control"
+          name="email"
+          value={state.email}
+          placeholder="Enter your email"
           onChange={handleChange}
         />
       </label>
