@@ -17,16 +17,18 @@
         $db = $db -> getConnection();
         $userdb = new usersHelper($db);
         $username = $_POST['username'];
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $userdb->addUser($username, $password);
-        $userdb->
-        $token = generateAuth();
-        $data = array();
-        $data['token'] = $token;
-        echo json_encode($data);
+        $user = $userdb->addUser($username, $email, $password);
+        if ($user === "This user already exists!"){
+            http_response_code(401);
+        }
+        else {
+            $data = array();
+            $data['message'] = "You are now registered from the backend!";
+            echo json_encode($data);
+        }        
         $db->close();
     }
 ?>
