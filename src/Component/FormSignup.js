@@ -2,8 +2,7 @@ import React from "react";
 import { AppIndicator } from "react-bootstrap-icons";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-// const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php"
-const API = "http://localhost:8080/modals/";
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/register.php"
 
 export default function Form() {
   
@@ -15,8 +14,8 @@ export default function Form() {
   
   function handleSubmit(event) {
       event.preventDefault();
-      
-      fetch(API + "register.php", {
+
+      fetch(API, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
