@@ -6,8 +6,11 @@ import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
 import GameRoom from "./Component/GameRoom.jsx";
 import WaitingRoom from "./Component/WaitingRoom";
+import RequestReset from "./Component/requestPasswordReset.jsx";
+import PasswordReset from "./Component/passwordReset.jsx";
+
 import {
-  BrowserRouter as Router, Routes, Route
+  BrowserRouter as Router, Routes, Route, Link
 }from 'react-router-dom';
 const PUBLIC_URL = "/CSE442-542/2022-Spring/cse-442h";
 class App extends React.Component{
@@ -40,6 +43,8 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/login" }element={<SignIn login={this.login} />} />
                   <Route path={PUBLIC_URL + "/room"} element={<Game login={this.login} />} />
                   <Route path={PUBLIC_URL + "/user"} element={<ProfilePage element={<ProfilePage/>} />} />
+                  <Route path={PUBLIC_URL + "/requestReset"} element={<RequestPasswordReset/>} />
+                  <Route path={PUBLIC_URL + "/passwordReset"} element={<PasswordResetForm/>} />
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
                 </Routes>
               </div>
@@ -113,6 +118,22 @@ const ProfilePage = (props) =>{
   return(
     <div>
       <Profile></Profile>
+    </div>
+  )
+}
+
+const RequestPasswordReset = (props) =>{
+  return(
+    <div>
+      <RequestReset/>
+    </div>
+  )
+}
+
+const PasswordResetForm = (props) =>{
+  return(
+    <div>
+      <PasswordReset/>
     </div>
   )
 }
