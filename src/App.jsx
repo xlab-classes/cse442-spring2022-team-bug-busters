@@ -8,6 +8,7 @@ import GameRoom from "./Component/GameRoom.jsx";
 import WaitingRoom from "./Component/WaitingRoom";
 import RequestReset from "./Component/requestPasswordReset.jsx";
 import PasswordReset from "./Component/passwordReset.jsx";
+import Settings from "./Component/Settings.jsx";
 
 import {
   BrowserRouter as Router, Routes, Route, Link
@@ -36,7 +37,7 @@ class App extends React.Component{
             <header className="App-header">
               <div className="maincontent" id="mainContent">
                 <Routes>
-                  <Route path={PUBLIC_URL + "/settings"} element={<Settings login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/settings"} element={<EditProfile login={this.login} />} />
                   <Route path={PUBLIC_URL + "/createroom"} element={<MakeRoom login={this.login} />} />
                   <Route path={PUBLIC_URL + "/join"} element={<JoinRoom login={this.login} />} />
                   <Route path={PUBLIC_URL + "/register"} element={<Register login={this.login} />} />
@@ -74,10 +75,10 @@ const Home = (props) => {
   );
 }
 
-const Settings = (props) => {
+const EditProfile = (props) => {
   return(
     <div>
-      <p>This is the Settings Page!</p>
+      <Settings login={props.login}/>
     </div>
   )
 }
