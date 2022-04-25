@@ -95,7 +95,11 @@ export default class LoginForm extends React.Component {
         <input id="loginButton" class="btn btn-primary" type="submit" value="Login" />
         <br></br>
         <span className="login">
-          Don't have an account? Register <a href="/register">here</a>
+          Don't have an account? Register <a href="/CSE442-542/2022-Spring/cse-442h/register">here</a>
+        </span>
+        <br></br>
+        <span className="login">
+          Forgot your password? Reset it <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
         </span>
       </form>
       </html>
