@@ -8,6 +8,7 @@ import GameRoom from "./Component/GameRoom.jsx";
 import WaitingRoom from "./Component/WaitingRoom";
 import RequestReset from "./Component/requestPasswordReset.jsx";
 import PasswordReset from "./Component/passwordReset.jsx";
+import Wordle from "./Component/Wordle";
 
 import {
   BrowserRouter as Router, Routes, Route, Link
@@ -46,6 +47,7 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/requestReset"} element={<RequestPasswordReset/>} />
                   <Route path={PUBLIC_URL + "/passwordReset"} element={<PasswordResetForm/>} />
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/wordle"} element={<WordleRoom login={this.login} />} />
                 </Routes>
               </div>
             </header>
@@ -56,6 +58,14 @@ class App extends React.Component{
     );
 
   }
+}
+
+const WordleRoom = (props) => {
+  return(
+    <div>
+      <Wordle></Wordle>
+    </div>
+  )
 }
 
 const Register = (props) => {

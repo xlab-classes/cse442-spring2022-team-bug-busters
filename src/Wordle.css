@@ -1,0 +1,67 @@
+#wordleGame{
+  height: 100vh;
+  width: 100vw;
+}
+
+#wordleWords{
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.wordleRow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wordleLetter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px; 
+  border: solid black;
+  height: 60px;
+  width: 60px;
+}
+
+#keyboard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px
+}
+
+#keyboard1{
+  display: flex;
+}
+#keyboard2{
+  display: flex;
+}
+#keyboard3{
+  display: flex;
+}
+
+.keys{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px; 
+  border: solid black;
+  height: 50px;
+  width: 50px;
+}
+
+.deleteAndEnter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px; 
+  border: solid black;
+  height: 50px;
+  width: 80px;
+}
+
+
