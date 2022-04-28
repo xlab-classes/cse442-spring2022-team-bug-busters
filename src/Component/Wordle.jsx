@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import "../Wordle.css"
 import Keyboard from './Keyboard';
 import Letter from './Letter';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 
 export default class Wordle extends Component {
@@ -25,7 +26,8 @@ export default class Wordle extends Component {
         ["","","","",""],
         ["","","","",""],
         ["","","","",""]],
-      correctWord: "RIGHT"
+      correctWord: "RIGHT",
+      gameover: false
     };
     //bind it used in keyboard
     this.incrementColumn = this.incrementColumn.bind(this)
@@ -35,13 +37,21 @@ export default class Wordle extends Component {
   checkWord = row =>{
     let remainingLetter = ""
     let array = [];
+    let count = 0;
     for(let i = 0; i < this.state.words[row].length; i++){
       if(this.state.correctWord[i] == this.state.words[row][i]){
         array[i] = "true"
+        count += 1
       }
       else{
         remainingLetter += this.state.correctWord[i];
       }
+    }
+
+    if(count == 5){
+      this.setState({
+        gameover: true
+      })
     }
 
 
@@ -90,6 +100,20 @@ export default class Wordle extends Component {
       this.setState({
         column: newColumn
       })  
+  }
+
+  checkGameover(){
+    if(this.state.gameover == true){
+      return "gameoverModal"
+    }
+    else{
+      return "gameInProgress"
+    }
+  }
+  closeModal(){
+    this.setState({
+      gameover: false
+    })
   }
 
   
@@ -187,7 +211,17 @@ export default class Wordle extends Component {
         updateBoard = {this.updateBoard}
         correctWord = {this.state.correctWord}
         checkWord = {this.checkWord}
-        ></Keyboard>       
+        ></Keyboard>  
+
+        <div id={this.checkGameover()}>
+              <div id='gameover'>
+                <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
+                <div id='gameoverMessage'>
+                  Game over
+                </div>
+                
+              </div>
+        </div>     
         
       </div>
       

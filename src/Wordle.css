@@ -7,7 +7,9 @@
 #wordleWords{
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
+  margin-top: 40px;
+  height: 60vh;
+  width: 100%;
 }
 
 
@@ -15,53 +17,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-#keyboard{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px
-}
-
-/* Keyboard.jsx */
-#keyboard1{
-  display: flex;
-}
-#keyboard2{
-  display: flex;
-}
-#keyboard3{
-  display: flex;
-}
-
-.keys{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px; 
-  border: solid black;
-  height: 50px;
-  width: 50px;
-}
-
-.deleteAndEnter{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px; 
-  border: solid black;
-  height: 50px;
-  width: 80px;
 }
 
 
 
 
 /* Letter.jsx */
-
-
 .wordleLetter{
   display: flex;
   justify-content: center;
@@ -110,3 +72,103 @@
   background-color: grey;
 }
 
+
+
+/* Keyboard.jsx */
+
+
+#keyboard{
+  display: flex;
+  flex-direction: column;
+  
+  height: 25vh;
+}
+
+#keyboard1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 25%;
+  width: 50%;
+  height: 100%;
+}
+#keyboard2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 25%;
+  width: 50%;
+  height: 100%;
+}
+#keyboard3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 25%;
+  width: 50%;
+  height: 100%;
+}
+
+.keys{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px; 
+  border: solid black;
+  height: 50px;
+  width: 50px;
+}
+
+.deleteAndEnter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px; 
+  border: solid black;
+  height: 50px;
+  width: 80px;
+}
+
+#gameInProgress{
+  display: none;
+}
+
+
+#gameoverModal{
+
+  position: fixed; /* Stay in place */
+  z-index: 0; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#gameover{
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  width: 50%; /* Could be more or less, depending on screen size */
+  height: 200px;
+}
+
+#gameoverClose{
+  border: none;
+  background-color: #fefefe;
+  width: 10%;
+  margin-left: 90%;
+  float: right;
+  line-height: 42px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#gameoverMessage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
