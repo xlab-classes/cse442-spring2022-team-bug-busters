@@ -1,3 +1,4 @@
+/* Wordle.jsx */
 #wordleGame{
   height: 100vh;
   width: 100vw;
@@ -9,21 +10,11 @@
   margin-top: 60px;
 }
 
+
 .wordleRow{
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.wordleLetter{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  margin: 5px; 
-  border: solid black;
-  height: 60px;
-  width: 60px;
 }
 
 #keyboard{
@@ -34,6 +25,7 @@
   margin-top: 30px
 }
 
+/* Keyboard.jsx */
 #keyboard1{
   display: flex;
 }
@@ -64,4 +56,57 @@
   width: 80px;
 }
 
+
+
+
+/* Letter.jsx */
+
+
+.wordleLetter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px; 
+  border: solid black;
+  height: 60px;
+  width: 60px;
+}
+
+
+.correctWordleLetter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px; 
+  border: solid black;
+  height: 60px;
+  width: 60px;
+  background-color: green;
+}
+
+.almostCorrectWordLetter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px; 
+  border: solid black;
+  height: 60px;
+  width: 60px;
+  background-color: yellow;
+}
+
+.wrongWordLetter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px; 
+  border: solid black;
+  height: 60px;
+  width: 60px;
+  background-color: grey;
+}
 

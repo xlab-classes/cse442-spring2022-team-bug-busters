@@ -18,10 +18,37 @@ export default class Keyboard extends Component {
       newBoard[this.props.row][this.props.column] = keys
       this.props.incrementColumn(this.props.column + 1)
       this.props.updateBoard(newBoard)
-      console.log(newBoard)
+      
     }
   }
 
+  deleteClicked(){
+    if(this.props.column > 0){
+      const newBoard = [...this.props.board]
+      newBoard[this.props.row][this.props.column - 1] = ""
+      this.props.incrementColumn(this.props.column - 1)
+      this.props.updateBoard(newBoard)
+      
+    }
+    else{
+      const newBoard = [...this.props.board]
+      newBoard[this.props.row][this.props.column] = ""
+      this.props.incrementColumn(this.props.column)
+      this.props.updateBoard(newBoard)
+      
+    }
+  }
+
+  enterClicked(){
+    if(this.props.column == 5){
+      this.props.incrementColumn(0)
+      this.props.incrementRow(this.props.row + 1)
+      this.props.checkWord(this.props.row)
+    }
+  }
+
+  
+  
   render() {
     return (
       <div id='keyboard'>
@@ -38,11 +65,11 @@ export default class Keyboard extends Component {
         </div>
 
         <div id='keyboard3'>
-          <button className='deleteAndEnter'>DELETE</button>
+          <button className='deleteAndEnter' onClick={e => this.deleteClicked()}>DELETE</button>
           {this.state.keyboardRow3.map(keys =>(
             <button key={keys} className='keys' onClick={e => this.letterClicked(keys)}>{keys}</button>
           ))}
-          <button className='deleteAndEnter'>ENTER</button>
+          <button className='deleteAndEnter' onClick={e => this.enterClicked()}>ENTER</button>
         </div>
 
       </div>

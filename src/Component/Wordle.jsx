@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NavBar from "./NavBar";
 import "../Wordle.css"
 import Keyboard from './Keyboard';
+import Letter from './Letter';
 
 
 export default class Wordle extends Component {
@@ -10,24 +11,74 @@ export default class Wordle extends Component {
     this.state = {
       row: 0,
       column: 0,
-      words: [["a","b","c","d","e"],
-      ["b","","b","","c"],
-      ["a","b","c","d","e"],
-      ["b","","b","","c"],
-      ["a","b","c","d","e"],
-      ["a","b","c","d","e"]]
+      words: [
+      ["","","","",""],
+      ["","","","",""],
+      ["","","","",""],
+      ["","","","",""],
+      ["","","","",""],
+      ["","","","",""]],
+      checkIfWordCorrect: [
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""]],
+      correctWord: "RIGHT"
     };
     //bind it used in keyboard
     this.incrementColumn = this.incrementColumn.bind(this)
     this.incrementRow = this.incrementRow.bind(this)
+  }
+
+  checkWord = row =>{
+    let remainingLetter = ""
+    let array = [];
+    for(let i = 0; i < this.state.words[row].length; i++){
+      if(this.state.correctWord[i] == this.state.words[row][i]){
+        array[i] = "true"
+      }
+      else{
+        remainingLetter += this.state.correctWord[i];
+      }
+    }
+
+
+    for(let i = 0; i < 5; i++){
+      if(array[i] != "true"){
+        console.log(remainingLetter)
+        console.log(this.state.words[row][i])
+        console.log()
+        if(remainingLetter.includes(this.state.words[row][i])){
+          console.log("delete: " +this.state.words[row][i] )
+          remainingLetter =  remainingLetter.replace(this.state.words[row][i], "");
+          array[i] = "almost"
+        }
+        
+        else{
+          array[i] = "none"
+        }
+      }
+
+      const newcheckIfWordCorrect = [...this.state.checkIfWordCorrect]
+      newcheckIfWordCorrect[row] = array 
+
+      this.setState({
+        checkIfWordCorrect: newcheckIfWordCorrect
+      })
+
+    }
+
+    console.log(array)
+
   }
   
   //this way no need bind
   updateBoard = newBoard => {
     this.setState({
       words: newBoard
-    })
-    
+    })  
   }
 
   incrementRow(newRow){
@@ -40,11 +91,10 @@ export default class Wordle extends Component {
         column: newColumn
       })  
   }
-  // incrementColumn = newColumn => {
-  //   this.setState({
-  //     column: newColumn
-  //   })  
-  // }
+
+  
+
+
 
   render() {
     return (
@@ -54,110 +104,76 @@ export default class Wordle extends Component {
         </div>
         <div id='wordleWords'>
           <div className='wordleRow'>
-            <div className='wordleLetter'>
-              {this.state.words[0][0]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[0][1]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[0][2]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[0][3]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[0][4]}
-            </div>
+            {this.state.words[0].map((letters, i) =>(
+              <Letter letter = {letters}
+              board={this.state.words} 
+              row = {this.state.row} 
+              currentrow = {0}
+              currentcolumn = {i}
+              checkIfWordCorrect = {this.state.checkIfWordCorrect}
+              correctWord = {this.state.correctWord}
+              ></Letter>
+              
+            ))}
           </div>
 
           <div className='wordleRow'>
-            <div className='wordleLetter'>
-              {this.state.words[1][0]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[1][1]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[1][2]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[1][3]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[1][4]}
-            </div>
+            {this.state.words[1].map((letters, i) =>(
+              <Letter letter = {letters}
+              row = {this.state.row} 
+              currentrow = {1}
+              currentcolumn = {i}
+              checkIfWordCorrect = {this.state.checkIfWordCorrect}
+              correctWord = {this.state.correctWord}
+              ></Letter>
+            ))}
           </div>
 
           <div className='wordleRow'>
-            <div className='wordleLetter'>
-              {this.state.words[2][0]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[2][1]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[2][2]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[2][3]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[2][4]}
-            </div>
+            {this.state.words[2].map((letters, i) =>(
+              <Letter letter = {letters}
+              row = {this.state.row} 
+              currentrow = {2}
+              currentcolumn = {i}
+              checkIfWordCorrect = {this.state.checkIfWordCorrect}
+              correctWord = {this.state.correctWord}
+              ></Letter>
+            ))}
           </div>
 
           <div className='wordleRow'>
-            <div className='wordleLetter'>
-              {this.state.words[3][0]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[3][1]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[3][2]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[3][3]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[3][4]}
-            </div>
+            {this.state.words[3].map((letters, i) =>(
+              <Letter letter = {letters}
+              row = {this.state.row} 
+              currentrow = {3}
+              currentcolumn = {i}
+              checkIfWordCorrect = {this.state.checkIfWordCorrect}
+              correctWord = {this.state.correctWord}
+              ></Letter>
+            ))}
           </div>
 
           <div className='wordleRow'>
-            <div className='wordleLetter'>
-              {this.state.words[4][0]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[4][1]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[4][2]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[4][3]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[4][4]}
-            </div>
+            {this.state.words[4].map((letters, i) =>(
+              <Letter letter = {letters}
+              row = {this.state.row} 
+              currentrow = {4}
+              currentcolumn = {i}
+              checkIfWordCorrect = {this.state.checkIfWordCorrect}
+              correctWord = {this.state.correctWord}
+              ></Letter>
+            ))}
           </div>   
           <div className='wordleRow'>
-            <div className='wordleLetter'>
-              {this.state.words[5][0]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[5][1]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[5][2]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[5][3]}
-            </div>
-            <div className='wordleLetter'>
-              {this.state.words[5][4]}
-            </div>
+            {this.state.words[5].map((letters, i) =>(
+              <Letter letter = {letters}
+              row = {this.state.row} 
+              currentrow = {5}
+              currentcolumn = {i}   
+              checkIfWordCorrect = {this.state.checkIfWordCorrect}        
+              correctWord = {this.state.correctWord}
+              ></Letter>
+            ))}
           </div>  
         </div>
         
@@ -169,6 +185,8 @@ export default class Wordle extends Component {
         incrementColumn = {this.incrementColumn}
         incrementRow = {this.incrementRow}
         updateBoard = {this.updateBoard}
+        correctWord = {this.state.correctWord}
+        checkWord = {this.checkWord}
         ></Keyboard>       
         
       </div>
