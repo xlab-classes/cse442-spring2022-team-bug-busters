@@ -1,11 +1,10 @@
 import React from "react";
 
 // Use the following line for deployment!
-const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
 //Use the following line for local testing!
-//const API = "http://localhost:8080/modals/"
-
+const API = "http://localhost:8080/modals/"
 
 // import Container from 'react-bootstrap/Container';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -52,7 +51,8 @@ export default class LoginForm extends React.Component {
             this.setState({
               sessionToken: result.token,
             });
-            document.location = "/CSE442-542/2022-Spring/cse-442h/room"
+            sessionStorage.setItem("token", result.token);
+            document.location = "/CSE442-542/2022-Spring/cse-442h/"
         },
       error =>{
         alert("Incorrect username, or password!");
