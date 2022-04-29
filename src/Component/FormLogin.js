@@ -16,6 +16,7 @@ export default class LoginForm extends React.Component {
       username: "",
       password: "",
       sessionToken: "",
+      errors: {}
     };
   }
   
@@ -34,6 +35,7 @@ export default class LoginForm extends React.Component {
 
   handleSubmit = event => {
       // alert('You have been logged into your account!');
+      let errors = {};
       event.preventDefault();
       fetch(API + "login.php", {
         method: 'POST',
@@ -48,61 +50,69 @@ export default class LoginForm extends React.Component {
       .then(res => res.json())
       .then(
         result => {
+          if(result.token.length !== 0){
+            console.log("login success");
             this.setState({
               sessionToken: result.token,
             });
             sessionStorage.setItem("token", result.token);
             document.location = "/CSE442-542/2022-Spring/cse-442h/"
+          }else{
+            console.log("login failed");
+            sessionStorage.removeItem("token");
+            errors["login_failed"] = "Wrong username or password";
+            this.setState({
+              errors: errors,
+              sessionToken: ""
+            });
+          }
         },
-      error =>{
-        alert("Incorrect username, or password!");
-      }
-  );
-}
+      );
+    }
 
   render(){
     return(
-      <html>
-      <h3>{this.state.sessionToken}</h3>
-      <form onSubmit={this.handleSubmit}>
-        <h2>Sign in to your account to begin playing!</h2>
-        <div className="login">
-        <label>
-          Username
-          <input
-            type="username"
-            className="form-control"
-            value={this.state.username}
-            name="username"
-            placeholder="Enter your username"
-            onChange={this.usernameChangeHandler}
-          />
-        </label>
-        </div>
-        <div className="register">
-        <label>
-          Password
-          <input
-            type="password"
-            className="form-control"
-            value={this.state.password}
-            name="password"
-            placeholder="Enter your password"
-            onChange={this.pwdChangeHandler}
-          />
-        </label>
-        </div>
-        <input id="loginButton" class="btn btn-primary" type="submit" value="Login" />
-        <br></br>
-        <span className="login">
-          Don't have an account? Register <a href="/CSE442-542/2022-Spring/cse-442h/register">here</a>
-        </span>
-        <br></br>
-        <span className="login">
-          Forgot your password? Reset it <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
-        </span>
-      </form>
-      </html>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <h2>Sign in to your account to begin playing!</h2>
+          {this.state.errors.login_failed && <div class="alert alert-danger" role="alert">Incorrect Username or Password!</div>}
+          <div className="login">
+            <label>
+              Username
+              <input
+                type="username"
+                className="form-control"
+                value={this.state.username}
+                name="username"
+                placeholder="Enter your username"
+                onChange={this.usernameChangeHandler}
+              />
+            </label>
+          </div>
+          <div className="register">
+            <label>
+              Password
+              <input
+                type="password"
+                className="form-control"
+                value={this.state.password}
+                name="password"
+                placeholder="Enter your password"
+                onChange={this.pwdChangeHandler}
+              />
+            </label>
+          </div>
+          <input id="loginButton" class="btn btn-primary" type="submit" value="Login" />
+          <br></br>
+          <span className="login">
+            Don't have an account? Register <a href="/CSE442-542/2022-Spring/cse-442h/register">here</a>
+          </span>
+          <br></br>
+          <span className="login">
+            Forgot your password? Reset it <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
+          </span>
+        </form>
+      </div>
     )
   }
 }
