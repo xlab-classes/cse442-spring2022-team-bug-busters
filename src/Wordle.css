@@ -172,3 +172,10 @@
   justify-content: center;
   align-items: center;
 }
+
+/* timer */
+#timer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

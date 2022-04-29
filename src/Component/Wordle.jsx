@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import "../Wordle.css"
 import Keyboard from './Keyboard';
 import Letter from './Letter';
-import { faL } from '@fortawesome/free-solid-svg-icons';
+import Timer from './Timer';
 
 
 export default class Wordle extends Component {
@@ -27,7 +27,8 @@ export default class Wordle extends Component {
         ["","","","",""],
         ["","","","",""]],
       correctWord: "RIGHT",
-      gameover: false
+      gameover: false,
+      time: false
     };
     //bind it used in keyboard
     this.incrementColumn = this.incrementColumn.bind(this)
@@ -47,8 +48,7 @@ export default class Wordle extends Component {
         remainingLetter += this.state.correctWord[i];
       }
     }
-
-    if(count == 5){
+    if(count == 5 || this.state.row == 5){
       this.setState({
         gameover: true
       })
@@ -106,6 +106,9 @@ export default class Wordle extends Component {
     if(this.state.gameover == true){
       return "gameoverModal"
     }
+    else if(this.state.time == true){
+      return "gameoverModal"
+    }
     else{
       return "gameInProgress"
     }
@@ -116,6 +119,11 @@ export default class Wordle extends Component {
     })
   }
 
+  timesUp(){
+    this.setState({
+      gameover: true
+    })
+  }
   
 
 
@@ -127,6 +135,9 @@ export default class Wordle extends Component {
           <NavBar></NavBar>
         </div>
         <div id='wordleWords'>
+          <Timer timesUp = {e => this.timesUp()}>
+              
+          </Timer>
           <div className='wordleRow'>
             {this.state.words[0].map((letters, i) =>(
               <Letter letter = {letters}

@@ -9,7 +9,7 @@ export default class Letter extends Component {
   }
   
 
-  style(){
+  letterColors(){
 
     if(this.props.checkIfWordCorrect[this.props.currentrow][this.props.currentcolumn] == "true"){
       if(this.props.currentrow <this.props.row){
@@ -27,14 +27,13 @@ export default class Letter extends Component {
           return "wrongWordLetter"
       }
     }
-
     return "wordleLetter"
     
   
   }
   render() {
     return (
-      <div className={this.style()} onClick={e=>this.checkIfCorrect()}> 
+      <div className={this.letterColors()}> 
         {this.props.letter}
       </div>
     )
