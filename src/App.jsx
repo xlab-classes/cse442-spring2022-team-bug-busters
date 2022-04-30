@@ -81,6 +81,11 @@ const WordleRoom = (props) => {
   }
 }
 
+const Leader = (props) => {
+  return(
+    <Leaderboard></Leaderboard>
+  )
+}
 const Register = (props) => {
   if(!sessionStorage.getItem("token")){
     return(

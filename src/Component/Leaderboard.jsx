@@ -13,13 +13,12 @@ export default class Leaderboard extends React.Component {
     super(props)
 
     this.state = {
-        user: []
+        scores: []
     };
   }
 
   componentDidMount() {
-      
-      fetch(API + "register.php", {
+      fetch(API + "ranking.php", {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -28,59 +27,10 @@ export default class Leaderboard extends React.Component {
       .then(response => response.json())
       .then((res) => {
           console.log(res);
-        //   this.setState({user: res});
+          this.setState({scores: res});
+        //   this.state.scores.map(item => console.log(item.username));
       })
   }
-  
-//   usernameHandler = event => {
-//       this.setState({
-//           username: event.target.value
-//       });
-//   }
-
-//   scoreHandler = event => {
-//       this.setState({
-//           scores: event.target.value
-//       });
-//   }
-
-//   async componentDidMount() {    
-//     fetch(API + "ranking.php")
-//         .then(res => res.json())
-//     //   .then(function(response) {
-//     //       return [(response.username, response.scores)];
-//         .then((result) => {
-//             console.log(result.results);
-//             document.location = "/CSE442-542/2022-Spring/cse-442h/"
-//         },
-//         error =>{
-//             alert("uh oh!");
-//         },
-//     //   this.setState({username: res.json(), scores: res.json()})
-//   )};
-
-//-------------------------------------------------------
-// renderUsers() {
-//     const User = ({ name, email, key}) => (
-//         <div>
-//             <div>
-//                 <p>{name}</p>
-//                 <p>{email}</p>
-//                 <p>{key}</p>
-//             </div>
-//         </div>
-//     )
-//     const userList = [];
-//     for(let i = 0; i < this.state.usernames.length; i++) {
-//         let name = `${this.state.usernames[i].username} ${this.state.scores[i].points}`;
-//         let email = this.state.usernames[i].username.value;
-//         let key = this.state.points[i].value;
-//         userList.push(<User name={name} email={email} key={key}/>);
-//     }
-
-//     return userList;
-// }
-//-------------------------------------------------------
 
 render() {
     const {result} = this.state;
@@ -92,14 +42,19 @@ render() {
                 </div>
                 <div className='player'>
                     Players
+                    {Object.entries(this.state.scores).map(([key, values]) => (
+                        // this.state.scores = {0: {username: "", scores: 2}}
+                        // key = 0
+                        // dict[key] = values
+                        // this.state.scores[key] = values
+                        // this.state.scores[key].username
+                        <p>{values.username}: {values.points}</p>
+                    )
+                    )}
+                    {/* {this.state.scores.map(score => (
+                    score.username
+                    ))} */}
                 </div>
-                <ul>
-                    {result.map(item => (
-                        <li key={item}>
-                            {item.values.username}
-                        </li>
-                    ))}
-                </ul>
             </div>
         </div>
     )
