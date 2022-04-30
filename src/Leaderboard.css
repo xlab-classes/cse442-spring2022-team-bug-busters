@@ -1,0 +1,35 @@
+.Ranking {
+    position: absolute;
+    width: 855px;
+    height: 496px;
+    left: 292px;
+    top: 261px;
+}
+
+.gameName {
+    position: absolute;
+    width: 495px;
+    height: 94px;
+    left: 477px;
+    top: 120px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 75px;
+    color: #000000;
+}
+
+.player {
+    position: absolute;
+    width: 118px;
+    height: 42px;
+    left: 297px;
+    top: 214px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    color: #000000;
+}

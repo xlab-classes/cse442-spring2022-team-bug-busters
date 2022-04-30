@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import "./Form.css";
+import Leaderboard from "./Component/Leaderboard.jsx";
 import Profile from "./Component/Profile.jsx";
 import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
@@ -47,6 +48,7 @@ class App extends React.Component{
                   {/* <Route path={PUBLIC_URL + "/createroom"} element={<MakeRoom login={this.login} />} />
                   <Route path={PUBLIC_URL + "/join"} element={<JoinRoom login={this.login} />} /> */}
                   <Route path={PUBLIC_URL + "/register"} element={<Register login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/leaderboard"} element={<Leader login={this.login} />} />
                   <Route path={PUBLIC_URL + "/login" }element={<SignIn login={this.login} />} />
                   {/* <Route path={PUBLIC_URL + "/room"} element={<Game login={this.login} />} /> */}
                   <Route path={PUBLIC_URL + "/user"} element={<ProfilePage element={<ProfilePage/>} />} />
@@ -82,6 +84,11 @@ const WordleRoom = (props) => {
   }
 }
 
+const Leader = (props) => {
+  return(
+    <Leaderboard></Leaderboard>
+  )
+}
 const Register = (props) => {
   return(
     <div>
