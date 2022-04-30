@@ -25,6 +25,7 @@ export default class GameRoom extends React.Component {
   render(){
     return(
         <div id="gameRoom">
+        {this.shuffleDeck()}
           <div>
             <NavBar></NavBar>
           </div>
@@ -32,7 +33,7 @@ export default class GameRoom extends React.Component {
           <div id="gameRoomContent">
             <div id="gameRoomPlayers">
               <div className='eachPlayerRow'>
-                user1
+                user1(You)
               </div>
               <div className='eachPlayerRow'>
                 user2
