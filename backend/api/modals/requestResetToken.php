@@ -14,21 +14,17 @@
     if($method == 'POST'){
         $db = new DBConnection($db_config);
         $db = $db -> getConnection();
-        $loginHelper = new usersHelper($db);
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $isLogin = $loginHelper->checkPassword($username, $password);
-        if($isLogin){
-            $token = generateAuth();
-            $data = array();
-            $data['token'] = $token;
-            echo json_encode($data);
+        $passwordHelper = new passwordResetHelper($db);
+        $email = $_POST['email'];
+        $resetToken = $passwordHelper->generateResetToken($email);
+        if ($resetToken == "This email does not exist!"){
+            http_response_code(404);
         }
         else{
-            $data['token'] = "";
-            http_response_code(200);
-            echo json_encode($data);
-        }
+        $data = array();
+        $data['resetToken'] = $resetToken;
+        echo json_encode($data);
         $db->close();
+        }
     }
 ?>
