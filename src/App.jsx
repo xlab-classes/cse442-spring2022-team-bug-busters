@@ -7,6 +7,7 @@ import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
 import GameRoom from "./Component/GameRoom.jsx";
 import WaitingRoom from "./Component/WaitingRoom";
+import PointsExample from "./Component/pointsExamples";
 import RequestReset from "./Component/requestPasswordReset.jsx";
 import PasswordReset from "./Component/passwordReset.jsx";
 import Settings from "./Component/Settings.jsx";
@@ -53,6 +54,7 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/passwordReset"} element={<PasswordResetForm/>} />
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
                   <Route path={PUBLIC_URL + "/wordle"} element={<WordleRoom login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/testPoints"} element={<Points/>} />
                 </Routes>
               </div>
             </header>
@@ -86,6 +88,15 @@ const Leader = (props) => {
     <Leaderboard></Leaderboard>
   )
 }
+
+const Points = (props) => {
+  return(
+    <div>
+      <PointsExample/>
+    </div>
+  )
+}
+
 const Register = (props) => {
   if(!sessionStorage.getItem("token")){
     return(
