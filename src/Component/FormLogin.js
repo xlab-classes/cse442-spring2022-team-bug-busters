@@ -54,6 +54,7 @@ export default class LoginForm extends React.Component {
             console.log("login success");
             this.setState({
               sessionToken: result.token,
+              login: true
             });
             sessionStorage.setItem("token", result.token);
             document.location = "/CSE442-542/2022-Spring/cse-442h/"
@@ -61,9 +62,10 @@ export default class LoginForm extends React.Component {
             console.log("login failed");
             sessionStorage.removeItem("token");
             errors["login_failed"] = "Wrong username or password";
-            this.setState({
+            this.setState({ 
               errors: errors,
-              sessionToken: ""
+              sessionToken: "",
+              login: false
             });
           }
         },

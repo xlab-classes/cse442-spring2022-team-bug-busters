@@ -22,10 +22,13 @@
             $token = generateAuth();
             $data = array();
             $data['token'] = $token;
+            $data["msg"] = "success";
             echo json_encode($data);
         }
         else{
+            $data = array();
             $data['token'] = "";
+            $data["msg"] = "fail";
             http_response_code(200);
             echo json_encode($data);
         }

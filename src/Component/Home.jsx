@@ -20,7 +20,7 @@ export default class HomePage extends React.Component {
                 </div>
                 <div className="containerSettings">
                     <div id="title">
-                        <h2>Settings</h2>
+                        <h2>Leaderboard</h2>
                     </div>
                 </div>
             </div>

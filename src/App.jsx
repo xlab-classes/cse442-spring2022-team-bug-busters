@@ -11,11 +11,12 @@ import PasswordReset from "./Component/passwordReset.jsx";
 import Settings from "./Component/Settings.jsx";
 import Wordle from "./Component/Wordle.jsx";
 import HomePage from "./Component/Home.jsx";
+import LoginForm from "./Component/FormLogin.js";
 
 import {
   BrowserRouter as Router, Routes, Route, Link
 }from 'react-router-dom';
-import LoginForm from "./Component/FormLogin.js";
+
 const PUBLIC_URL = "/CSE442-542/2022-Spring/cse-442h";
 class App extends React.Component{
 
@@ -30,6 +31,8 @@ class App extends React.Component{
 
   componentDidMount(){
     window.addEventListener('click', e => {console.log("TESTING EVENT LISTENER")});
+    console.log("Login state is currently");
+    console.log(this.state.login);
   }
 
   render(){
@@ -80,19 +83,11 @@ const WordleRoom = (props) => {
 }
 
 const Register = (props) => {
-  if(!sessionStorage.getItem("token")){
-    return(
-      <div>
-        <LoginForm login={props.login}/>
-      </div>
-    )
-  }else{
-    return(
-      <div>
-        <SignUp login={props.login}/>
-      </div>
-    )
-  }
+  return(
+    <div>
+      <SignUp login={props.login}/>
+    </div>
+  )
 }
 
 const Home = (props) => {
