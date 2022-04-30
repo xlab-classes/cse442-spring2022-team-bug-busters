@@ -52,6 +52,24 @@ class usersHelper{
         $stmt -> execute();
     }
 
+    public function getProfilePicture($username){
+        $stmt = $this->conn->prepare("SELECT profilePicture FROM users WHERE username = ?");
+        $stmt -> bind_param("s", $username);
+        $stmt -> execute();
+        $stmt -> bind_result($result);
+        $numberOfUsers;
+        while($stmt->fetch()){
+            $profilePicture = $result;
+        }
+        return $profilePicture;
+    }
+
+    public function changeProfilePicture($username, $profilePicture){
+        $stmt = $this->conn->prepare("UPDATE users SET profilePicture = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $profilePicture, $username);
+        $stmt -> execute();
+    }
+
     //Gets a username by id of a user in the database. Returned as a string.
     public function getUserByID($userID){
         
