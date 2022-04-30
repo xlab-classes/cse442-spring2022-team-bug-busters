@@ -7,7 +7,8 @@ import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
 import GameRoom from "./Component/GameRoom.jsx";
 import WaitingRoom from "./Component/WaitingRoom";
-import PointsExample from "./Component/pointsExamples";
+import PointsExample from "./Component/pointsExamples.jsx";
+import ProfilePictureExample from "./Component/testProfilePicture.jsx";
 import RequestReset from "./Component/requestPasswordReset.jsx";
 import PasswordReset from "./Component/passwordReset.jsx";
 import Settings from "./Component/Settings.jsx";
@@ -45,7 +46,7 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/settings"} element={<EditProfile login={this.login} />} />
                   {/* <Route path={PUBLIC_URL + "/createroom"} element={<MakeRoom login={this.login} />} />
                   <Route path={PUBLIC_URL + "/join"} element={<JoinRoom login={this.login} />} /> */}
-                  <Route path={PUBLIC_URL + "/register"} element={<Register login={this.login} />} />
+                  <Route path={PUBLIC_URL + "/register"} element={<Register/>} />
                   <Route path={PUBLIC_URL + "/leaderboard"} element={<Leader login={this.login} />} />
                   <Route path={PUBLIC_URL + "/login" }element={<SignIn login={this.login} />} />
                   {/* <Route path={PUBLIC_URL + "/room"} element={<Game login={this.login} />} /> */}
@@ -55,6 +56,7 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
                   <Route path={PUBLIC_URL + "/wordle"} element={<WordleRoom login={this.login} />} />
                   <Route path={PUBLIC_URL + "/testPoints"} element={<Points/>} />
+                  <Route path={PUBLIC_URL + "/testProfilePicture"} element={<ProfilePicture/>} />
                 </Routes>
               </div>
             </header>
@@ -97,20 +99,20 @@ const Points = (props) => {
   )
 }
 
+const ProfilePicture = (props) => {
+  return(
+    <div>
+      <ProfilePictureExample/>
+    </div>
+  )
+}
+
 const Register = (props) => {
-  if(!sessionStorage.getItem("token")){
-    return(
-      <div>
-        <LoginForm login={props.login}/>
-      </div>
-    )
-  }else{
     return(
       <div>
         <SignUp login={props.login}/>
       </div>
     )
-  }
 }
 
 const Home = (props) => {

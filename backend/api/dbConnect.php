@@ -34,7 +34,8 @@ class DBConnection{
                         username VARCHAR(20) NOT NULL UNIQUE,
                         email VARCHAR(320) NOT NULL UNIQUE,
                         hashed_pw TEXT NOT NULL,
-                        auth VARCHAR(120) DEFAULT NULL,
+                        profilePicture VARCHAR(25) DEFAULT '',
+                        auth VARCHAR(120),
                         PRIMARY KEY(userid)
                     )AUTO_INCREMENT=1; " ;
         
