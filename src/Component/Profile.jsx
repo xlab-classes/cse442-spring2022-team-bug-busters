@@ -6,12 +6,8 @@ import profilePic from '../assets/flower.png';
 export default function Profile() {
   return (
     <div>
-      
-
       <NavBar>
-        
       </NavBar>
-
       <div id='profile'>
         <div id='profilePictureSection'>
           <img src={profilePic} alt="profile" id='profilepicture'/>
@@ -21,9 +17,7 @@ export default function Profile() {
           <p>Rank #4104</p>
           <p>Wins: 103 | Losses: 34</p>
         </div>
-
       </div>
-      
     </div>
 
 

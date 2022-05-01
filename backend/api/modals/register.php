@@ -22,7 +22,10 @@
 
         $user = $userdb->addUser($username, $email, $password);
         if ($user === "This user already exists!"){
-            http_response_code(401);
+            $data = array();
+            $data["message"] = "";
+            http_response_code(200);
+            echo json_encode($data);
         }
         else {
             $data = array();

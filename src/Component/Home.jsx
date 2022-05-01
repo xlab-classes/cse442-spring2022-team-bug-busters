@@ -7,12 +7,12 @@ export default class HomePage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          username: "",
-          userid: "",
+            username: "",
+            userid: "",
         };
-      }
+    }
     
-      render(){
+    render(){
         return(
             <div id="settings">
                 <div id="navbar-div">
@@ -25,7 +25,7 @@ export default class HomePage extends React.Component {
                 </div>
             </div>
         )
-      }
+    }
 }
 
 

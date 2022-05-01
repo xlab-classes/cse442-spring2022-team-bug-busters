@@ -28,7 +28,7 @@ class App extends React.Component{
     this.state = {
       logout: false,
       login: false
-    }
+    };
     this.mainContent = React.createRef();
   }
 
@@ -58,8 +58,6 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/passwordReset"} element={<PasswordResetForm/>} />
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
                   <Route path={PUBLIC_URL + "/wordle"} element={<WordleRoom login={this.login} />} />
-                  <Route path={PUBLIC_URL + "/testPoints"} element={<Points/>} />
-                  <Route path={PUBLIC_URL + "/testProfilePicture"} element={<ProfilePicture/>} />
                 </Routes>
               </div>
             </header>

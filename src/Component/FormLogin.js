@@ -18,8 +18,9 @@ export default class LoginForm extends React.Component {
       sessionToken: "",
       errors: {}
     };
+    this.pwdChangeHandler = this.pwdChangeHandler.bind(this);
+    this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
   }
-  
 
   pwdChangeHandler = event => {
     this.setState({
@@ -55,8 +56,10 @@ export default class LoginForm extends React.Component {
             this.setState({
               sessionToken: result.token,
               login: true
-            });
+            });            
             sessionStorage.setItem("token", result.token);
+            sessionStorage.setItem("username", this.state.username);
+            console.log(sessionStorage.getItem("username"));
             document.location = "/CSE442-542/2022-Spring/cse-442h/"
           }else{
             console.log("login failed");
@@ -70,7 +73,7 @@ export default class LoginForm extends React.Component {
           }
         },
       );
-    }
+  }
 
   render(){
     return(
