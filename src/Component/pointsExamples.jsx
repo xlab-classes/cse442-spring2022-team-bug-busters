@@ -16,7 +16,7 @@ export default class PointsExample extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      username: "ray",
+      username: sessionStorage.getItem('username'),
       points: 0,
       wins: 0,
       losses: 0
