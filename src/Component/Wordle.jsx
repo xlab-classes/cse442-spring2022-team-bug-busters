@@ -4,7 +4,10 @@ import "../Wordle.css"
 import Keyboard from './Keyboard';
 import Letter from './Letter';
 import Timer from './Timer';
-
+// Use the following line for deployment!
+//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+//Use the following line for local testing!
+const API = "http://localhost:8080/modals/"
 
 export default class Wordle extends Component {
   constructor(props){
@@ -28,12 +31,107 @@ export default class Wordle extends Component {
         ["","","","",""]],
       correctWord: "RIGHT",
       gameover: false,
-      time: false
+      correct: false,
+      time: false,
+      points: 0,
+      wins: 0,
+      losses: 0
     };
     //bind it used in keyboard
     this.incrementColumn = this.incrementColumn.bind(this)
     this.incrementRow = this.incrementRow.bind(this)
   }
+
+  componentDidMount(){
+    this.getPoints()
+  } 
+  
+  getPoints= error =>{
+    fetch(API+"getStats.php", {
+        method: "post",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: sessionStorage.getItem('username'),
+        })
+      })
+      .then((res) => res.json())
+      .then( (result) =>{
+        //If the response is not okay, have the user input a new email address.
+          this.setState({
+            points: result.Points,
+            wins: result.Wins,
+            losses: result.Losses
+          })
+        }
+      );
+    };
+
+  updatePoints= pointsToAdd =>{
+    //make the api call to the authentication page
+    fetch(API+"updatePoints.php", {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: sessionStorage.getItem('username'),
+        points: pointsToAdd,
+      })
+    })
+    .then(res => {
+      //If the response is not okay, have the user input a new email address.
+        this.setState({
+          points: this.state.points + pointsToAdd
+        })
+      }
+    );
+  };
+
+    
+  updateWins= winsToAdd =>{
+    //make the api call to the authentication page
+    fetch(API+"updateWins.php", {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: sessionStorage.getItem('username'),
+        wins: winsToAdd,
+      })
+    })
+    .then(res => {
+      //If the response is not okay, have the user input a new email address.
+        this.setState({
+          wins: this.state.wins + winsToAdd
+        })
+      }
+    );
+  };
+
+    
+    updateLosses= lossesToAdd =>{
+      //make the api call to the authentication page
+      fetch(API+"updateLosses.php", {
+        method: "post",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: sessionStorage.getItem('username'),
+          losses: lossesToAdd,
+        })
+      })
+      .then(res => {
+        //If the response is not okay, have the user input a new email address.
+          this.setState({
+            losses: this.state.losses + lossesToAdd
+          })
+        }
+      );
+    };
 
   checkWord = row =>{
     let remainingLetter = ""
@@ -48,10 +146,21 @@ export default class Wordle extends Component {
         remainingLetter += this.state.correctWord[i];
       }
     }
-    if(count == 5 || this.state.row == 5){
+    if(count == 5){
+      this.setState({
+        gameover: true,
+        correct: true
+      })
+      this.updateWins(1);
+      this.updatePoints(1);
+    
+    }
+    if(this.state.row == 5){
       this.setState({
         gameover: true
       })
+      this.updateLosses(1);
+      this.updatePoints(-1);
     }
 
 
@@ -104,22 +213,82 @@ export default class Wordle extends Component {
 
   checkGameover(){
     if(this.state.gameover == true){
-      return "gameoverModal"
+      if(this.state.correct == true){
+        return(
+          <div id="gameoverModal">
+                <div id='gameover'>
+                  <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
+                  <div id='gameoverMessage'>
+                    <div>You guessed the word!</div>
+                    <div>Points: {this.state.points}</div>
+                    <div>Wins: {this.state.wins} </div>
+                    <div>Losses: {this.state.losses}</div>
+                  </div>
+                  
+                </div>
+          </div> 
+        )
+      }
+      else{
+        return(
+          <div id="gameoverModal">
+                <div id='gameover'>
+                  <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
+                  <div id='gameoverMessage'>
+                    <div>You didnt guessed the word!</div>
+                    <div>Points: {this.state.points}</div>
+                    <div>Wins: {this.state.wins} </div>
+                    <div>Losses: {this.state.losses}</div>
+                  </div>
+                  
+                </div>
+          </div> 
+        )
+      }
+      
     }
     else if(this.state.time == true){
-      return "gameoverModal"
-    }
+      return(
+        <div id="gameoverModal">
+              <div id='gameover'>
+                <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
+                <div id='gameoverMessage'>
+                  <div>You ran out of time</div>
+                  <div>Points: {this.state.points}</div>
+                  <div>Wins: {this.state.wins} </div>
+                  <div>Losses: {this.state.losses}</div>
+                </div>
+                
+              </div>
+        </div> 
+      )    }
     else{
-      return "gameInProgress"
+
+      return(
+        <div id="gameInProgress">
+              <div id='gameover'>
+                <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
+                <div id='gameoverMessage'>
+                <p>Points: {this.state.points}</p>
+                <p>Wins: {this.state.wins} </p>
+                <p>Losses: {this.state.losses}</p>
+                </div>
+           
+              </div>
+        </div> 
+      )
     }
   }
   closeModal(){
+    
     this.setState({
       gameover: false
     })
   }
 
   timesUp(){
+    this.updateLosses(1);
+    this.updatePoints(-1);
     this.setState({
       gameover: true
     })
@@ -224,15 +393,8 @@ export default class Wordle extends Component {
         checkWord = {this.checkWord}
         ></Keyboard>  
 
-        <div id={this.checkGameover()}>
-              <div id='gameover'>
-                <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
-                <div id='gameoverMessage'>
-                  Game over
-                </div>
-                
-              </div>
-        </div>     
+        {this.checkGameover()}
+            
         
       </div>
       
