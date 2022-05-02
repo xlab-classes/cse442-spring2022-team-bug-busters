@@ -41,24 +41,24 @@ export default class NavBar extends Component {
       body: JSON.stringify({
         username: this.state.username,
       })
-  })
-  .then((res) => res.json())
-  .then((result) =>{
-      if(result.picture.length === 0){
-        let path_pic = public_imgs_path + "pic0.png";
-        sessionStorage.setItem("pfp", "pic0.png");
-        this.setState({
-          profile_picture: path_pic
-        })
-      }else{
-        let current_pfp = result.picture;
-        let path_pic = public_imgs_path + current_pfp;
-        sessionStorage.setItem("pfp", current_pfp);
-        this.setState({
-          profile_picture: path_pic
-        })
-      }
-  });
+    })
+    .then((res) => res.json())
+    .then((result) =>{
+        if(result.picture.length === 0){
+          let path_pic = public_imgs_path + "pic0.png";
+          sessionStorage.setItem("pfp", "pic0.png");
+          this.setState({
+            profile_picture: path_pic
+          })
+        }else{
+          let current_pfp = result.picture;
+          let path_pic = public_imgs_path + current_pfp;
+          sessionStorage.setItem("pfp", current_pfp);
+          this.setState({
+            profile_picture: path_pic
+          })
+        }
+    });
   }
 
   render() {
