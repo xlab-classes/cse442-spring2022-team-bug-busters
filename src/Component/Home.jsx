@@ -1,7 +1,6 @@
 import React from 'react';
 import "../Profile.css";
 import NavBar from "./NavBar";
-import pic0 from "../assets/profile_pictures/pic0.png";
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 

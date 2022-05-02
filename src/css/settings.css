@@ -1,3 +1,26 @@
+#settings-title{
+    border-bottom: 1px solid black;
+}
+
+#pfp-title{
+    background-color: grey;
+    padding-top: 0.5vh;
+    display: flexbox;
+    align-items: center;
+    max-height: 5vh;
+    border-bottom: 1px solid black;
+}
+
+#pwChange-title{
+    background-color: grey;
+    padding-top: 0.5vh;
+    display: flexbox;
+    align-items: center;
+    max-height: 5vh;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
 #container{
     margin-left: 22vw;
     text-align: center;
@@ -11,7 +34,7 @@
 }
 
 #pic-select input, label {
-    display:block;
+    display: block;
     margin: 0.5vw;
 }
 

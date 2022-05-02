@@ -1,20 +1,12 @@
 import React from "react";
 import "../css/settings.css"
 import NavBar from "./NavBar";
-import pic0 from "../assets/profile_pictures/pic0.png";
-import pic1 from "../assets/profile_pictures/pic1.png";
-import pic2 from "../assets/profile_pictures/pic2.png";
-import pic3 from "../assets/profile_pictures/pic3.png";
-import pic4 from "../assets/profile_pictures/pic4.png";
-import pic5 from "../assets/profile_pictures/pic5.png";
-import pic6 from "../assets/profile_pictures/pic6.png";
-import pic7 from "../assets/profile_pictures/pic7.png";
-import pic8 from "../assets/profile_pictures/pic8.png";
-
 
 import {
   Link
 } from 'react-router-dom';
+
+let public_imgs_path = process.env.PUBLIC_URL + "/profile_pictures/"
 export default class Settings extends React.Component {
   
   constructor(props){
@@ -33,24 +25,60 @@ export default class Settings extends React.Component {
             </div>
             <div id="container">
               <div className="containerSettings">
-                <div>
-                  <div id="title">
+                <div id="settings-title-container">
+                  <div id="settings-title">
                     <h2>Settings</h2>
                   </div>
                 </div>
-                <div id="pic-select">
-                  <label>
-                    <input type="radio" name="pfp" value="pic0"/>
-                    <img src={pic0} height="50" width="50"/>
-                  </label>
-                  <label>
-                    <input type="radio" name="pfp" value="pic1"/>
-                    <img src={pic1} height="50" width="50"/>
-                  </label>
-                  <label>
-                    <input type="radio" name="pfp" value="pic2"/>
-                    <img src={pic2} height="50" width="50"/>
-                  </label>
+                <div id="pfp-title">
+                  <h4>Update your profile picture!</h4>
+                </div>
+                <div id="group-pic-select">
+                  <div className="pic-select">
+                    <label>
+                      <input type="radio" name="pfp" value="pic0"/>
+                      <img src={public_imgs_path + "pic0.png"} height="50" width="50"/>
+                    </label>
+                    <label>
+                      <input type="radio" name="pfp" value="pic1"/>
+                      <img src={public_imgs_path + "pic1.png"} height="50" width="50"/>
+                    </label>
+                    <label>
+                      <input type="radio" name="pfp" value="pic2"/>
+                      <img src={public_imgs_path + "pic2.png"} height="50" width="50"/>
+                    </label>
+                  </div>
+                  <div className="pic-select">
+                    <label>
+                      <input type="radio" name="pfp" value="pic3"/>
+                      <img src={public_imgs_path + "pic3.png"}  height="50" width="50"/>
+                    </label>
+                    <label>
+                      <input type="radio" name="pfp" value="pic4"/>
+                      <img src={public_imgs_path + "pic4.png"}  height="50" width="50"/>
+                    </label>
+                    <label>
+                      <input type="radio" name="pfp" value="pic5"/>
+                      <img src={public_imgs_path + "pic5.png"}height="50" width="50"/>
+                    </label>
+                  </div>
+                  <div className="pic-select">
+                    <label>
+                      <input type="radio" name="pfp" value="pic6"/>
+                      <img src={public_imgs_path + "pic6.png"}  height="50" width="50"/>
+                    </label>
+                    <label>
+                      <input type="radio" name="pfp" value="pic7"/>
+                      <img src={public_imgs_path + "pic7.png"}  height="50" width="50"/>
+                    </label>
+                    <label>
+                      <input type="radio" name="pfp" value="pic8"/>
+                      <img src={public_imgs_path + "pic8.png"}  height="50" width="50"/>
+                    </label>
+                  </div>
+                </div>
+                <div id="pwChange-title">
+                  <h4>Change your password</h4>
                 </div>
               </div>
             </div>

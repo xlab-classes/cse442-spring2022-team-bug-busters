@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
 import { Navbar, Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import pic0 from "../assets/profile_pictures/pic0.png";
+
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
 //Use the following line for local testing!
 const API = "http://localhost:8080/modals/"
+
+let public_imgs_path = process.env.PUBLIC_URL + "/profile_pictures/"
 export default class NavBar extends Component {
   constructor(props){
     super(props);
     this.state = {
       username: sessionStorage.getItem("username"),
+      profile_picture: "",
       errors: {}
     };
   }
@@ -42,11 +45,18 @@ export default class NavBar extends Component {
   .then((res) => res.json())
   .then((result) =>{
       if(result.picture.length === 0){
-          let current_pfp = pic0;
-          sessionStorage.setItem("pfp", current_pfp);
+        let current_pfp = public_imgs_path + "pic0.png";
+        sessionStorage.setItem("pfp", "pic0.png");
+        this.setState({
+          profile_picture: public_imgs_path + "pic0.png"
+        })
       }else{
-          let current_pfp = "../assets/profile_pictures/" + result.picture;
-          sessionStorage.setItem("pfp", current_pfp);
+        let current_pfp = result.picture;
+        let path_pic = public_imgs_path + current_pfp;
+        sessionStorage.setItem("pfp", current_pfp);
+        this.setState({
+          profile_picture: path_pic
+        })
       }
   });
   }
@@ -58,7 +68,7 @@ export default class NavBar extends Component {
             <Navbar.Brand href="/CSE442-542/2022-Spring/cse-442h/">
               <img
                 alt=""
-                src={sessionStorage.getItem("pfp")}
+                src={this.state.profile_picture}
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
@@ -72,7 +82,7 @@ export default class NavBar extends Component {
                 <a href={"/CSE442-542/2022-Spring/cse-442h/user/" + this.state.username}>
                   <img
                     alt=""
-                    src={sessionStorage.getItem("pfp")}
+                    src={this.state.profile_picture}
                     width="40"
                     height="40"
                     className="d-inline-block align-top"
