@@ -40,15 +40,15 @@ export default class Settings extends React.Component {
                 </div>
                 <div id="pic-select">
                   <label>
-                    <input type="radio" name="pic0" value="small"/>
+                    <input type="radio" name="pfp" value="pic0"/>
                     <img src={pic0} height="50" width="50"/>
                   </label>
                   <label>
-                    <input type="radio" name="pic1" value="small"/>
+                    <input type="radio" name="pfp" value="pic1"/>
                     <img src={pic1} height="50" width="50"/>
                   </label>
                   <label>
-                    <input type="radio" name="pic2" value="small"/>
+                    <input type="radio" name="pfp" value="pic2"/>
                     <img src={pic2} height="50" width="50"/>
                   </label>
                 </div>

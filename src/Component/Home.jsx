@@ -21,25 +21,6 @@ export default class HomePage extends React.Component {
             username: sessionStorage.getItem("username")
         })
         console.log(sessionStorage.getItem("username"));
-        fetch(API+"getProfilePicture.php", {
-            method: "post",
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              username: this.state.username,
-            })
-        })
-        .then((res) => res.json())
-        .then((result) =>{
-            if(result.picture.length === 0){
-                let current_pfp = pic0;
-                sessionStorage.setItem("pfp", current_pfp);
-            }else{
-                let current_pfp = "../assets/profile_pictures/" + result.picture;
-                sessionStorage.setItem("pfp", current_pfp);
-            }
-        });
     }
 
     render(){

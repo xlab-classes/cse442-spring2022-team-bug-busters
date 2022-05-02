@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Navbar, Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import profile_pic from "../assets/profile_pictures/pic0.png";
+import pic0 from "../assets/profile_pictures/pic0.png";
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
@@ -27,6 +27,28 @@ export default class NavBar extends Component {
   }
 
   componentDidMount(){
+    this.setState({
+      username: sessionStorage.getItem("username")
+    })
+    fetch(API+"getProfilePicture.php", {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+      })
+  })
+  .then((res) => res.json())
+  .then((result) =>{
+      if(result.picture.length === 0){
+          let current_pfp = pic0;
+          sessionStorage.setItem("pfp", current_pfp);
+      }else{
+          let current_pfp = "../assets/profile_pictures/" + result.picture;
+          sessionStorage.setItem("pfp", current_pfp);
+      }
+  });
   }
 
   render() {
