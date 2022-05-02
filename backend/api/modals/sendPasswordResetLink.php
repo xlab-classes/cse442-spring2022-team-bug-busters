@@ -1,6 +1,6 @@
 <?php
          $to = "racalasc@buffalo.edu";
-         $subject = "This is subject";
+         $subject = "This is a test!";
          
          $message = "<b>This is HTML message.</b>";
          $message .= "<h1>This is headline.</h1>";
