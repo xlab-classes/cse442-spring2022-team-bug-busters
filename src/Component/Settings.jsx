@@ -8,13 +8,19 @@ import {
 
 let public_imgs_path = process.env.PUBLIC_URL + "/profile_pictures/"
 export default class Settings extends React.Component {
-  
   constructor(props){
     super(props);
     this.state = {
       username: "",
       userid: "",
+      pfp_choice: ""
     };
+  }
+
+  onSelectChange(event){
+    this.setState({value: event.target.value}, function () {
+      console.log(this.state.value);
+    });
   }
 
   render(){
@@ -36,43 +42,43 @@ export default class Settings extends React.Component {
                 <div id="group-pic-select">
                   <div className="pic-select">
                     <label>
-                      <input type="radio" name="pfp" value="pic0"/>
+                      <input type="radio" name="pfp" value="pic0.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic0.png"} height="50" width="50"/>
                     </label>
                     <label>
-                      <input type="radio" name="pfp" value="pic1"/>
+                      <input type="radio" name="pfp" value="pic1.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic1.png"} height="50" width="50"/>
                     </label>
                     <label>
-                      <input type="radio" name="pfp" value="pic2"/>
+                      <input type="radio" name="pfp" value="pic2.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic2.png"} height="50" width="50"/>
                     </label>
                   </div>
                   <div className="pic-select">
                     <label>
-                      <input type="radio" name="pfp" value="pic3"/>
+                      <input type="radio" name="pfp" value="pic3.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic3.png"}  height="50" width="50"/>
                     </label>
                     <label>
-                      <input type="radio" name="pfp" value="pic4"/>
+                      <input type="radio" name="pfp" value="pic4.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic4.png"}  height="50" width="50"/>
                     </label>
                     <label>
-                      <input type="radio" name="pfp" value="pic5"/>
+                      <input type="radio" name="pfp" value="pic5.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic5.png"}height="50" width="50"/>
                     </label>
                   </div>
                   <div className="pic-select">
                     <label>
-                      <input type="radio" name="pfp" value="pic6"/>
+                      <input type="radio" name="pfp" value="pic6.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic6.png"}  height="50" width="50"/>
                     </label>
                     <label>
-                      <input type="radio" name="pfp" value="pic7"/>
+                      <input type="radio" name="pfp" value="pic7.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic7.png"}  height="50" width="50"/>
                     </label>
                     <label>
-                      <input type="radio" name="pfp" value="pic8"/>
+                      <input type="radio" name="pfp" value="pic8.png" onChange={this.onSelectChange}/>
                       <img src={public_imgs_path + "pic8.png"}  height="50" width="50"/>
                     </label>
                   </div>

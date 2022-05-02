@@ -45,10 +45,10 @@ export default class NavBar extends Component {
   .then((res) => res.json())
   .then((result) =>{
       if(result.picture.length === 0){
-        let current_pfp = public_imgs_path + "pic0.png";
+        let path_pic = public_imgs_path + "pic0.png";
         sessionStorage.setItem("pfp", "pic0.png");
         this.setState({
-          profile_picture: public_imgs_path + "pic0.png"
+          profile_picture: path_pic
         })
       }else{
         let current_pfp = result.picture;
