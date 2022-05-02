@@ -27,19 +27,6 @@ export default class NavBar extends Component {
   }
 
   componentDidMount(){
-    fetch(API + "getProfilePicture.php", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: this.state.username
-      })
-    })
-    .then(response => response.json())
-    .then((res) => {
-        console.log(res);
-    })
   }
 
   render() {
@@ -49,7 +36,7 @@ export default class NavBar extends Component {
             <Navbar.Brand href="/CSE442-542/2022-Spring/cse-442h/">
               <img
                 alt=""
-                src={profile_pic}
+                src={sessionStorage.getItem("pfp")}
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
@@ -63,7 +50,7 @@ export default class NavBar extends Component {
                 <a href={"/CSE442-542/2022-Spring/cse-442h/user/" + this.state.username}>
                   <img
                     alt=""
-                    src={profile_pic}
+                    src={sessionStorage.getItem("pfp")}
                     width="40"
                     height="40"
                     className="d-inline-block align-top"

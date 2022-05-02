@@ -10,12 +10,12 @@
     border: 1px solid black;
 }
 
-input, label {
+#pic-select input, label {
     display:block;
     margin: 0.5vw;
 }
 
-input{
+#pic-select input{
     margin-left: 1vw!important;
     margin-bottom: 0.1vh!important;
 }

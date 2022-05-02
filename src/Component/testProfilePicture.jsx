@@ -57,7 +57,7 @@ getProfilePicture= error =>{
               }) 
           }
     });
-    };
+};
 
 
 updatePicture= profilePicture =>{

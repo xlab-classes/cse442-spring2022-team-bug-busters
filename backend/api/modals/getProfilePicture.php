@@ -17,6 +17,7 @@
         $userHelper = new usersHelper($db);
         $username = $_POST["username"];
         $results = $userHelper->getProfilePicture($username);
+        $data = array();
         $data['picture'] = $results;
         echo json_encode($data);
         $db->close();
