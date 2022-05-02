@@ -1,7 +1,6 @@
 import React from 'react';
 import "../Profile.css";
 import NavBar from "./NavBar";
-import profilePic from '../assets/flower.png';
 
 export default class HomePage extends React.Component {
     constructor(props){
@@ -12,6 +11,12 @@ export default class HomePage extends React.Component {
         };
     }
     
+    // componentDidMount(){
+    //     this.setState({
+    //         username: sessionStorage.getItem("username")
+    //     })
+    // }
+
     render(){
         return(
             <div id="settings">

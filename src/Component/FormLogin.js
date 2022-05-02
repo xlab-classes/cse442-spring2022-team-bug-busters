@@ -1,5 +1,5 @@
 import React from "react";
-
+import HomePage from "../Component/Home.jsx";
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
@@ -35,44 +35,45 @@ export default class LoginForm extends React.Component {
   };
 
   handleSubmit = event => {
-      // alert('You have been logged into your account!');
-      let errors = {};
-      event.preventDefault();
-      fetch(API + "login.php", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.password
-        })
+    // alert('You have been logged into your account!');
+    let errors = {};
+    event.preventDefault();
+    fetch(API + "login.php", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
       })
-      .then(res => res.json())
-      .then(
-        result => {
-          if(result.token.length !== 0){
-            console.log("login success");
-            this.setState({
-              sessionToken: result.token,
-              login: true
-            });            
-            sessionStorage.setItem("token", result.token);
-            sessionStorage.setItem("username", this.state.username);
-            console.log(sessionStorage.getItem("username"));
-            document.location = "/CSE442-542/2022-Spring/cse-442h/"
-          }else{
-            console.log("login failed");
-            sessionStorage.removeItem("token");
-            errors["login_failed"] = "Wrong username or password";
-            this.setState({ 
-              errors: errors,
-              sessionToken: "",
-              login: false
-            });
-          }
-        },
-      );
+    })
+    .then(res => res.json())
+    .then(
+      result => {
+        if(result.token.length !== 0){
+          console.log("login success");
+          this.setState({
+            sessionToken: result.token,
+            login: true
+          });            
+          sessionStorage.setItem("token", result.token);
+          sessionStorage.setItem("username", this.state.username);
+          console.log(this.state.username);
+          console.log(sessionStorage.getItem("username"));
+          console.log(sessionStorage.getItem("token"));
+          document.location = "/CSE442-542/2022-Spring/cse-442h/";
+        }else{
+          console.log("login failed");
+          errors["login_failed"] = "Wrong username or password";
+          this.setState({ 
+            errors: errors,
+            sessionToken: "",
+            login: false
+          });
+        }
+      },
+    );
   }
 
   render(){

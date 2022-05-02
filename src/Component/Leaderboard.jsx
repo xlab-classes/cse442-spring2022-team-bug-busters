@@ -1,11 +1,12 @@
 
 import React from "react";
-import NavBar from "./NavBar";
-import {
-  Link
-} from 'react-router-dom';
 
+// Use the following line for deployment!
+//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+
+//Use the following line for local testing!
 const API = "http://localhost:8080/modals/"
+
 
 export default class Leaderboard extends React.Component {
 
@@ -18,22 +19,21 @@ export default class Leaderboard extends React.Component {
   }
 
   componentDidMount() {
-      fetch(API + "ranking.php", {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-      })
-      .then(response => response.json())
-      .then((res) => {
-          console.log(res);
-          this.setState({scores: res});
-        //   this.state.scores.map(item => console.log(item.username));
-      })
+    fetch(API + "ranking.php", {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then((res) => {
+        console.log(res);
+        this.setState({scores: res});
+    //   this.state.scores.map(item => console.log(item.username));
+    })
   }
 
 render() {
-    const {result} = this.state;
     return (
         <div className='Leaderboard'>
             <div className='Ranking'>

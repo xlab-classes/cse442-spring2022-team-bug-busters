@@ -5,10 +5,6 @@ import Leaderboard from "./Component/Leaderboard.jsx";
 import Profile from "./Component/Profile.jsx";
 import SignUp from "./Component/FormSignup.js";
 import LogInForm from "./Component/FormLogin.js";
-import GameRoom from "./Component/GameRoom.jsx";
-import WaitingRoom from "./Component/WaitingRoom";
-import PointsExample from "./Component/pointsExamples.jsx";
-import ProfilePictureExample from "./Component/testProfilePicture.jsx";
 import RequestReset from "./Component/requestPasswordReset.jsx";
 import PasswordReset from "./Component/passwordReset.jsx";
 import Settings from "./Component/Settings.jsx";
@@ -17,7 +13,7 @@ import HomePage from "./Component/Home.jsx";
 import LoginForm from "./Component/FormLogin.js";
 
 import {
-  BrowserRouter as Router, Routes, Route, Link
+  BrowserRouter as Router, Routes, Route
 }from 'react-router-dom';
 
 const PUBLIC_URL = "/CSE442-542/2022-Spring/cse-442h";
@@ -34,8 +30,6 @@ class App extends React.Component{
 
   componentDidMount(){
     window.addEventListener('click', e => {console.log("TESTING EVENT LISTENER")});
-    console.log("Login state is currently");
-    console.log(this.state.login);
   }
 
   render(){
@@ -47,13 +41,10 @@ class App extends React.Component{
               <div className="maincontent" id="mainContent">
                 <Routes>
                   <Route path={PUBLIC_URL + "/settings"} element={<EditProfile login={this.login} />} />
-                  {/* <Route path={PUBLIC_URL + "/createroom"} element={<MakeRoom login={this.login} />} />
-                  <Route path={PUBLIC_URL + "/join"} element={<JoinRoom login={this.login} />} /> */}
                   <Route path={PUBLIC_URL + "/register"} element={<Register/>} />
                   <Route path={PUBLIC_URL + "/leaderboard"} element={<Leader login={this.login} />} />
                   <Route path={PUBLIC_URL + "/login" }element={<SignIn login={this.login} />} />
-                  {/* <Route path={PUBLIC_URL + "/room"} element={<Game login={this.login} />} /> */}
-                  <Route path={PUBLIC_URL + "/user"} element={<ProfilePage element={<ProfilePage/>} />} />
+                  <Route path={PUBLIC_URL + "/user/:username"} element={<ProfilePage element={<ProfilePage/>} />} />
                   <Route path={PUBLIC_URL + "/requestReset"} element={<RequestPasswordReset/>} />
                   <Route path={PUBLIC_URL + "/passwordReset"} element={<PasswordResetForm/>} />
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
@@ -89,22 +80,6 @@ const WordleRoom = (props) => {
 const Leader = (props) => {
   return(
     <Leaderboard></Leaderboard>
-  )
-}
-
-const Points = (props) => {
-  return(
-    <div>
-      <PointsExample/>
-    </div>
-  )
-}
-
-const ProfilePicture = (props) => {
-  return(
-    <div>
-      <ProfilePictureExample/>
-    </div>
   )
 }
 
@@ -209,6 +184,22 @@ const PasswordResetForm = (props) =>{
 //   return(
 //     <div>
 //       <GameRoom login={props.login}/>
+//     </div>
+//   )
+// }
+//
+// const Points = (props) => {
+//   return(
+//     <div>
+//       <PointsExample/>
+//     </div>
+//   )
+// }
+
+// const ProfilePicture = (props) => {
+//   return(
+//     <div>
+//       <ProfilePictureExample/>
 //     </div>
 //   )
 // }
