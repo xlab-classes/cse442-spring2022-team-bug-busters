@@ -51,6 +51,10 @@
   outline: 0;
 }
 
+#title{
+  margin-left: 45vw;
+}
+
 #playButton{
   display: flex;
   align-items: center;
