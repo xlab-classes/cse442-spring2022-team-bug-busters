@@ -15,7 +15,7 @@
         $db = $db -> getConnection();
         $scoresDataBase = new scoresHelper($db);
         $allPoints = $scoresDataBase->getAllPoints();
-        $allPoints['message'] = "Sending a list of users in the order from most points to least points";         
+        // $allPoints['message'] = "Sending a list of users in the order from most points to least points";         
         echo json_encode($allPoints);
         $db->close();
     }

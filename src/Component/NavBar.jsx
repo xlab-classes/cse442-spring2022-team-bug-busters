@@ -14,7 +14,6 @@ export default class NavBar extends Component {
     super(props);
     this.state = {
       username: sessionStorage.getItem("username"),
-      profile_picture: "",
       errors: {}
     };
   }
@@ -33,32 +32,6 @@ export default class NavBar extends Component {
     this.setState({
       username: sessionStorage.getItem("username")
     })
-    fetch(API+"getProfilePicture.php", {
-      method: "post",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: this.state.username,
-      })
-    })
-    .then((res) => res.json())
-    .then((result) =>{
-        if(result.picture.length === 0){
-          let path_pic = public_imgs_path + "pic0.png";
-          sessionStorage.setItem("pfp", "pic0.png");
-          this.setState({
-            profile_picture: path_pic
-          })
-        }else{
-          let current_pfp = result.picture;
-          let path_pic = public_imgs_path + current_pfp;
-          sessionStorage.setItem("pfp", current_pfp);
-          this.setState({
-            profile_picture: path_pic
-          })
-        }
-    });
   }
 
   render() {
@@ -68,7 +41,7 @@ export default class NavBar extends Component {
             <Navbar.Brand href="/CSE442-542/2022-Spring/cse-442h/">
               <img
                 alt=""
-                src={this.state.profile_picture}
+                src={public_imgs_path + sessionStorage.getItem("pfp")}
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
@@ -82,7 +55,7 @@ export default class NavBar extends Component {
                 <a href={"/CSE442-542/2022-Spring/cse-442h/user/" + this.state.username}>
                   <img
                     alt=""
-                    src={this.state.profile_picture}
+                    src={public_imgs_path + sessionStorage.getItem("pfp")}
                     width="40"
                     height="40"
                     className="d-inline-block align-top"

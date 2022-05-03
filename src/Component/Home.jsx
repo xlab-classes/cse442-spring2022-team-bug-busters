@@ -1,7 +1,6 @@
 import React from 'react';
 import "../Profile.css";
 import NavBar from "./NavBar";
-import pic0 from "../assets/profile_pictures/pic0.png";
 import Leaderboard from './Leaderboard';
 
 // Use the following line for deployment!
@@ -23,6 +22,25 @@ export default class HomePage extends React.Component {
             username: sessionStorage.getItem("username")
         })
         console.log(sessionStorage.getItem("username"));
+        fetch(API+"getProfilePicture.php", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: sessionStorage.getItem("username"),
+            })
+        })
+        .then((res) => res.json())
+        .then((result) =>{
+        console.log(result);
+        if(result.picture.length === 0){
+            sessionStorage.setItem("pfp", "pic0.png");
+        }else{
+            let current_pfp = result.picture;
+            sessionStorage.setItem("pfp", current_pfp);
+        }
+        });
     }
 
     render(){
