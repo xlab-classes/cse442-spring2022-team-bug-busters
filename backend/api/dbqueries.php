@@ -70,6 +70,13 @@ class usersHelper{
         $stmt -> execute();
     }
 
+    public function updatePassword($username, $newPassword){
+        $hashed_pw = hash('sha256', $newPassword);
+        $stmt = $this->conn->prepare("UPDATE users SET hashed_pw = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $hashed_pw, $username);
+        $stmt -> execute();
+    }
+
     //Gets a username by id of a user in the database. Returned as a string.
     public function getUserByID($userID){
         
