@@ -19,7 +19,7 @@
         $picture = $_POST["picture"];
         $userHelper -> changeProfilePicture($username, $picture);
         $data = array();
-        //$data['Message'] = "Picture successfully changed!";
+        $data['message'] = "Picture successfully changed!";
         echo json_encode($data);
         $db->close();
     }

@@ -39,9 +39,10 @@ export default class Settings extends React.Component {
     console.log(this.state.pfp_choice);
   }
 
-  submitHandler = () => { 
+  submitHandler = (event) => { 
     console.log(this.state.pfp_choice);
     console.log(sessionStorage.getItem("username"));
+    event.preventDefault()
     fetch(API+"changeProfilePicture.php", {
       method: "post",
       headers: {
@@ -52,12 +53,12 @@ export default class Settings extends React.Component {
         picture: this.state.pfp_choice
       })
     })
-    .then((res) => {
-      console.log(res);
-    })
-    .then( (result) => {
-      console.log(result);
-      console.log("here here");
+    .then((res) => res.json())
+    .then((result) => {
+      if(result.message){
+        sessionStorage.setItem("pfp", this.state.pfp_choice);
+        window.location.reload();
+      }
     });
   }
 
