@@ -33,9 +33,9 @@
         $message = "
 
         <h1>Password Reset Link</h1>
-        <b>Please click the following link to be redirected to the password reset page!
-        There will be additional instructions to follow on that page!</b>
-        <a href =\"".$resetLink."\">www.example.com</a>
+        <b>Please click the following link to be redirected to the password reset page,
+        there will be additional instructions to follow on that page!</b><br/>
+        <a href =\"".$resetLink."\">Password Reset Link</a>
         
         ";
          
@@ -45,7 +45,6 @@
          
         $retval = mail ($to,$subject,$message,$header);
          
-        $data['url'] = $_POST['url']."/".$resetToken;
         if( $retval == true ) {
             $data['message'] = "Token has been sent successfully!";
         }else {
