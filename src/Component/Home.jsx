@@ -1,5 +1,5 @@
 import React from 'react';
-import "../Profile.css";
+import "../css/standard.css";
 import NavBar from "./NavBar";
 import Leaderboard from './Leaderboard';
 
@@ -45,15 +45,20 @@ export default class HomePage extends React.Component {
 
     render(){
         return(
-            <div id="settings">
+            <div id="home">
                 <div id="navbar-div">
                     <NavBar></NavBar>
                 </div>
-                <div className="containerSettings">
+                <div className="containerScores">
                     <div id="title">
                         <h2>Leaderboard</h2>
                         <Leaderboard></Leaderboard>
                     </div>
+                </div>
+                <div id="playButton">
+                    <button class="button-56" role="button" 
+                    onClick={() => {document.location = "/CSE442-542/2022-Spring/cse-442h/wordle";}}
+                    >Play Wordle!</button>
                 </div>
             </div>
         )
