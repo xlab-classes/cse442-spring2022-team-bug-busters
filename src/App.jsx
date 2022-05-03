@@ -3,7 +3,7 @@ import "./App.css";
 import "./Form.css";
 import Leaderboard from "./Component/Leaderboard.jsx";
 import Profile from "./Component/Profile.jsx";
-import SignUp from "./Component/FormSignup.js";
+import SignUp from "./Component/FormSignup.jsx";
 import LogInForm from "./Component/FormLogin.js";
 import RequestReset from "./Component/requestPasswordReset.jsx";
 import PasswordReset from "./Component/passwordReset.jsx";
