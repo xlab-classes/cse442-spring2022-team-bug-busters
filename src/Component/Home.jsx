@@ -52,8 +52,8 @@ export default class HomePage extends React.Component {
                 <div className="containerScores">
                     <div id="title">
                         <h2>Leaderboard</h2>
-                        <Leaderboard></Leaderboard>
                     </div>
+                    <Leaderboard></Leaderboard>
                 </div>
                 <div id="playButton">
                     <button class="button-56" role="button" 
