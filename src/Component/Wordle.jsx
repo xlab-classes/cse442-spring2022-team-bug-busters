@@ -4,11 +4,14 @@ import "../Wordle.css"
 import Keyboard from './Keyboard';
 import Letter from './Letter';
 import Timer from './Timer';
+import {
+  Link
+} from 'react-router-dom';
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 //Use the following line for local testing!
 const API = "http://localhost:8080/modals/"
-
+const wordleWord = ["RIGHT", "WRONG", "HAPPY", "HELLO", "EARTH", "PIZZA", "TOWEL", "STONE", "CREAM", "SHARP"]
 export default class Wordle extends Component {
   constructor(props){
     super(props);
@@ -29,7 +32,7 @@ export default class Wordle extends Component {
         ["","","","",""],
         ["","","","",""],
         ["","","","",""]],
-      correctWord: "RIGHT",
+      correctWord: wordleWord[Math.floor(Math.random() * wordleWord.length)],
       gameover: false,
       correct: false,
       time: false,
@@ -217,12 +220,16 @@ export default class Wordle extends Component {
         return(
           <div id="gameoverModal">
                 <div id='gameover'>
-                  <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
                   <div id='gameoverMessage'>
                     <div>You guessed the word!</div>
+                    <div>You gained one point</div>
+                    <div>The word is {this.state.correctWord}</div>
                     <div>Points: {this.state.points}</div>
                     <div>Wins: {this.state.wins} </div>
                     <div>Losses: {this.state.losses}</div>
+                    <Link to={"/CSE442-542/2022-Spring/cse-442h/"}>
+                      <button>Okay</button>
+                    </Link>
                   </div>
                   
                 </div>
@@ -233,12 +240,16 @@ export default class Wordle extends Component {
         return(
           <div id="gameoverModal">
                 <div id='gameover'>
-                  <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
                   <div id='gameoverMessage'>
                     <div>You didnt guessed the word!</div>
+                    <div>You lost one point</div>
+                    <div>The word is {this.state.correctWord}</div>
                     <div>Points: {this.state.points}</div>
                     <div>Wins: {this.state.wins} </div>
                     <div>Losses: {this.state.losses}</div>
+                    <Link to={"/CSE442-542/2022-Spring/cse-442h/"}>
+                      <button>Okay</button>
+                    </Link>
                   </div>
                   
                 </div>
@@ -251,23 +262,26 @@ export default class Wordle extends Component {
       return(
         <div id="gameoverModal">
               <div id='gameover'>
-                <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
                 <div id='gameoverMessage'>
                   <div>You ran out of time</div>
+                  <div>You lost one point</div>
+                  <div>The word is {this.state.correctWord}</div>
                   <div>Points: {this.state.points}</div>
                   <div>Wins: {this.state.wins} </div>
                   <div>Losses: {this.state.losses}</div>
+                  <Link to={"/CSE442-542/2022-Spring/cse-442h/"}>
+                      <button>Okay</button>
+                  </Link>
                 </div>
                 
               </div>
         </div> 
-      )    }
+      )}
     else{
 
       return(
         <div id="gameInProgress">
               <div id='gameover'>
-                <button id='gameoverClose' onClick={e=> this.closeModal()}>X</button>
                 <div id='gameoverMessage'>
                 <p>Points: {this.state.points}</p>
                 <p>Wins: {this.state.wins} </p>
@@ -290,7 +304,7 @@ export default class Wordle extends Component {
     this.updateLosses(1);
     this.updatePoints(-1);
     this.setState({
-      gameover: true
+      time: true
     })
   }
   
