@@ -1,7 +1,6 @@
 import React from 'react';
-import "../Profile.css";
+import "../css/Profile.css";
 import NavBar from "./NavBar";
-import PointsExample from './pointsExamples';
 
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
@@ -23,10 +22,10 @@ export default class Profile extends React.Component{
     };
   }
   componentDidMount(){
-    this.getPoints()
+    this.getPoints();
   } 
   
-  getPoints= error =>{
+  getPoints = error =>{
     fetch(API+"getStats.php", {
         method: "post",
         headers: {
