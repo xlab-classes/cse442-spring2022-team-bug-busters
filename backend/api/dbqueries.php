@@ -499,30 +499,25 @@ class passwordResetHelper{
         }
     }
 
-    public function changePassword($email, $token, $password, $confirmPassword){
-        //First check the time the token was created to make sure it didn't expire! (Token Expires after ~1 hour)
+    public function changePassword($token, $password, $confirmPassword){
         if($password != $confirmPassword){
-        return "The passwords given did not match.";
+        return "The passwords given did not match!";
         }
-        $stmt = $this->conn->prepare("SELECT token, timeCreated FROM passwordReset WHERE email = ?");
-        $stmt -> bind_param("s", $email);
+        $stmt = $this->conn->prepare("SELECT username, timeCreated FROM passwordReset WHERE token = ?");
+        $stmt -> bind_param("s", $token);
         $stmt -> execute();
         $stmt -> store_result();
-        $stmt -> bind_result($storedToken, $timeCreated);
+        $stmt -> bind_result($username, $timeCreated);
         while($stmt->fetch()){
-            $storedToken = $storedToken;
+            $username = $username;
             $timeCreated = $timeCreated;
         }
-        //If tokens do not match, throw an error!
-        if($storedToken != $token){
-            return "Error, the token provided was incorrect.";
-        }
-        if($password != $confirmPassword){
-            return "Error, passwords did not match.";
+        if($username < 1){
+            return "This token is invalid!";
         }
         $hashed_pw = hash('sha256', $password);
-        $stmt = $this->conn->prepare("UPDATE users SET hashed_pw = ? WHERE email = ?");
-        $stmt -> bind_param("ss", $hashed_pw, $email);
+        $stmt = $this->conn->prepare("UPDATE users SET hashed_pw = ? WHERE username = ?");
+        $stmt -> bind_param("ss", $hashed_pw, $username);
         $stmt -> execute();
         return "Password has been successfully changed!";
     }

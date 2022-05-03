@@ -15,17 +15,23 @@
         $db = new DBConnection($db_config);
         $db = $db -> getConnection();
         $passwordHelper = new passwordResetHelper($db);
-        $email = $_POST['email'];
         $token = $_POST['token'];
         $password = $_POST['newPassword'];
         $confirmPassword = $_POST['confirmNewPassword'];
-        $resetToken = $passwordHelper->changePassword($email, $token, $password, $confirmPassword);
-        if ($resetToken == "This email does not exist!"){
-            http_response_code(404);
+        $response = $passwordHelper->changePassword($token, $password, $confirmPassword);
+        $data = array();
+        if ($response == "The passwords given did not match!"){
+            $data['message'] = $response;
+            echo json_encode($data);
+            $db->close();
+        }
+        else if ($response == "This token is invalid!"){
+            $data['message'] = $response;
+            echo json_encode($data);
+            $db->close();
         }
         else{
-        $data = array();
-        $data['resetToken'] = $resetToken;
+        $data['message'] = $response;
         echo json_encode($data);
         $db->close();
         }
