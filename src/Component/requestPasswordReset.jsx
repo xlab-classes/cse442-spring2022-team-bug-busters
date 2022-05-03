@@ -13,6 +13,7 @@ export default class RequestReset extends React.Component {
     super(props);
     this.state = {
       email: "",
+      url : window.location.href,
       errorMessage: "",
       currentForm: 0,
     };
@@ -39,27 +40,31 @@ export default class RequestReset extends React.Component {
       },
       body: JSON.stringify({
         email: this.state.email,
+        url: this.state.url
       })
     })
     .then(res => {
-      //If the response is not okay, have the user input a new email address.
-      if (!res.ok){
+      if (res.status == 500){
         this.setState({
-          errorMessage: "The email you entered is either invalid, or does not have a user associated with it!"
-        })
-        this.setState({
-          email: ""
+          errorMessage: "An error occured, please try again!",
         })
       }
-      //Else send the success page.
-      else {
+      else if (res.status == 404){
         this.setState({
-          currentForm: 1,
-          errorMessage: ""
+          errorMessage: "The email you entered is either invalid, or does not have a user associated with it!",
         })
       }
-    },
-    );
+    })
+    .then(res => res.json())
+    .then(
+      result => {
+        //document.location = "/CSE442-542/2022-Spring/cse-442h/login"
+          this.setState({
+            currentForm: 1,
+            errorMessage: ""
+          })
+      }
+    )
   };
 
   render() {
@@ -67,7 +72,7 @@ export default class RequestReset extends React.Component {
       return (
         <>
         <body>
-        <h3>A token has been sent to the following email: {this.state.email}</h3>
+        <h3>A link has been sent to the following email: {this.state.email}</h3>
         Please follow the instructions sent to you email to successfully reset your password!
         </body>
         </>); 
@@ -80,7 +85,7 @@ export default class RequestReset extends React.Component {
           <label>
             <h3>Forgot Password?</h3>
             <p><small>Enter the email associated with your<br/>
-            account to receive a password reset token.</small></p>
+            account to receive a password reset link.</small></p>
             <input type="input" onChange={this.myEmailChangeHandler} />
           </label>
           <br/>

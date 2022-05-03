@@ -19,10 +19,38 @@
         $resetToken = $passwordHelper->generateResetToken($email);
         if ($resetToken == "This email does not exist!"){
             http_response_code(404);
+            $data['message'] = "This email does not exist!";
+            echo json_encode($data);
         }
         else{
         $data = array();
-        $data['resetToken'] = $resetToken;
+
+        $resetLink = $_POST['url']."/".$resetToken;
+
+        $to = $email;
+        $subject = "Bug Busters Password Reset Link";
+         
+        $message = "
+
+        <h1>Password Reset Link</h1>
+        <b>Please click the following link to be redirected to the password reset page!
+        There will be additional instructions to follow on that page!</b>
+        <a href =\"".$resetLink."\">www.example.com</a>
+        
+        ";
+         
+        $header = "From:no-reply@email.bugbusters.com \r\n";
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+         
+        $retval = mail ($to,$subject,$message,$header);
+         
+        $data['url'] = $_POST['url']."/".$resetToken;
+        if( $retval == true ) {
+            $data['message'] = "Token has been sent successfully!";
+        }else {
+            http_response_code(500);
+        }
         echo json_encode($data);
         $db->close();
         }

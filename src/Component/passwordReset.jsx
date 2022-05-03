@@ -15,28 +15,13 @@ export default class PasswordReset extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      token: "",
+      token: window.location.href.split('/')[7],
       newPassword: "",
       confirmNewPassword: "",
       errorMessage: "",
-      currentForm: 0,
+      currentForm: 0
     };
   }
-
-  // change handlers keep the state current with the values as you type them, so
-  // the submit handler can read from the state to hit the API layer
-  myEmailChangeHandler = event => {
-    this.setState({
-      email: event.target.value
-    });
-  };
-
-  myTokenChangeHandler = event => {
-    this.setState({
-      token: event.target.value
-    });
-  };
 
   myNewPasswordChangeHandler = event => {
     this.setState({
@@ -62,44 +47,43 @@ export default class PasswordReset extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: this.state.email,
         token: this.state.token,
         newPassword: this.state.newPassword,
         confirmNewPassword: this.state.confirmNewPassword
       })
     })
-    .then(res => {
-      //If the response is not okay, have the user input a new email address.
-      if (!res.ok){
-        this.setState({
-          errorMessage: "The email you entered is either invalid, or does not have a user associated with it!"
-        })
-        this.setState({
-          email: ""
-        })
+    .then(res => res.json())
+    .then(
+      result => {
+        if (result.message === "The passwords given did not match!"){
+          this.setState({
+            errorMessage: "The given passwords did not match!"
+          })
+        }
+        else if (result.message === "This token is invalid!"){
+          this.setState({
+            errorMessage: "This token is invalid, double check the link you received!"
+          })
+        }
+        else(
+        //document.location = "/CSE442-542/2022-Spring/cse-442h/login"
+          this.setState({
+            currentForm: 1,
+            errorMessage: ""
+          })
+        )
       }
-      //Else send the success page.
-      else {
-        this.setState({
-          currentForm: 1,
-          errorMessage: ""
-        })
-      }
-    },
-    );
+    )
   };
 
   render() {
+    if (this.state.currentForm == 0){
       return (
         <div>
         
         <form onSubmit={this.emailSubmitHandler}>
           <label>
             <h3>Update Password</h3>
-            <p><small>Enter the token you received via email!</small></p>
-            <input type="input" onChange={this.myTokenChangeHandler} />
-            <p><small>Enter the email associated with your account!</small></p>
-            <input type="input" onChange={this.myEmailChangeHandler} />
             <p><small>Enter your new password!</small></p>
             <input type="password" onChange={this.myNewPasswordChangeHandler} />
             <p><small>Confirm your new password!</small></p>
@@ -119,5 +103,16 @@ export default class PasswordReset extends React.Component {
         </form>
         <br/>
         </div>);
+    }
+    else {
+      return (
+      <div>
+        <body>
+        <h3>Your password has been reset successfully!</h3>
+        Please log into your account <a href="/CSE442-542/2022-Spring/cse-442h/login">here</a>!
+        </body>
+      </div>
+      );
+    }
   }
 }
