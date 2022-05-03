@@ -23,7 +23,8 @@ export default class Settings extends React.Component {
       current_pfp: sessionStorage.getItem("pfp"),
       current_pw: "",
       new_pw: "",
-      confirm_new_pw: ""
+      confirm_new_pw: "",
+      errors: {}
     };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -70,7 +71,57 @@ export default class Settings extends React.Component {
   }
 
   handlePasswordSubmit = (event) =>{
-    event.preventDefault();
+    let errors = {};
+    event.preventDefault()
+    fetch(API+"changePassword.php", {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: sessionStorage.getItem("username"),
+        currentPassword: this.state.current_pw,
+        newPassword: this.state.new_pw,
+        confirmNewPassword: this.state.confirm_new_pw
+      })
+    })
+    .then((res) => res.json())
+    .then((result) => {
+      Array.from(document.querySelectorAll('input'));
+      this.setState({
+        current_pw: "",
+        new_pw: "",
+        confirm_new_pw: ""
+      });
+      if(result.message == "success"){
+        //Password was reset!
+        errors["changed"] = true;
+        this.setState({ 
+          errors: errors
+        });
+      }
+      else if(result.message == "Incorrect Password!"){
+        //Passwords was not correct!
+        errors["incorrect"] = true;
+        this.setState({ 
+          errors: errors
+        });
+      }
+      else if(result.message == "Passwords do not match!"){
+        //Passwords did not match!
+        errors["mismatch"] = true;
+        this.setState({ 
+          errors: errors
+        });
+      }
+      else if(result.message == "Passwords must be different!"){
+        //Old and New Password are the same!
+        errors["same"] = true;
+        this.setState({ 
+          errors: errors
+        });
+      }
+    });
   }
   
   currpwdChangeHandler = event => {
@@ -161,6 +212,10 @@ export default class Settings extends React.Component {
               <div id="pw-form">
                 <form id="pwChange-form" onSubmit={this.handlePasswordSubmit}>
                   <div>
+                  {this.state.errors.changed && <div class="alert alert-success" role="alert">Your Password has been changed successfully!</div>}
+                  {this.state.errors.incorrect && <div class="alert alert-danger" role="alert">Incorrect Password for the User!</div>}
+                  {this.state.errors.mismatch && <div class="alert alert-danger" role="alert">New Passwords Did Not Match!</div>}
+                  {this.state.errors.same && <div class="alert alert-danger" role="alert">The New Password Cannot be the Same as the Old Password!</div>}
                     <label>
                       <p>Current Password: </p>
                       <input 
