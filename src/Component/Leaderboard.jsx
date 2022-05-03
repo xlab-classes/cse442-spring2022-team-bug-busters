@@ -1,4 +1,4 @@
-
+import Table from 'react-bootstrap/Table'
 import React from "react";
 
 // Use the following line for deployment!
@@ -37,24 +37,24 @@ render() {
     return (
         <div className='Leaderboard'>
             <div className='Ranking'>
-                <div className='gameName'>
-                    Ranking
-                </div>
-                <div className='player'>
-                    Players
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                            <th>Rank #</th>
+                            <th>Player</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {Object.entries(this.state.scores).map(([key, values]) => (
-                        // this.state.scores = {0: {username: "", scores: 2}}
-                        // key = 0
-                        // dict[key] = values
-                        // this.state.scores[key] = values
-                        // this.state.scores[key].username
-                        <p>{values.username}: {values.points}</p>
-                    )
-                    )}
-                    {/* {this.state.scores.map(score => (
-                    score.username
-                    ))} */}
-                </div>
+                        <tr>
+                            <td>{Number(key) + 1}</td>
+                            <td>{values.username}</td>
+                            <td>{values.points}</td>
+                        </tr>   
+                    ))}
+                    </tbody>
+                </Table>
             </div>
         </div>
     )

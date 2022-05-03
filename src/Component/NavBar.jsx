@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Navbar, Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import profile_pic from "../assets/profile_pictures/pic0.png";
+
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
 //Use the following line for local testing!
 const API = "http://localhost:8080/modals/"
+
+let public_imgs_path = process.env.PUBLIC_URL + "/profile_pictures/"
 export default class NavBar extends Component {
   constructor(props){
     super(props);
@@ -27,6 +29,9 @@ export default class NavBar extends Component {
   }
 
   componentDidMount(){
+    this.setState({
+      username: sessionStorage.getItem("username")
+    })
   }
 
   render() {
@@ -36,7 +41,7 @@ export default class NavBar extends Component {
             <Navbar.Brand href="/CSE442-542/2022-Spring/cse-442h/">
               <img
                 alt=""
-                src={sessionStorage.getItem("pfp")}
+                src={public_imgs_path + sessionStorage.getItem("pfp")}
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
@@ -50,7 +55,7 @@ export default class NavBar extends Component {
                 <a href={"/CSE442-542/2022-Spring/cse-442h/user/" + this.state.username}>
                   <img
                     alt=""
-                    src={sessionStorage.getItem("pfp")}
+                    src={public_imgs_path + sessionStorage.getItem("pfp")}
                     width="40"
                     height="40"
                     className="d-inline-block align-top"
