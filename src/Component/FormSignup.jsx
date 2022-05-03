@@ -78,7 +78,7 @@ export default class SignUp extends React.Component {
         return(
             <div className="register1">
                 <div className="container">
-                    <div className="card-body">
+                    <div className="card">
                         <form onSubmit={this.handleSubmit}>
                             <h1>Let's play, Bug Busters!</h1>
                             <h2>Create your account by filling out the information below.</h2>
