@@ -83,22 +83,22 @@ export default class PasswordReset extends React.Component {
         
         <form onSubmit={this.emailSubmitHandler}>
           <label>
-            <h3>Update Password</h3>
-            <p><small>Enter your new password!</small></p>
+            <h3>Enter the Following Information to Change your Password:</h3>
+            <p><small>New Password!</small></p>
             <input type="password" onChange={this.myNewPasswordChangeHandler} />
-            <p><small>Confirm your new password!</small></p>
+            <p><small>Confirm New Password!</small></p>
             <input type="password" onChange={this.myConfirmNewPasswordChangeHandler} />
           </label>
           <br/>
           <body>{this.state.errorMessage}</body>
           <input className="btn btn-primary" type="submit" value="Change Password" />
           <Link to="/CSE442-542/2022-Spring/cse-442h/login">
-            <button className="btn btn-primary">
+            <button className="btn btn-secondary">
               Cancel
             </button>
           </Link><br/>
           <span className="login">
-          Don't have a token? Get one here! <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
+          Don't have a reset link? Get one here! <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
         </span>
         </form>
         <br/>
@@ -108,7 +108,8 @@ export default class PasswordReset extends React.Component {
       return (
       <div>
         <body>
-        <h3>Your password has been reset successfully!</h3>
+        <h1>Your password has been changed successfully!</h1>
+        <h3>The previous token you used is now expired!</h3>
         Please log into your account <a href="/CSE442-542/2022-Spring/cse-442h/login">here</a>!
         </body>
       </div>
