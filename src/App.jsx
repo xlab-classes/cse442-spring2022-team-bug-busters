@@ -44,7 +44,7 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/register"} element={<Register/>} />
                   <Route path={PUBLIC_URL + "/leaderboard"} element={<Leader login={this.login} />} />
                   <Route path={PUBLIC_URL + "/login" }element={<SignIn login={this.login} />} />
-                  <Route path={PUBLIC_URL + "/user/:username"} element={<ProfilePage element={<ProfilePage/>} />} />
+                  <Route path={PUBLIC_URL + "/user"} element={<ProfilePage element={<ProfilePage/>} />} />
                   <Route path={PUBLIC_URL + "/requestReset"} element={<RequestPasswordReset/>} />
                   <Route path={PUBLIC_URL + "/requestReset/:token"} element={<PasswordResetForm/>} />
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />

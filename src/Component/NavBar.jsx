@@ -61,7 +61,7 @@ export default class NavBar extends Component {
                     className="d-inline-block align-top"
                   />{' '}
                 </a>
-                <Nav.Link href={"/CSE442-542/2022-Spring/cse-442h/user/" + this.state.username}>{this.state.username}</Nav.Link>
+                <Nav.Link href="/CSE442-542/2022-Spring/cse-442h/user">{this.state.username}</Nav.Link>
                 <Nav.Link eventKey={2} href="/CSE442-542/2022-Spring/cse-442h/settings">Settings</Nav.Link>
                 <Nav.Link onClick={() => this.logoutUser()}>Logout</Nav.Link>
               </Nav>
