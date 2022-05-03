@@ -46,3 +46,7 @@
 #submitDiv{
     padding-bottom: 5px;
 }
+
+#pw-form{
+    display: block;
+}

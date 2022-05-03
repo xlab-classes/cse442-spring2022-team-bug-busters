@@ -20,7 +20,10 @@ export default class Settings extends React.Component {
       username: "",
       userid: "",
       pfp_choice: sessionStorage.getItem("pfp"),
-      current_pfp: sessionStorage.getItem("pfp")
+      current_pfp: sessionStorage.getItem("pfp"),
+      current_pw: "",
+      new_pw: "",
+      confirm_new_pw: ""
     };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -65,6 +68,28 @@ export default class Settings extends React.Component {
   isChecked(value){
     return this.state.current_pfp === value;
   }
+
+  handlePasswordSubmit = (event) =>{
+    event.preventDefault();
+  }
+  
+  currpwdChangeHandler = event => {
+    this.setState({
+      current_pw: event.target.value
+    });
+  };
+
+  newChangeHandler = event => {
+    this.setState({
+      new_pw: event.target.value,
+    });
+  };
+
+  confirmChangeHandler = event => {
+    this.setState({
+      confirm_new_pw: event.target.value
+    });
+  };
 
   render(){
     return(
@@ -133,6 +158,52 @@ export default class Settings extends React.Component {
             </form>
             <div id="pwChange-title">
               <h4>Change your password</h4>
+              <div id="pw-form">
+                <form id="pwChange-form" onSubmit={this.handlePasswordSubmit}>
+                  <div>
+                    <label>
+                      <p>Current Password: </p>
+                      <input 
+                      type="password" 
+                      name="Current Password" 
+                      value={this.state.current_pw}
+                      placeholder="Current Password"
+                      onChange={this.currpwdChangeHandler}
+                      required
+                      />
+                    </label>                  
+                  </div>
+                  <div>
+                    <label>
+                      <p>New Password: </p> 
+                      <input 
+                      type="password" 
+                      name="New Password" 
+                      value={this.state.new_pw}
+                      placeholder="New Password"
+                      onChange={this.newChangeHandler}
+                      required
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <p>Confirm New Password: </p> 
+                      <input 
+                      type="password" 
+                      name="Confirm Password" 
+                      value={this.state.confirm_new_pw}
+                      placeholder="Confirm New Password"
+                      onChange={this.confirmChangeHandler}
+                      required
+                      />
+                    </label>
+                  </div>
+                  <div id="submitDiv">
+                    <button type="submit" className="btn btn-primary btn-lg">Change Password</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
