@@ -4,13 +4,13 @@ import "./Form.css";
 import Leaderboard from "./Component/Leaderboard.jsx";
 import Profile from "./Component/Profile.jsx";
 import SignUp from "./Component/FormSignup.jsx";
-import LogInForm from "./Component/FormLogin.js";
+import LogInForm from "./Component/FormLogin.jsx";
 import RequestReset from "./Component/requestPasswordReset.jsx";
 import PasswordReset from "./Component/passwordReset.jsx";
 import Settings from "./Component/Settings.jsx";
 import Wordle from "./Component/Wordle.jsx";
 import HomePage from "./Component/Home.jsx";
-import LoginForm from "./Component/FormLogin.js";
+import LoginForm from "./Component/FormLogin.jsx";
 
 import {
   BrowserRouter as Router, Routes, Route
