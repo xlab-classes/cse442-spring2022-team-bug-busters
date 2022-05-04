@@ -36,6 +36,8 @@
         <b>Please click the following link to be redirected to the password reset page,
         there will be additional instructions to follow on that page!</b><br/>
         <a href =\"".$resetLink."\">Password Reset Link</a>
+        <br/>
+        <h3>Wasn't you? Don't worry this email can be safely discarded!</h3>
         
         ";
          

@@ -54,17 +54,13 @@ export default class RequestReset extends React.Component {
           errorMessage: "The email you entered is either invalid, or does not have a user associated with it!",
         })
       }
-    })
-    .then(res => res.json())
-    .then(
-      result => {
-        //document.location = "/CSE442-542/2022-Spring/cse-442h/login"
-          this.setState({
-            currentForm: 1,
-            errorMessage: ""
-          })
+      else {
+        this.setState({
+          currentForm: 1,
+          errorMessage: ""
+        })
       }
-    )
+    })
   };
 
   render() {
