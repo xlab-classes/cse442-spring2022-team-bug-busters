@@ -52,7 +52,7 @@ export default class NavBar extends Component {
           <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto"></Nav>
               <Nav>
-                <a href="/CSE442-542/2022-Spring/cse-442h/user/">
+                <a href="/CSE442-542/2022-Spring/cse-442h/user">
                   <img
                     alt=""
                     src={public_imgs_path + sessionStorage.getItem("pfp")}
