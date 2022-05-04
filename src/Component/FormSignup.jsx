@@ -2,9 +2,9 @@ import React from "react";
 import "../css/Signup.css"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 // Testing URL
-const API = "http://localhost:8080/modals/";
+//const API = "http://localhost:8080/modals/";
 export default class SignUp extends React.Component {
 
     constructor(props) {
