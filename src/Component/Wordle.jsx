@@ -8,9 +8,9 @@ import {
   Link
 } from 'react-router-dom';
 // Use the following line for deployment!
-//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 //Use the following line for local testing!
-const API = "http://localhost:8080/modals/"
+//const API = "http://localhost:8080/modals/"
 const wordleWord = ["RIGHT", "WRONG", "HAPPY", "HELLO", "EARTH", "PIZZA", "TOWEL", "STONE", "CREAM", "SHARP"]
 export default class Wordle extends Component {
   constructor(props){

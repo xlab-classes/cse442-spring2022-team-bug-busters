@@ -4,10 +4,10 @@ import NavBar from "./NavBar";
 import Leaderboard from './Leaderboard';
 
 // Use the following line for deployment!
-//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
 //Use the following line for local testing!
-const API = "http://localhost:8080/modals/"
+//const API = "http://localhost:8080/modals/"
 export default class HomePage extends React.Component {
     constructor(props){
         super(props);
