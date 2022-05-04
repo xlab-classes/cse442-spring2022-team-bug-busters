@@ -5,7 +5,6 @@
 #pfp-title{
     background-color: grey;
     padding-top: 0.5vh;
-    display: flexbox;
     align-items: center;
     max-height: 5vh;
     border-bottom: 1px solid black;
@@ -14,7 +13,6 @@
 #pwChange-title{
     background-color: grey;
     padding-top: 0.5vh;
-    display: flexbox;
     align-items: center;
     max-height: 5vh;
     border-bottom: 1px solid black;
@@ -28,20 +26,22 @@
 
 .containerSettings{
     margin: 1vh;
-    min-height: 85vh;
+    min-height: 90vh;
     max-width: 50vw;
     border: 1px solid black;
 }
 
+.pic-select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #pic-select input, label {
-    display: block;
     margin: 0.5vw;
 }
 
-#pic-select input{
-    margin-left: 1vw!important;
-    margin-bottom: 0.1vh!important;
-}
+
 
 #submitDiv{
     padding-bottom: 5px;
