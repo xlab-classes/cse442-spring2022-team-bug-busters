@@ -3,10 +3,10 @@ import { Navbar, Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 
 // Use the following line for deployment!
-//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
 //Use the following line for local testing!
-const API = "http://localhost:8080/modals/"
+//const API = "http://localhost:8080/modals/"
 
 let public_imgs_path = process.env.PUBLIC_URL + "/profile_pictures/"
 export default class NavBar extends Component {
