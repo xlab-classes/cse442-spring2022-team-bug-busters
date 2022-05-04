@@ -1,5 +1,5 @@
 import React from "react";
-import HomePage from "../Component/Home.jsx";
+import HomePage from "./Home.jsx";
 // Use the following line for deployment!
 //const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 
