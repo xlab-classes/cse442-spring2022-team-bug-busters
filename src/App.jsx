@@ -10,6 +10,7 @@ import PasswordReset from "./Component/passwordReset.jsx";
 import Settings from "./Component/Settings.jsx";
 import Wordle from "./Component/Wordle.jsx";
 import HomePage from "./Component/Home.jsx";
+import ErrorPage from "./Component/Error404.jsx";
 import LoginForm from "./Component/FormLogin.jsx";
 
 import {
@@ -49,6 +50,7 @@ class App extends React.Component{
                   <Route path={PUBLIC_URL + "/requestReset/:token"} element={<PasswordResetForm/>} />
                   <Route path={PUBLIC_URL + "/"} element={<Home login={this.login} />} />
                   <Route path={PUBLIC_URL + "/wordle"} element={<WordleRoom login={this.login} />} />
+                  <Route path='*' element={<ErrorPage/>} />
                 </Routes>
               </div>
             </header>
