@@ -13,13 +13,8 @@ h5.card-subtitle {
     color: rgb(116, 114, 114);
 }
 
-.form-group {
-    /* margin-left: auto;
-    margin-right: auto;
-    width: 8em 
-    */
-    /* padding-top: 10px; */
-    /* padding-right: 50%; */
+.form-main {
+    position: center;
 }
 
 .form-group {

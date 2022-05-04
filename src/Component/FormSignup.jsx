@@ -99,52 +99,54 @@ export default class SignUp extends React.Component {
                             {this.state.errors.register_failed && <div className="alert alert-danger" role="alert">Sorry, that username exists!</div>}
                             {this.state.errors.register_success && <div className="alert alert-success" role="alert">
                                 You have successfully registered! <a href="login" className="alert-link">Login Here!</a></div>}
-                            <div className="form-group">
-                                <div className="username">
+                            <div className="form-main">
+                                <div className="form-group">
+                                    <div className="username">
+                                        <label class="col-sm-3 col-form-label">
+                                            <p>Username</p>
+                                            <input
+                                            type="text"
+                                            className="col-sm-4 form-control"
+                                            name="username"
+                                            value={this.state.username}
+                                            placeholder="Enter your username"
+                                            onChange={this.usernameChangeHandler}
+                                            required
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <div className="email">
+                                        <label class="col-sm-4 col-form-label">
+                                            <p>Email</p>
+                                            <input
+                                            type="text"
+                                            className="col-sm-4 form-control"
+                                            name="email"
+                                            value={this.state.email}
+                                            placeholder="Enter your email"
+                                            onChange={this.emailChangeHandler}
+                                            required
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <div className="password">
                                     <label class="col-sm-3 col-form-label">
-                                        <p>Username</p>
+                                        <p>Password</p>
                                         <input
-                                        type="text"
+                                        type="password"
                                         className="col-sm-4 form-control"
-                                        name="username"
-                                        value={this.state.username}
-                                        placeholder="Enter your username"
-                                        onChange={this.usernameChangeHandler}
+                                        name="password"
+                                        value={this.state.password}
+                                        placeholder="Enter your password"
+                                        onChange={this.pwdChangeHandler }
                                         required
                                         />
                                     </label>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="email">
-                                    <label class="col-sm-4 col-form-label">
-                                        <p>Email</p>
-                                        <input
-                                        type="text"
-                                        className="col-sm-4 form-control"
-                                        name="email"
-                                        value={this.state.email}
-                                        placeholder="Enter your email"
-                                        onChange={this.emailChangeHandler}
-                                        required
-                                        />
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="password">
-                                <label class="col-sm-3 col-form-label">
-                                    <p>Password</p>
-                                    <input
-                                    type="password"
-                                    className="col-sm-4 form-control"
-                                    name="password"
-                                    value={this.state.password}
-                                    placeholder="Enter your password"
-                                    onChange={this.pwdChangeHandler }
-                                    required
-                                    />
-                                </label>
+                                    </div>
                                 </div>
                             </div>
                             <br></br>
