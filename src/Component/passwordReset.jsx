@@ -15,13 +15,19 @@ export default class PasswordReset extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: window.location.href.split('/')[7],
+      token: "",
       newPassword: "",
       confirmNewPassword: "",
       errorMessage: "",
       currentForm: 0
     };
   }
+
+  tokenChangeHandler = event => {
+    this.setState({
+      token: event.target.value
+    });
+  };
 
   myNewPasswordChangeHandler = event => {
     this.setState({
@@ -34,6 +40,7 @@ export default class PasswordReset extends React.Component {
       confirmNewPassword: event.target.value
     });
   };
+
 
   // when the user hits submit, process the email sending through the API
   emailSubmitHandler = event => {
@@ -84,6 +91,8 @@ export default class PasswordReset extends React.Component {
         <form onSubmit={this.emailSubmitHandler}>
           <label>
             <h3>Enter the Following Information to Change your Password:</h3>
+            <p><small>Token!</small></p>
+            <input type="text" onChange={this.tokenChangeHandler} />
             <p><small>New Password!</small></p>
             <input type="password" onChange={this.myNewPasswordChangeHandler} />
             <p><small>Confirm New Password!</small></p>
@@ -98,7 +107,7 @@ export default class PasswordReset extends React.Component {
             </button>
           </Link><br/>
           <span className="login">
-          Don't have a reset link? Get one here! <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
+          Don't have a reset token? Get one here! <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
         </span>
         </form>
         <br/>
