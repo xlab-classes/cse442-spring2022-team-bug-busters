@@ -217,7 +217,7 @@ export default class Settings extends React.Component {
                   {this.state.errors.mismatch && <div class="alert alert-danger" role="alert">New Passwords Did Not Match!</div>}
                   {this.state.errors.same && <div class="alert alert-danger" role="alert">The New Password Cannot be the Same as the Old Password!</div>}
                     <label>
-                      <p>Current Password: </p>
+                      <div>Current Password: </div>
                       <input 
                       type="password" 
                       name="Current Password" 
@@ -230,7 +230,7 @@ export default class Settings extends React.Component {
                   </div>
                   <div>
                     <label>
-                      <p>New Password: </p> 
+                      <div>New Password: </div> 
                       <input 
                       type="password" 
                       name="New Password" 
@@ -243,7 +243,7 @@ export default class Settings extends React.Component {
                   </div>
                   <div>
                     <label>
-                      <p>Confirm New Password: </p> 
+                      <div>Confirm New Password: </div> 
                       <input 
                       type="password" 
                       name="Confirm Password" 
