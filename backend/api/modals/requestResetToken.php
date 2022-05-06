@@ -25,17 +25,19 @@
         else{
         $data = array();
 
-        $resetLink = $_POST['url']."/".$resetToken;
+        $resetLink = $_POST['url']."/reset";
 
         $to = $email;
-        $subject = "Bug Busters Password Reset Link";
+        $subject = "Bug Busters Password Reset Token";
          
         $message = "
 
-        <h1>Password Reset Link</h1>
+        <h1>Password Reset Token</h1>
         <b>Please click the following link to be redirected to the password reset page,
-        there will be additional instructions to follow on that page!</b><br/>
+        there will be additional instructions to follow on that page! Make sure you copy over your token!</b><br/>
         <a href =\"".$resetLink."\">Password Reset Link</a>
+        <h2>Token</h2>
+        <body>.$resetToken.<body>
         <br/>
         <h3>Wasn't you? Don't worry this email can be safely discarded!</h3>
         

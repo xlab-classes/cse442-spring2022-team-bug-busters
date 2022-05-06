@@ -81,7 +81,7 @@ export default class RequestReset extends React.Component {
           <label>
             <h3>Forgot Password?</h3>
             <p><small>Enter the email associated with your<br/>
-            account to receive a password reset link.</small></p>
+            account to receive a password reset token.</small></p>
             <input type="input" onChange={this.myEmailChangeHandler} />
           </label>
           <br/>
