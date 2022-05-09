@@ -25,21 +25,17 @@
         else{
         $data = array();
 
-        $resetLink = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/passwordReset";
+        $resetLink = $_POST['url']."/".$resetToken;
 
         $to = $email;
-        $subject = "Bug Busters Password Reset Token";
+        $subject = "Bug Busters Password Reset Link";
          
         $message = "
 
-        <h1>Password Reset Token</h1>
+        <h1>Password Reset Link</h1>
         <b>Please click the following link to be redirected to the password reset page,
-        there will be additional instructions to follow on that page! Make sure you copy over your token!</b><br/>
+        there will be additional instructions to follow on that page!</b><br/>
         <a href =\"".$resetLink."\">Password Reset Link</a>
-        <h2>Token</h2>
-        <body>".$resetToken."<body>
-        <br/>
-        <h3>Wasn't you? Don't worry this email can be safely discarded!</h3>
         
         ";
          
@@ -47,7 +43,7 @@
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
          
-        $retval = mail($to,$subject,$message,$header);
+        $retval = mail ($to,$subject,$message,$header);
          
         if( $retval == true ) {
             $data['message'] = "Token has been sent successfully!";

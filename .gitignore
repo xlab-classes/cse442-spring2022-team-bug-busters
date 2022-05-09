@@ -6,7 +6,7 @@
 .pnp.js
 
 # config file for database 
-./backend/api/config.php
+backend/api/config.php
 
 # testing
 /coverage
@@ -26,3 +26,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vscode/settings.json
+

@@ -11,27 +11,16 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     $method = $_SERVER['REQUEST_METHOD'];
     $_POST = json_decode(file_get_contents("php://input"), TRUE);
-
     if($method == 'POST'){
         $db = new DBConnection($db_config);
         $db = $db -> getConnection();
-        $userdb = new usersHelper($db);
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $user = $userdb->addUser($username, $email, $password);
-        if ($user === "This user already exists!"){
-            $data = array();
-            $data["message"] = "";
-            http_response_code(200);
-            echo json_encode($data);
-        }
-        else {
-            $data = array();
-            $data['message'] = "You are now registered from the backend!";
-            echo json_encode($data);
-        }        
+        $userHelper = new usersHelper($db);
+        $username = $_POST["username"];
+        $picture = $_POST["picture"];
+        $userHelper -> changeProfilePicture($username, $picture);
+        $data = array();
+        $data['message'] = "Picture successfully changed!";
+        echo json_encode($data);
         $db->close();
     }
 ?>

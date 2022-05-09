@@ -7,32 +7,23 @@ import {
 // to input a new password, confirm the new password and the token.
 
 // Use the following line for deployment!
-//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 //Use the following line for local testing!
-const API = "http://localhost:8080/modals/"
+//const API = "http://localhost:8080/modals/"
 
 export default class PasswordReset extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
       token: "",
       newPassword: "",
       confirmNewPassword: "",
       errorMessage: "",
-      currentForm: 0,
+      currentForm: 0
     };
   }
 
-  // change handlers keep the state current with the values as you type them, so
-  // the submit handler can read from the state to hit the API layer
-  myEmailChangeHandler = event => {
-    this.setState({
-      email: event.target.value
-    });
-  };
-
-  myTokenChangeHandler = event => {
+  tokenChangeHandler = event => {
     this.setState({
       token: event.target.value
     });
@@ -50,6 +41,7 @@ export default class PasswordReset extends React.Component {
     });
   };
 
+
   // when the user hits submit, process the email sending through the API
   emailSubmitHandler = event => {
     //keep the form from actually submitting
@@ -62,62 +54,75 @@ export default class PasswordReset extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: this.state.email,
         token: this.state.token,
         newPassword: this.state.newPassword,
         confirmNewPassword: this.state.confirmNewPassword
       })
     })
-    .then(res => {
-      //If the response is not okay, have the user input a new email address.
-      if (!res.ok){
-        this.setState({
-          errorMessage: "The email you entered is either invalid, or does not have a user associated with it!"
-        })
-        this.setState({
-          email: ""
-        })
+    .then(res => res.json())
+    .then(
+      result => {
+        if (result.message === "The passwords given did not match!"){
+          this.setState({
+            errorMessage: "The given passwords did not match!"
+          })
+        }
+        else if (result.message === "This token is invalid!"){
+          this.setState({
+            errorMessage: "This token is invalid, double check the link you received!"
+          })
+        }
+        else(
+        //document.location = "/CSE442-542/2022-Spring/cse-442h/login"
+          this.setState({
+            currentForm: 1,
+            errorMessage: ""
+          })
+        )
       }
-      //Else send the success page.
-      else {
-        this.setState({
-          currentForm: 1,
-          errorMessage: ""
-        })
-      }
-    },
-    );
+    )
   };
 
   render() {
+    if (this.state.currentForm == 0){
       return (
         <div>
         
         <form onSubmit={this.emailSubmitHandler}>
           <label>
-            <h3>Update Password</h3>
-            <p><small>Enter the token you received via email!</small></p>
-            <input type="input" onChange={this.myTokenChangeHandler} />
-            <p><small>Enter the email associated with your account!</small></p>
-            <input type="input" onChange={this.myEmailChangeHandler} />
-            <p><small>Enter your new password!</small></p>
+            <h3>Enter the Following Information to Change your Password:</h3>
+            <p><small>Token!</small></p>
+            <input type="text" onChange={this.tokenChangeHandler} />
+            <p><small>New Password!</small></p>
             <input type="password" onChange={this.myNewPasswordChangeHandler} />
-            <p><small>Confirm your new password!</small></p>
+            <p><small>Confirm New Password!</small></p>
             <input type="password" onChange={this.myConfirmNewPasswordChangeHandler} />
           </label>
           <br/>
           <body>{this.state.errorMessage}</body>
           <input className="btn btn-primary" type="submit" value="Change Password" />
           <Link to="/CSE442-542/2022-Spring/cse-442h/login">
-            <button className="btn btn-primary">
+            <button className="btn btn-secondary">
               Cancel
             </button>
           </Link><br/>
           <span className="login">
-          Don't have a token? Get one here! <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
+          Don't have a reset token? Get one here! <a href="/CSE442-542/2022-Spring/cse-442h/requestReset">here</a>
         </span>
         </form>
         <br/>
         </div>);
+    }
+    else {
+      return (
+      <div>
+        <body>
+        <h1>Your password has been changed successfully!</h1>
+        <h3>The previous token you used is now expired!</h3>
+        Please log into your account <a href="/CSE442-542/2022-Spring/cse-442h/login">here</a>!
+        </body>
+      </div>
+      );
+    }
   }
 }

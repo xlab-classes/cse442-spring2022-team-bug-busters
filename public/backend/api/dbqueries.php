@@ -503,24 +503,22 @@ class passwordResetHelper{
         if($password != $confirmPassword){
         return "The passwords given did not match!";
         }
-        $stmt = $this->conn->prepare("SELECT email, username, timeCreated FROM passwordReset WHERE token = ?");
+        $stmt = $this->conn->prepare("SELECT username, timeCreated FROM passwordReset WHERE token = ?");
         $stmt -> bind_param("s", $token);
         $stmt -> execute();
         $stmt -> store_result();
-        $stmt -> bind_result($email, $username, $timeCreated);
+        $stmt -> bind_result($username, $timeCreated);
         while($stmt->fetch()){
-            $email = $email;
             $username = $username;
             $timeCreated = $timeCreated;
         }
-        if($email == null && $username == null && $timeCreated == null){
+        if($username < 1){
             return "This token is invalid!";
         }
         $hashed_pw = hash('sha256', $password);
         $stmt = $this->conn->prepare("UPDATE users SET hashed_pw = ? WHERE username = ?");
         $stmt -> bind_param("ss", $hashed_pw, $username);
         $stmt -> execute();
-        $this->generateResetToken($email);
         return "Password has been successfully changed!";
     }
 

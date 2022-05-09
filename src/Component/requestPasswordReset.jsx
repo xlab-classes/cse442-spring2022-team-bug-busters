@@ -4,15 +4,16 @@ import {
 } from 'react-router-dom';
 
 // Use the following line for deployment!
-//const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
+const API = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/backend/api/modals/"
 //Use the following line for local testing!
-const API = "http://localhost:8080/modals/"
+//const API = "http://localhost:8080/modals/"
 
 export default class RequestReset extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
+      url : window.location.href,
       errorMessage: "",
       currentForm: 0,
     };
@@ -39,27 +40,27 @@ export default class RequestReset extends React.Component {
       },
       body: JSON.stringify({
         email: this.state.email,
+        url: this.state.url
       })
     })
     .then(res => {
-      //If the response is not okay, have the user input a new email address.
-      if (!res.ok){
+      if (res.status == 500){
         this.setState({
-          errorMessage: "The email you entered is either invalid, or does not have a user associated with it!"
-        })
-        this.setState({
-          email: ""
+          errorMessage: "An error occured, please try again!",
         })
       }
-      //Else send the success page.
+      else if (res.status == 404){
+        this.setState({
+          errorMessage: "The email you entered is either invalid, or does not have a user associated with it!",
+        })
+      }
       else {
         this.setState({
           currentForm: 1,
           errorMessage: ""
         })
       }
-    },
-    );
+    })
   };
 
   render() {
@@ -67,7 +68,7 @@ export default class RequestReset extends React.Component {
       return (
         <>
         <body>
-        <h3>A token has been sent to the following email: {this.state.email}</h3>
+        <h3>A link has been sent to the following email: {this.state.email}</h3>
         Please follow the instructions sent to you email to successfully reset your password!
         </body>
         </>); 
