@@ -25,7 +25,7 @@
         else{
         $data = array();
 
-        $resetLink = $_POST['url']."/reset";
+        $resetLink = "https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/passwordReset";
 
         $to = $email;
         $subject = "Bug Busters Password Reset Token";
