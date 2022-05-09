@@ -6,7 +6,7 @@
 .pnp.js
 
 # config file for database 
-./backend/api/config.php
+./backend/api/modals/config.php
 
 # testing
 /coverage
