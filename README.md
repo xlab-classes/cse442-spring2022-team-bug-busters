@@ -105,7 +105,7 @@ Node Package Manager: [npm](https://docs.npmjs.com/downloading-and-installing-no
    ```sh
    npm install
    ```
-
+# To Run Locally
 ### Frontend
 
 * Start the frontend app
@@ -114,36 +114,40 @@ Node Package Manager: [npm](https://docs.npmjs.com/downloading-and-installing-no
    ```sh
    npm install
    ```
-2. To build a compiled app
+2. To start application
    ```sh
-   npm run build
+   npm start
    ```
-3. copy the build folder files to the local server folder
-
 ### Backend
 
 * Start the backend apache server
 
-1. copy the backend folder to the local server folder
+1. Install php and XAMPP, ensure that you have PHP under environment variables
 
-2. grant permission
+2. Start backend API locally
    ```sh
-   chmod -R 777 backend/
+   php -S localhost:8080 -t ./backend/api/
    ```
-4. Start httpd localhost server
+   
+# To Deploy onto Apache Servers
+* Start the frontend app
 
+1. To install app dependenices
    ```sh
-   brew services start httpd
+   npm install
    ```
-
-3. Stop httpd localhost server
-
+2. To create a production build
    ```sh
-   brew services stop httpd
+   npm run build
    ```
-
+3. Copy the backend folder into the build folder
+4. Then use 
+   ```sh
+      scp -r [path/to/source/file] [username@targetHost:target/path]
+      ```
+   to secure copy onto the existing Apache server under University at Buffalo 
+   
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
