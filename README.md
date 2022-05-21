@@ -166,7 +166,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Login Page
 - [x] Register Page
 - [ ] Dashboard
-  - [ ] Leaderboard
+  - [x] Leaderboard
   - [ ] List of games
 - [x] Settings Page
   - [x] Account Settings
@@ -178,7 +178,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ### Database
 
-- [ ] MySQL Database 
+- [x] MySQL Database 
   - [x] User Account
   - [x] Scores
 
