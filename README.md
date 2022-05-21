@@ -118,14 +118,7 @@ Node Package Manager: [npm](https://docs.npmjs.com/downloading-and-installing-no
    ```
 ### Backend
 
-* Start the backend apache server
-
-1. Install php and XAMPP, ensure that you have PHP under environment variables
-
-2. Start backend API locally
-   ```sh
-   php -S localhost:8080 -t ./backend/api/
-   ```
+* Since the backend is already deployed for you we do not need to worry about it.
    
 # To Deploy onto Apache Servers
 
