@@ -27,10 +27,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="auto" height="80">
-  </a>
-
 <h3 align="center">Bug Busters</h3>
 </div>
 
@@ -246,3 +242,14 @@ cse442-spring2022-team-bug-busters](https://github.com/xlab-classes/cse442-sprin
 [contributors-url]: https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/xlab-classes/cse442-spring2022-team-bug-busters.svg?style=for-the-badge
 [forks-url]: https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/network/membersls
+
+
+[stars-shield]: https://img.shields.io/github/stars/xlab-classes/cse442-spring2022-team-bug-busters.svg?style=for-the-badge
+[stars-url]: https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/stargazers
+[issues-shield]: https://img.shields.io/github/issues/xlab-classes/cse442-spring2022-team-bug-busters.svg?style=for-the-badge
+[issues-url]: https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/issues
+[license-shield]: https://img.shields.io/github/license/xlab-classes/cse442-spring2022-team-bug-busters.svg?style=for-the-badge
+[license-url]: https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/logo.png
