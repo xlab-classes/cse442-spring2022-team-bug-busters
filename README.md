@@ -218,21 +218,20 @@ Distributed under the APACHE License, version 2.0. See `LICENSE.txt` for more in
 <!-- CONTACT -->
 ## Contact
 
-Project Link: [https://github.com/xlab-classes/
-cse442-spring2022-team-bug-busters](https://github.com/xlab-classes/cse442-spring2022-team-bug-busters)
+Project Link: [https://github.com/xlab-classes/cse442-spring2022-team-bug-busters](https://github.com/xlab-classes/cse442-spring2022-team-bug-busters)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+<!-- ## Acknowledgments
 
 * []()
 * []()
 * []()
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p> -->
 
 
 
