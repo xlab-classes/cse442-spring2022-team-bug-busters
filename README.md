@@ -31,20 +31,7 @@
     <img src="images/logo.png" alt="Logo" width="auto" height="80">
   </a>
 
-<h3 align="center">RESUME BUILDER</h3>
-
-  <p align="center">
-    Interactive Resume Building Tool
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
-  </p>
+<h3 align="center">Bug Busters</h3>
 </div>
 
 
@@ -255,3 +242,7 @@ cse442-spring2022-team-bug-busters](https://github.com/xlab-classes/cse442-sprin
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 <!-- Shield will be updated once the repo changed to public -->
+[contributors-shield]: https://img.shields.io/github/contributors/xlab-classes/cse442-spring2022-team-bug-busters.svg?style=for-the-badge
+[contributors-url]: https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/xlab-classes/cse442-spring2022-team-bug-busters.svg?style=for-the-badge
+[forks-url]: https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/network/membersls
