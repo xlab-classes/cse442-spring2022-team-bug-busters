@@ -130,7 +130,6 @@ Node Package Manager: [npm](https://docs.npmjs.com/downloading-and-installing-no
    ```
    
 # To Deploy onto Apache Servers
-* Start the frontend app
 
 1. To install app dependenices
    ```sh
@@ -145,7 +144,7 @@ Node Package Manager: [npm](https://docs.npmjs.com/downloading-and-installing-no
    ```sh
    scp -r [path/to/source/file] [username@targetHost:target/path]
    ```
-   to secure copy onto the existing Apache server under University at Buffalo 
+   to secure copy onto the existing Apache server under University at Buffalo. Once this is done the Apache server automatically deploys onto the website * [Bug Busters](https://www-student.cse.buffalo.edu/CSE442-542/2022-Spring/cse-442h/) 
    
 <p align="right">(<a href="#top">back to top</a>)</p>
 
