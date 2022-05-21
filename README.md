@@ -143,8 +143,8 @@ Node Package Manager: [npm](https://docs.npmjs.com/downloading-and-installing-no
 3. Copy the backend folder into the build folder
 4. Then use 
    ```sh
-      scp -r [path/to/source/file] [username@targetHost:target/path]
-      ```
+   scp -r [path/to/source/file] [username@targetHost:target/path]
+   ```
    to secure copy onto the existing Apache server under University at Buffalo 
    
 <p align="right">(<a href="#top">back to top</a>)</p>
