@@ -82,8 +82,6 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Will be updated: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -92,7 +90,7 @@ Will be updated: `github_username`, `repo_name`, `twitter_handle`, `linkedin_use
 
 * [React.js](https://reactjs.org/)
 * [Create-React-App](https://create-react-app.dev/docs/getting-started/)
-* [PHP]
+* [PHP](https://www.php.net/manual/en/getting-started.php)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -200,7 +198,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
   - [x] User Account
   - [x] Scores
 
-See the [open issues](https://github.com/xlab-classes/Cse442-spring2022-HireMi/issues) for a full list of proposed features (and known issues).
+See the [open issues]((https://github.com/xlab-classes/cse442-spring2022-team-bug-busters/issues)) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -236,7 +234,8 @@ Distributed under the APACHE License, version 2.0. See `LICENSE.txt` for more in
 <!-- CONTACT -->
 ## Contact
 
-Project Link: [https://github.com/xlab-classes/Cse442-spring2022-HireMi](https://github.com/xlab-classes/cse442-spring2022-team-bug-busters)
+Project Link: [https://github.com/xlab-classes/
+cse442-spring2022-team-bug-busters](https://github.com/xlab-classes/cse442-spring2022-team-bug-busters)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -256,17 +255,3 @@ Project Link: [https://github.com/xlab-classes/Cse442-spring2022-HireMi](https:/
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 <!-- Shield will be updated once the repo changed to public -->
-[contributors-shield]: https://img.shields.io/github/contributors/xlab-classes/Cse442-spring2022-HireMi.svg?style=for-the-badge
-[contributors-url]: https://github.com/xlab-classes/Cse442-spring2022-HireMi/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/xlab-classes/Cse442-spring2022-HireMi.svg?style=for-the-badge
-[forks-url]: https://github.com/xlab-classes/Cse442-spring2022-HireMi/network/membersls
-
-[stars-shield]: https://img.shields.io/github/stars/xlab-classes/Cse442-spring2022-HireMi.svg?style=for-the-badge
-[stars-url]: https://github.com/xlab-classes/Cse442-spring2022-HireMi/stargazers
-[issues-shield]: https://img.shields.io/github/issues/xlab-classes/Cse442-spring2022-HireMi.svg?style=for-the-badge
-[issues-url]: https://github.com/xlab-classes/Cse442-spring2022-HireMi/issues
-[license-shield]: https://img.shields.io/github/license/xlab-classes/Cse442-spring2022-HireMi.svg?style=for-the-badge
-[license-url]: https://github.com/xlab-classes/Cse442-spring2022-HireMi/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/logo.png
