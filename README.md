@@ -62,7 +62,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+Our goal is to create a game hub in which everyone and anyone can come together and socialize with games. We look to add more games in the future where we can incorporate games that require to be there physically but bring them to life virtually through the browser!
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
